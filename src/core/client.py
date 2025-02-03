@@ -30,7 +30,6 @@ class Freudy(discord.Client):
 
         super().__init__(intents=discord.Intents.all())
         self.database = Database()
-        # self.database.save_questions()
         self.application_commands = load_application_commands()
         self.config = load_config(path=config_path)
         self.cooldowns = []

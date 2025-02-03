@@ -31,6 +31,7 @@ class Database:
         Base.metadata.create_all(self.engine)
         Base.set_database(self)
         self.Session = sessionmaker(self.engine, expire_on_commit=False)
+        self.populate_database()
 
     @contextmanager
     def session_scope(self):
@@ -43,12 +44,28 @@ class Database:
         finally:
             session.close()
 
-    def save_questions(self):
-        with open("data.json", "r", encoding="utf-8") as f:
+    def get_random_question(self):
+        with self.session_scope() as session:
+            statement = (
+                select(Question)
+                .options(joinedload(Question.answers))
+                .order_by(sqlalchemy.func.random())
+                .limit(1)
+            )
+            result = session.scalars(statement=statement).first()
+        return result
+
+    def populate_database(self):
+        with self.session_scope() as session:
+            statement = select(Question.question)
+            existing_questions = session.scalars(statement=statement).all()
+        with open("data.json", "r") as f:
             questions = json.load(f)
 
         for question_data in questions:
-            print(question_data)
+            if question_data["question"] in existing_questions:
+                print("question already in database...")
+                continue
 
             question = Question(
                 question=question_data["question"],
@@ -67,14 +84,4 @@ class Database:
 
             with self.session_scope() as session:
                 session.add(question)
-
-    def get_random_question(self):
-        with self.session_scope() as session:
-            statement = (
-                select(Question)
-                .options(joinedload(Question.answers))
-                .order_by(sqlalchemy.func.random())
-                .limit(1)
-            )
-            result = session.scalars(statement=statement).first()
-        return result
+                print("question added to database")
