@@ -1,0 +1,31 @@
+version: 1
+disable_existing_loggers: false
+formatters: 
+        default: 
+            format: '%(levelname)s : %(message)s'
+        detailed:
+            format: '[%(levelname)s | %(module)s | L%(lineno)d] %(asctime)s %(message)s'
+            datefmt: '%Y-%m-%d %H:%M:%S'
+     
+handlers: 
+        stderr:
+          class: logging.StreamHandler
+          level: WARNING
+          formatter : default
+          stream: ext://sys.stderr 
+        file:
+          class: logging.handlers.RotatingFileHandler
+          level: INFO
+          formatter : detailed
+          filename: logs/bot.log
+          maxBytes: 10000
+          backupCount: 10
+loggers: 
+        root: 
+            level: INFO
+            handlers:
+              - stderr
+              - file
+      
+
+  
