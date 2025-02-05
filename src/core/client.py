@@ -8,7 +8,7 @@ import pathlib
 import discord
 import traceback
 
-
+from .cooldowns import CooldownsManager
 from src.core.embeds import ErrorEmbed
 
 from .database.database import Database
@@ -32,7 +32,7 @@ class Freudy(discord.Client):
         self.database = Database()
         self.application_commands = load_application_commands()
         self.config = load_config(path=config_path)
-        self.cooldowns = []
+        self.cooldowns = CooldownsManager()
         self.loop = asyncio.get_event_loop()
 
     async def on_ready(self):
