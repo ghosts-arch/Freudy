@@ -59,7 +59,7 @@ class Database:
         with self.session_scope() as session:
             statement = select(Question.question)
             existing_questions = session.scalars(statement=statement).all()
-        with open("data.json", "r") as f:
+        with open("data.json", "r", encoding="utf-8") as f:
             questions = json.load(f)
 
         for question_data in questions:
