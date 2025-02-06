@@ -78,9 +78,9 @@ class Database:
 
             for key, value in question_data["answers"].items():
                 if len(value["text"]) > 80:
-                    print(f"error : {value["text"]} ({len(value["text"])} characters)")
+                    print(f"error : {value['text']} ({len(value['text'])} characters)")
                     raise ValueError(
-                        f"Answer text exceeds max length: {value["text"]} ({len(value["text"])} characters)"
+                        f"Answer text exceeds max length: {value['text']} ({len(value['text'])} characters)"
                     )
                 answer = Answer(
                     response=value["text"],
