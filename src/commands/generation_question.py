@@ -9,6 +9,9 @@ import time
 from src.core.interaction import Interaction, Context
 from src.core.embeds import Embed, ErrorEmbed
 from src.core.ui.views import ReponsesView
+import logging
+
+logger = logging.getLogger()
 
 
 class ApplicationCommand(Interaction):
@@ -37,6 +40,7 @@ class ApplicationCommand(Interaction):
         client.cooldowns.add_user(context.user.id, context)
 
         question = client.database.get_random_question()
+        logger.info(f"{question} triggered by {context.user}")
         embed = Embed().set_description(question.question)
         view = ReponsesView(question=question)
         await context.send(embed=embed, view=view)
