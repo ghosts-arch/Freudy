@@ -8,7 +8,7 @@ import discord
 import sqlalchemy
 import os
 from contextlib import contextmanager
-
+import logging
 from datetime import datetime
 from sqlalchemy import (
     select,
@@ -18,6 +18,8 @@ from sqlalchemy import (
 from sqlalchemy.orm import sessionmaker, joinedload
 
 from .models import Base, Answer, Question
+
+logger = logging.getLogger()
 
 
 class Database:
@@ -31,7 +33,10 @@ class Database:
         Base.metadata.create_all(self.engine)
         Base.set_database(self)
         self.Session = sessionmaker(self.engine, expire_on_commit=False)
-        self.populate_database()
+        try:
+            self.populate_database()
+        except ValueError as error:
+            logger.error(error)
 
     @contextmanager
     def session_scope(self):
@@ -72,6 +77,11 @@ class Database:
             )
 
             for key, value in question_data["answers"].items():
+                if len(value["text"]) > 80:
+                    print(f"error : {value["text"]} ({len(value["text"])} characters)")
+                    raise ValueError(
+                        f"Answer text exceeds max length: {value["text"]} ({len(value["text"])} characters)"
+                    )
                 answer = Answer(
                     response=value["text"],
                     explanation=value["explanation"],
