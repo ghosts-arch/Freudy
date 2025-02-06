@@ -40,6 +40,11 @@ class Question(Base):
         back_populates="question", cascade="all, delete-orphan"
     )
 
+    def __repr__(self):
+        return (
+            f"<{self.__class__.__name__}(id={self.id},question={repr(self.question)})>"
+        )
+
 
 class Answer(Base):
 
