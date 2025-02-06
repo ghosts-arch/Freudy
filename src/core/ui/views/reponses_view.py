@@ -8,8 +8,6 @@ class ReponsesView(discord.ui.View):
     def __init__(self, question):
         super().__init__()
         self.question = question
-
-        print(question.answers)
         for index, answer in enumerate(question.answers):
 
             button = QuestionAnswerButton(
@@ -24,18 +22,13 @@ class ReponsesView(discord.ui.View):
         await interaction.edit_original_response(view=None)
         valid_answer_id = None
         for index, answer in enumerate(self.question.answers):
-            print(answer.is_correct_answer)
-            print(type(answer.is_correct_answer))
             if answer.is_correct_answer == True:
                 valid_answer_id = index
                 break
-        print(valid_answer_id)
         if valid_answer_id == None:
-            print("aucune reponse valide pour cette question")
             return
         custom_id = interaction.data.get("custom_id")
         user_answer_id = int(custom_id.split("_")[-1])
-        print(valid_answer_id == user_answer_id)
 
         if valid_answer_id == user_answer_id:
 

@@ -13,12 +13,9 @@ from .interaction import Interaction
 
 
 def load_application_commands() -> Dict[str, Interaction]:
-    start_time = time.perf_counter()
     application_commands: Dict[str, Interaction] = {}
     # files = filter(lambda f: f.endswith(".py"), os.listdir("src/commands"))
     files = [f for f in os.listdir("src/commands") if f.endswith(".py")]
-    end_time = time.perf_counter()
-    print(f"temps d'excution : {end_time - start_time} secondes")
     for f in files:
         module_name = os.path.splitext(f)[0]
         module = importlib.import_module(name=f".{module_name}", package="src.commands")

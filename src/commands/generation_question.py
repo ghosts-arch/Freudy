@@ -24,7 +24,6 @@ class ApplicationCommand(Interaction):
             current_time = time.time()
             time_since_last_usage = current_time - result["last_usage"]
             remaining_time = 14400 - time_since_last_usage
-            print(remaining_time)
             hours = remaining_time // 3600
             minutes = (remaining_time % 3600) // 60
             seconds = remaining_time % 60
@@ -35,10 +34,9 @@ class ApplicationCommand(Interaction):
                 ephemeral=True,
             )
 
-        client.cooldowns.add_user(context.user.id)
+        client.cooldowns.add_user(context.user.id, context)
 
         question = client.database.get_random_question()
-        print(question)
         embed = Embed().set_description(question.question)
         view = ReponsesView(question=question)
         await context.send(embed=embed, view=view)
