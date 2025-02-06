@@ -5,9 +5,11 @@
 import logging
 import discord
 
-from src.core.embeds import Embed
+from src.core.embeds import Embed, ErrorEmbed
+from discord.ui.view import View
 
-logger = logging.getLogger(__name__)
+
+logger = logging.getLogger()
 
 
 class Context:
@@ -64,7 +66,7 @@ class Context:
         content: str | None = None,
         embed: Embed | None = None,
         file=None,
-        view=None,
+        view: View | None = None,
         ephemeral: bool = False,
     ):
         """Envoie la reponse dans le salon du message."""
@@ -79,7 +81,16 @@ class Context:
             response["file"] = file
         if view:
             response["view"] = view
-
+            for children in view.children:
+                if len(children.label) > 80:
+                    logger.error(
+                        f"Button label exceeds max length: {children.label} ({len(children.label)} characters)"
+                    )
+                    return await self.interaction.response.send_message(
+                        embed=ErrorEmbed(
+                            "Une erreur est survenue lors de l'éxécution de la commande."
+                        )
+                    )
         if self.guild and self.channel:
             channel = self.guild.get_channel(self.channel.id)
             if not channel:
