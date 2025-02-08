@@ -5,27 +5,19 @@ from src.core.interaction import Interaction
 
 
 class ReponsesView(discord.ui.View):
-    def __init__(self, question, mobile_version: bool = False):
+    def __init__(self, question, mobile_version: bool):
         super().__init__()
         self.question = question
-        if mobile_version:
-            for index, answer in enumerate(question.answers):
-
-                button = QuestionAnswerButton(
-                    label=str(index + 1),
-                    custom_id=f"answer_{index}",
-                    callback=self.on_click,
-                )
-                self.add_item(button)
-        else:
-            for index, answer in enumerate(question.answers):
-
-                button = QuestionAnswerButton(
-                    label=f"{answer.response}",
-                    custom_id=f"answer_{index}",
-                    callback=self.on_click,
-                )
-                self.add_item(button)
+        print(mobile_version)
+        for index, answer in enumerate(question.answers):
+            if mobile_version:
+                label = str(index + 1)
+            else:
+                label = f"{answer.response}"
+            button = QuestionAnswerButton(
+                label=label, custom_id=f"answer_{index}", callback=self.on_click
+            )
+            self.add_item(button)
 
     async def on_click(self, interaction: discord.Interaction):
         await interaction.response.defer()
