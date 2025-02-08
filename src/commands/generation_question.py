@@ -41,6 +41,14 @@ class ApplicationCommand(Interaction):
 
         question = client.database.get_random_question()
         logger.info(f"{question} triggered by {context.user}")
-        embed = Embed().set_description(question.question)
-        view = ReponsesView(question=question)
+        on_mobile = context.guild.get_member(context.user.id).is_on_mobile()
+        if on_mobile:
+            description = f"Question : {question.question}\n"
+            for index, answer in enumerate(question.answers):
+                description += f"{index + 1}. {answer.response}\n"
+            view = ReponsesView(question=question, mobile_version=True)
+        else:
+            description = f"{question.question}"
+            view = ReponsesView(question=question, mobile_version=False)
+        embed = Embed().set_description(description=description)
         await context.send(embed=embed, view=view)
