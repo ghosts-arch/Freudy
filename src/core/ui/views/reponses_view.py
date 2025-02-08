@@ -8,7 +8,6 @@ class ReponsesView(discord.ui.View):
     def __init__(self, question, mobile_version: bool):
         super().__init__()
         self.question = question
-        print(mobile_version)
         for index, answer in enumerate(question.answers):
             if mobile_version:
                 label = str(index + 1)
