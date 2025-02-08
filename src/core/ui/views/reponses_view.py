@@ -5,15 +5,16 @@ from src.core.interaction import Interaction
 
 
 class ReponsesView(discord.ui.View):
-    def __init__(self, question):
+    def __init__(self, question, mobile_version: bool):
         super().__init__()
         self.question = question
         for index, answer in enumerate(question.answers):
-
+            if mobile_version:
+                label = str(index + 1)
+            else:
+                label = f"{answer.response}"
             button = QuestionAnswerButton(
-                label=answer.response,
-                custom_id=f"answer_{index}",
-                callback=self.on_click,
+                label=label, custom_id=f"answer_{index}", callback=self.on_click
             )
             self.add_item(button)
 
