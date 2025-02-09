@@ -32,6 +32,6 @@ class ApplicationCommand(Interaction):
         last_logs = "".join(logs[-20:])
 
         if len(last_logs) > 2000:
-            last_logs = "".join(logs[-20:])
+            last_logs = "".join(logs[-10:])
 
         await context.send(content=f"```{last_logs}```")
