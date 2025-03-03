@@ -17,9 +17,15 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import sessionmaker, joinedload
 
-from .models import Base, Answer, Question
+from .models import Base, Answer, Question, DailyFact
 
 logger = logging.getLogger()
+
+
+def load_json_file(path: str):
+    with open(path, mode="r", encoding="utf-8") as f:
+        content = json.load(f)
+    return content
 
 
 class Database:
@@ -61,12 +67,15 @@ class Database:
         return result
 
     def populate_database(self):
+        questions = load_json_file("data.json")
+        facts = load_json_file("facts.json")
         with self.session_scope() as session:
-            statement = select(Question.question)
-            existing_questions = session.scalars(statement=statement).all()
-        with open("data.json", "r", encoding="utf-8") as f:
-            questions = json.load(f)
-
+            select_questions_statement = select(Question.question)
+            existing_questions = session.scalars(
+                statement=select_questions_statement
+            ).all()
+            select_facts_statement = select(DailyFact.fact)
+            existing_facts = session.scalars(statement=select_facts_statement).all()
         for question_data in questions:
             if question_data["question"] in existing_questions:
                 print("question already in database...")
@@ -95,3 +104,13 @@ class Database:
             with self.session_scope() as session:
                 session.add(question)
                 print("question added to database")
+
+        for fact in facts:
+            if fact in existing_facts:
+                print("fact already in database...")
+                continue
+
+            fact = DailyFact(fact=fact)
+            with self.session_scope() as session:
+                session.add(fact)
+                print("fact added in database")

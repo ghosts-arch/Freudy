@@ -56,3 +56,11 @@ class Answer(Base):
     explanation: Mapped[str] = mapped_column(nullable=False)
     is_correct_answer: Mapped[bool] = mapped_column()
     question: Mapped["Question"] = relationship(back_populates="answers")
+
+
+class DailyFact(Base):
+
+    __tablename__ = "daily_facts"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    fact: Mapped[str] = mapped_column(nullable=False)
