@@ -40,7 +40,8 @@ class Database:
         Base.set_database(self)
         self.Session = sessionmaker(self.engine, expire_on_commit=False)
         try:
-            self.populate_database()
+            self.populate_questions()
+            self.populate_facts()
         except ValueError as error:
             logger.error(error)
 
@@ -66,51 +67,53 @@ class Database:
             result = session.scalars(statement=statement).first()
         return result
 
-    def populate_database(self):
+    def populate_questions(self):
         questions = load_json_file("data.json")
-        facts = load_json_file("facts.json")
         with self.session_scope() as session:
             select_questions_statement = select(Question.question)
-            existing_questions = session.scalars(
-                statement=select_questions_statement
-            ).all()
-            select_facts_statement = select(DailyFact.fact)
-            existing_facts = session.scalars(statement=select_facts_statement).all()
-        for question_data in questions:
-            if question_data["question"] in existing_questions:
-                print("question already in database...")
-                continue
-
-            question = Question(
-                question=question_data["question"],
+            existing_questions = set(
+                session.scalars(statement=select_questions_statement).all()
             )
-
-            for key, value in question_data["answers"].items():
-                if len(value["text"]) > 80:
-                    print(f"error : {value['text']} ({len(value['text'])} characters)")
-                    raise ValueError(
-                        f"Answer text exceeds max length: {value['text']} ({len(value['text'])} characters)"
-                    )
-                answer = Answer(
-                    response=value["text"],
-                    explanation=value["explanation"],
-                    is_correct_answer=(
-                        True if int(key) == question_data["correct_answer"] else False
-                    ),
-                    question=question,
+            new_questions = [
+                question
+                for question in questions
+                if question["question"] not in existing_questions
+            ]
+            for question_data in new_questions:
+                question = Question(
+                    question=question_data["question"],
                 )
-                question.answers.append(answer)
-
-            with self.session_scope() as session:
+                for key, value in question_data["answers"].items():
+                    if len(value["text"]) > 80:
+                        print(
+                            f"error : {value['text']} ({len(value['text'])} characters)"
+                        )
+                        raise ValueError(
+                            f"Answer text exceeds max length: {value['text']} ({len(value['text'])} characters)"
+                        )
+                    answer = Answer(
+                        response=value["text"],
+                        explanation=value["explanation"],
+                        is_correct_answer=(
+                            True
+                            if int(key) == question_data["correct_answer"]
+                            else False
+                        ),
+                        question=question,
+                    )
+                    question.answers.append(answer)
                 session.add(question)
-                print("question added to database")
+                logger.info("%s added to database.", question)
 
-        for fact in facts:
-            if fact in existing_facts:
-                print("fact already in database...")
-                continue
-
-            fact = DailyFact(fact=fact)
-            with self.session_scope() as session:
+    def populate_facts(self):
+        facts = load_json_file("facts.json")
+        with self.session_scope() as session:
+            select_facts_statement = select(DailyFact.fact)
+            existing_facts = set(
+                session.scalars(statement=select_facts_statement).all()
+            )
+            new_facts = [fact for fact in facts if fact not in existing_facts]
+            for fact in new_facts:
+                fact = DailyFact(fact=fact)
                 session.add(fact)
-                print("fact added in database")
+                logger.info("%s added to database.", fact)

@@ -64,3 +64,6 @@ class DailyFact(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     fact: Mapped[str] = mapped_column(nullable=False)
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__}(id={self.id},fact={repr(self.fact)})>"
