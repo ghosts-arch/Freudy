@@ -3,18 +3,13 @@
 # ----------------------------------------------------------------------------
 
 import json
-import io
-import discord
+
 import sqlalchemy
 import os
 from contextlib import contextmanager
 import logging
-from datetime import datetime
-from sqlalchemy import (
-    select,
-    delete,
-    update,
-)
+
+from sqlalchemy import select, insert
 import time
 from sqlalchemy.orm import sessionmaker, joinedload
 
@@ -45,6 +40,9 @@ class Database:
             self.populate_facts()
         except ValueError as error:
             logger.error(error)
+
+    def close(self):
+        self.engine.dispose()
 
     @contextmanager
     def session_scope(self):
@@ -120,7 +118,7 @@ class Database:
             DailyFact(fact=fact) for fact in facts if fact not in existing_facts
         ]
         with self.session_scope() as session:
-            session.add_all(created_facts)
+            session.bulk_save_objects(created_facts)
         for fact in created_facts:
             logger.info("%s added to database.", fact)
         end_time = time.perf_counter()
