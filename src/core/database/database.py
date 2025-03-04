@@ -15,6 +15,7 @@ from sqlalchemy import (
     delete,
     update,
 )
+import time
 from sqlalchemy.orm import sessionmaker, joinedload
 
 from .models import Base, Answer, Question, DailyFact
@@ -105,15 +106,24 @@ class Database:
                 session.add(question)
                 logger.info("%s added to database.", question)
 
-    def populate_facts(self):
-        facts = load_json_file("facts.json")
+    def get_daily_facts(self):
         with self.session_scope() as session:
-            select_facts_statement = select(DailyFact.fact)
-            existing_facts = set(
-                session.scalars(statement=select_facts_statement).all()
-            )
-            new_facts = [fact for fact in facts if fact not in existing_facts]
-            for fact in new_facts:
-                fact = DailyFact(fact=fact)
-                session.add(fact)
-                logger.info("%s added to database.", fact)
+            statement = select(DailyFact.fact)
+            fact = session.scalars(statement=statement).all()
+        return set(fact)
+
+    def populate_facts(self):
+        start_time = time.perf_counter()
+        facts = load_json_file("facts.json")
+        existing_facts = self.get_daily_facts()
+        created_facts = [
+            DailyFact(fact=fact) for fact in facts if fact not in existing_facts
+        ]
+        with self.session_scope() as session:
+            session.add_all(created_facts)
+        for fact in created_facts:
+            logger.info("%s added to database.", fact)
+        end_time = time.perf_counter()
+        logger.info(
+            f"Populated {len(created_facts)} facts in {(end_time - start_time) * 1000:.2f} seconds."
+        )
