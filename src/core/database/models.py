@@ -52,7 +52,7 @@ class Answer(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     question_id: Mapped[int] = mapped_column(ForeignKey("questions.id"))
-    response: Mapped[str] = mapped_column(nullable=False)
+    text: Mapped[str] = mapped_column(nullable=False)
     explanation: Mapped[str] = mapped_column(nullable=False)
     is_correct_answer: Mapped[bool] = mapped_column()
     question: Mapped["Question"] = relationship(back_populates="answers")

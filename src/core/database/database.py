@@ -68,6 +68,29 @@ class Database:
             result = session.scalars(statement=statement).first()
         return result
 
+    def validate_answer(self, text: str):
+        if len(text) > 80:
+            raise ValueError(
+                f"Answer text exceeds max length: {text} ({len(text)} characters)"
+            )
+
+    def create_answer(
+        self, text: str, explanation: str, is_correct_answer: bool, question: Question
+    ) -> Answer:
+        try:
+            self.validate_answer(text=text)
+        except ValueError as error:
+            raise ValueError(error)
+        return Answer(
+            text=text,
+            explanation=explanation,
+            is_correct_answer=is_correct_answer,
+            question=question,
+        )
+
+    def create_question(self, question: str) -> Question:
+        return Question(question=question)
+
     def populate_questions(self):
         start_time = time.perf_counter()
         questions = load_json_file("data.json")
@@ -82,22 +105,14 @@ class Database:
                 if question["question"] not in existing_questions
             ]
             for question_data in new_questions:
-                question = Question(
-                    question=question_data["question"],
+                question: Question = self.create_question(
+                    question=question_data["question"]
                 )
-                for key, value in question_data["answers"].items():
-                    if len(value["text"]) > 80:
-                        raise ValueError(
-                            f"Answer text exceeds max length: {value['text']} ({len(value['text'])} characters)"
-                        )
-                    answer = Answer(
-                        response=value["text"],
-                        explanation=value["explanation"],
-                        is_correct_answer=(
-                            True
-                            if int(key) == question_data["correct_answer"]
-                            else False
-                        ),
+                for answer in question_data["answers"]:
+                    answer = self.create_answer(
+                        text=answer["text"],
+                        explanation=answer["explanation"],
+                        is_correct_answer=answer["correct_answer"],
                         question=question,
                     )
                     question.answers.append(answer)
