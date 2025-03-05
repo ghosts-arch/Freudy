@@ -175,3 +175,4 @@ bot.log.*
 *.log
 
 data.json
+facts.json
