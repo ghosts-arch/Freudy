@@ -17,6 +17,8 @@ from sqlalchemy.orm import (
 
 class Base(DeclarativeBase):
 
+    _database = None
+
     __abstract__ = True
 
     @classmethod
@@ -24,6 +26,8 @@ class Base(DeclarativeBase):
         cls._database = database
 
     def save(self):
+        if not self._database:
+            raise Exception("set_database must be called before save")
         with self._database.Session() as session:
             session.add(self)
             session.commit()

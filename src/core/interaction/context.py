@@ -71,7 +71,7 @@ class Context:
     ):
         """Envoie la reponse dans le salon du message."""
 
-        response = {}
+        response: dict[str, str | Embed | View | None] = {}
 
         if content:
             response["content"] = content
@@ -81,16 +81,7 @@ class Context:
             response["file"] = file
         if view:
             response["view"] = view
-            for children in view.children:
-                if len(children.label) > 80:
-                    logger.error(
-                        f"Button label exceeds max length: {children.label} ({len(children.label)} characters)"
-                    )
-                    return await self.interaction.response.send_message(
-                        embed=ErrorEmbed(
-                            "Une erreur est survenue lors de l'éxécution de la commande."
-                        )
-                    )
+
         if self.guild and self.channel:
             channel = self.guild.get_channel(self.channel.id)
             if not channel:

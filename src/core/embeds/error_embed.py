@@ -12,4 +12,6 @@ class ErrorEmbed(Embed):
         self,
         description: str | None = None,
     ) -> None:
-        super().__init__(description=description, color=discord.Color.red())
+        super().__init__(
+            description=description, color=discord.Color.red(), title="Erreur !"
+        )

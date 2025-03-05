@@ -20,7 +20,6 @@ class ApplicationCommand(Interaction):
         if not os.path.exists(logs_file_path):
             await context.send(
                 embed=ErrorEmbed(
-                    title="Erreur",
                     description="Le fichier de logs n'existe pas",
                 )
             )

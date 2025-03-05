@@ -6,6 +6,8 @@ import random
 
 import threading
 import time
+
+import discord
 from src.core.interaction import Interaction, Context
 from src.core.embeds import Embed, ErrorEmbed
 from src.core.ui.views import ReponsesView
@@ -21,6 +23,8 @@ class ApplicationCommand(Interaction):
         self.description = "generer une question aléatoire"
 
     async def run(self, client, context: Context) -> None:
+        if not isinstance(context.guild, discord.Guild):
+            return
         result = client.cooldowns.find_user(context.user.id)
 
         if result:
@@ -41,7 +45,10 @@ class ApplicationCommand(Interaction):
 
         question = client.database.get_random_question()
         logger.info(f"{question} triggered by {context.user}")
-        on_mobile = context.guild.get_member(context.user.id).is_on_mobile()
+        member = context.guild.get_member(context.user.id)
+        if not isinstance(member, discord.Member):
+            return
+        on_mobile = member.is_on_mobile()
         if on_mobile:
             description = f"Question : {question.question}\n"
             for index, answer in enumerate(question.answers):

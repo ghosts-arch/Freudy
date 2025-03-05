@@ -17,7 +17,7 @@ from .interaction import (
     load_application_commands,
     register_application_commands,
 )
-from .config import load_config
+from .config import load_config, validate_config
 
 logger = logging.getLogger()
 
@@ -33,6 +33,7 @@ class Freudy(discord.Client):
         self.database.init()
         self.application_commands = load_application_commands()
         self.config = load_config(path=config_path)
+        self.config = validate_config(self.config)
         self.cooldowns = CooldownsManager()
         self.loop = asyncio.get_event_loop()
 
@@ -47,7 +48,8 @@ class Freudy(discord.Client):
 
         DailyFactManager(self).start()
         logger.info(f"Logged as {self.user}")
-        test_channel = self.get_channel(self.config.get("TEST_CHANNEL_ID"))
+        test_channel_id: int = self.config["TEST_CHANNEL_ID"]
+        test_channel = self.get_channel(test_channel_id)
 
         if isinstance(test_channel, discord.TextChannel):
             await test_channel.send(f"{self.user} ready.")

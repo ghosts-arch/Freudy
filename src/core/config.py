@@ -9,12 +9,10 @@ from pathlib import Path
 
 
 class Config(TypedDict):
-    CERTIFIED_ROLE: int
     GUILD_ID: int
     TEST_CHANNEL_ID: int
     DEV_MODE: bool
-    ADMINSTRATION_CHANNEL_ID: int
-    WELCOME_CHANNEL_ID: int
+    ADMINISTRATION_CHANNEL_ID: int
 
 
 def load_config(path: Path) -> Config:
@@ -24,7 +22,9 @@ def load_config(path: Path) -> Config:
 
 
 def validate_config(config: Config) -> Config:
-    for key in config.keys():
-        if config[key] is None:
-            raise Exception(f"{key} is not set in config")
+    for key in ("GUILD_ID", "TEST_CHANNEL_ID", "DEV_MODE", "ADMINISTRATION_CHANNEL_ID"):
+        if config[key] is None or config[key] not in config:
+            raise ValueError(f"{key} is null.")
+        if config[key] not in config:
+            raise ValueError(f"{key} is not in config.")
     return config

@@ -174,5 +174,7 @@ config.yaml
 bot.log.*
 *.log
 
+src/__init__.py
+
 data.json
 facts.json

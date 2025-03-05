@@ -6,9 +6,9 @@ from src.core.embeds import Embed
 
 class CooldownsManager:
     def __init__(self) -> None:
-        self.cooldowns = {}
+        self.cooldowns: dict[int, dict[str, float]] = {}
 
-    def add_user(self, user_id, context):
+    def add_user(self, user_id: int, context):
         self.cooldowns[user_id] = {"last_usage": time()}
         asyncio.create_task(self.schedule_delete_user(user_id, context))
 
