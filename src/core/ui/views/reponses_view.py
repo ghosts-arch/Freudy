@@ -12,7 +12,7 @@ class ReponsesView(discord.ui.View):
             if mobile_version:
                 label = str(index + 1)
             else:
-                label = f"{answer.response}"
+                label = f"{answer.text}"
             button = QuestionAnswerButton(
                 label=label, custom_id=f"answer_{index}", callback=self.on_click
             )
@@ -43,7 +43,7 @@ class ReponsesView(discord.ui.View):
         else:
             await interaction.channel.send(
                 embed=ErrorEmbed(
-                    f'mauvaise reponse, la réponse était "{self.question.answers[valid_answer_id].response}". \n\n {self.question.answers[valid_answer_id].explanation}'
+                    f'mauvaise reponse, la réponse était "{self.question.answers[valid_answer_id].text}". \n\n {self.question.answers[valid_answer_id].explanation}'
                 ),
             )
 

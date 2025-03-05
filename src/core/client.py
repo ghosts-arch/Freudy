@@ -10,7 +10,7 @@ import traceback
 
 from .cooldowns import CooldownsManager
 from src.core.embeds import ErrorEmbed
-
+from .managers.daily_fact_manager import DailyFactManager
 from .database.database import Database
 from .interaction import (
     Context,
@@ -30,6 +30,7 @@ class Freudy(discord.Client):
 
         super().__init__(intents=discord.Intents.all())
         self.database = Database()
+        self.database.init()
         self.application_commands = load_application_commands()
         self.config = load_config(path=config_path)
         self.cooldowns = CooldownsManager()
@@ -44,6 +45,7 @@ class Freudy(discord.Client):
         except Exception:
             logger.error(traceback.format_exc())
 
+        DailyFactManager(self).start()
         logger.info(f"Logged as {self.user}")
         test_channel = self.get_channel(self.config.get("TEST_CHANNEL_ID"))
 

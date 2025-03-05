@@ -52,7 +52,18 @@ class Answer(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     question_id: Mapped[int] = mapped_column(ForeignKey("questions.id"))
-    response: Mapped[str] = mapped_column(nullable=False)
+    text: Mapped[str] = mapped_column(nullable=False)
     explanation: Mapped[str] = mapped_column(nullable=False)
     is_correct_answer: Mapped[bool] = mapped_column()
     question: Mapped["Question"] = relationship(back_populates="answers")
+
+
+class DailyFact(Base):
+
+    __tablename__ = "daily_facts"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    fact: Mapped[str] = mapped_column(nullable=False)
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__}(id={self.id},fact={repr(self.fact)})>"
