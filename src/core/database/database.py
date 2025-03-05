@@ -113,6 +113,12 @@ class Database:
             fact = session.scalars(statement=statement).all()
         return set(fact)
 
+    def get_random_daily_fact(self):
+        with self.session_scope() as session:
+            statement = select(DailyFact).order_by(sqlalchemy.func.random()).limit(1)
+            result = session.scalars(statement=statement).first()
+        return result
+
     def populate_facts(self) -> None:
         start_time = time.perf_counter()
         facts = load_json_file("facts.json")
