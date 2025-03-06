@@ -53,7 +53,7 @@ class Freudy(discord.Client):
 
         DailyFactManager(self).start()
         logger.info(f"Logged as {self.user}")
-        test_channel_id: int = self.config["TEST_CHANNEL_ID"]
+        test_channel_id: int = self.config["test_channel_id"]
         test_channel = self.get_channel(test_channel_id)
 
         if isinstance(test_channel, discord.TextChannel):
