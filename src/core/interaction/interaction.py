@@ -3,8 +3,8 @@
 # ----------------------------------------------------------------------------
 
 from abc import ABC, abstractmethod
-from typing import Any, Coroutine, NotRequired, TypedDict
-
+from typing import Any, Coroutine, TypedDict
+from typing_extensions import NotRequired
 
 from .context import Context
 
@@ -43,7 +43,7 @@ class Interaction(ABC):
         return self.options
 
     @abstractmethod
-    def run(self, client, context: Context) -> Coroutine[Any, Any, Any]:
+    def run(self, context: Context) -> Coroutine[Any, Any, Any]:
         pass
 
     def in_adminstration_channel_only(self) -> bool:

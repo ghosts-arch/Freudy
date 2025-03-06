@@ -2,14 +2,13 @@
 # Python 3.10
 # ----------------------------------------------------------------------------
 
-import random
-
-import threading
-import time
-from src.core.interaction import Interaction, Context
-from src.core.embeds import Embed, ErrorEmbed
-from src.core.ui.views import ReponsesView
 import logging
+import time
+
+import discord
+from src.core.embeds import Embed, ErrorEmbed
+from src.core.interaction import Context, Interaction
+from src.core.ui.views import ReponsesView
 
 logger = logging.getLogger()
 
@@ -20,9 +19,11 @@ class ApplicationCommand(Interaction):
         self.name = "generate_question"
         self.description = "generer une question aléatoire"
 
-    async def run(self, client, context: Context) -> None:
-        result = client.cooldowns.find_user(context.user.id)
-
+    async def run(self, context: Context) -> None:
+        if not isinstance(context.guild, discord.Guild):
+            return
+        result = context.client.cooldowns.find_user(context.user.id)
+        
         if result:
             current_time = time.time()
             time_since_last_usage = current_time - result["last_usage"]
@@ -37,11 +38,14 @@ class ApplicationCommand(Interaction):
                 ephemeral=True,
             )
 
-        client.cooldowns.add_user(context.user.id, context)
+        context.client.cooldowns.add_user(context.user.id, context)
 
-        question = client.database.get_random_question()
+        question = context.client.database.get_random_question()
         logger.info(f"{question} triggered by {context.user}")
-        on_mobile = context.guild.get_member(context.user.id).is_on_mobile()
+        member = context.guild.get_member(context.user.id)
+        if not isinstance(member, discord.Member):
+            return
+        on_mobile = member.is_on_mobile()
         if on_mobile:
             description = f"Question : {question.question}\n"
             for index, answer in enumerate(question.answers):

@@ -3,10 +3,16 @@
 # ----------------------------------------------------------------------------
 
 import logging
-import discord
+from typing import TYPE_CHECKING, Union, Optional
 
-from src.core.embeds import Embed, ErrorEmbed
-from discord.ui.view import View
+import discord
+from discord.ui import View
+
+if TYPE_CHECKING:
+    from discord.interactions import InteractionChannel
+    # import discord.types
+    from src.core.client import Freudy
+from src.core.embeds import Embed
 
 
 logger = logging.getLogger()
@@ -14,52 +20,57 @@ logger = logging.getLogger()
 
 class Context:
 
-    def __init__(self, interaction: discord.Interaction):
-
-        super().__init__()
+    def __init__(self, interaction: discord.Interaction["Freudy"]) -> None:
 
         if not interaction.data:
             raise ValueError("interaction.data is None")
 
-        self.__interaction = interaction
-        self.__name = str(interaction.data.get("name"))
-        self.__message = interaction.message
-        self.__user = interaction.user
-        self.__data = interaction.data
+        self.__interaction : discord.Interaction["Freudy"] = interaction
+        self.__name : str = str(interaction.data.get("name"))
+        self.__message : Optional[discord.Message]= interaction.message
+        self.__user : Union[discord.Member , discord.User] = interaction.user
+        self.__data  = interaction.data
+        self.__client : Freudy = interaction.client
+        self.__guild  : Optional[discord.Guild] = interaction.guild
+        self.__channel : Optional[InteractionChannel] = interaction.channel
 
     @property
-    def message(self):
+    def interaction(self) -> discord.Interaction["Freudy"]:
+        return self.__interaction
+
+    @property
+    def name(self) -> str:
+        return self.__name
+
+    @property
+    def message(self) -> Optional[discord.Message]:
         return self.__message
 
     @property
-    def user(self):
+    def user(self) -> Union[discord.Member, discord.User]:
         return self.__user
-
-    @property
-    def guild(self) -> discord.Guild | None:
-        return self.interaction.guild
-
-    @property
-    def channel(self):
-        if self.interaction.channel:
-            return self.interaction.channel
-        raise ValueError("interaction.channel is None")
-
-    @property
-    def name(self):
-        return self.__name
 
     @property
     def data(self):
         return self.__data
 
     @property
-    def options(self):
-        return self.data.get("options")
+    def client(self) -> 'Freudy':
+        return self.__client
 
     @property
-    def interaction(self):
-        return self.__interaction
+    def guild(self) -> Optional[discord.Guild]:
+        return self.__guild
+
+    @property
+    def channel(self) -> 'InteractionChannel':
+        if self.__channel:
+            return self.__channel
+        raise ValueError("interaction.channel is None")
+
+    @property
+    def options(self):
+        return self.data.get("options")
 
     async def send(
         self,
@@ -71,7 +82,7 @@ class Context:
     ):
         """Envoie la reponse dans le salon du message."""
 
-        response = {}
+        response: dict[str, str | Embed | View | None] = {}
 
         if content:
             response["content"] = content
@@ -81,16 +92,7 @@ class Context:
             response["file"] = file
         if view:
             response["view"] = view
-            for children in view.children:
-                if len(children.label) > 80:
-                    logger.error(
-                        f"Button label exceeds max length: {children.label} ({len(children.label)} characters)"
-                    )
-                    return await self.interaction.response.send_message(
-                        embed=ErrorEmbed(
-                            "Une erreur est survenue lors de l'éxécution de la commande."
-                        )
-                    )
+
         if self.guild and self.channel:
             channel = self.guild.get_channel(self.channel.id)
             if not channel:
@@ -100,9 +102,18 @@ class Context:
                 logger.error("Bot not have permission to send message")
                 return
 
+        if not isinstance(embed, discord.Embed):
+            return
         try:
-            await self.interaction.response.send_message(
-                **response, ephemeral=ephemeral
+            if view:
+
+                await self.interaction.response.send_message(
+                content=content, file=file, view=view,
+                embed=embed, ephemeral=ephemeral
             )
+            else:
+                await self.interaction.response.send_message(
+                content=content, file=file, 
+                embed=embed, ephemeral=ephemeral)
         except Exception as error:
             logger.error(error)

@@ -1,7 +1,7 @@
 import discord
+
+from src.core.embeds import ErrorEmbed, SuccessEmbed
 from src.core.ui.buttons import QuestionAnswerButton
-from src.core.embeds import SuccessEmbed, ErrorEmbed
-from src.core.interaction import Interaction
 
 
 class ReponsesView(discord.ui.View):
@@ -14,11 +14,13 @@ class ReponsesView(discord.ui.View):
             else:
                 label = f"{answer.text}"
             button = QuestionAnswerButton(
-                label=label, custom_id=f"answer_{index}", callback=self.on_click
+                label=label, custom_id=f"answer_{index}", on_click=self.on_click
             )
             self.add_item(button)
 
     async def on_click(self, interaction: discord.Interaction):
+        if not isinstance(interaction.channel, discord.TextChannel):
+            return
         await interaction.response.defer()
         await interaction.edit_original_response(view=None)
         valid_answer_id = None
@@ -28,7 +30,9 @@ class ReponsesView(discord.ui.View):
                 break
         if valid_answer_id == None:
             return
-        custom_id = interaction.data.get("custom_id")
+        if not interaction.data:
+            raise Exception("No custom_id found for this interaction.")
+        custom_id: str = str(interaction.data.get("custom_id"))
         user_answer_id = int(custom_id.split("_")[-1])
 
         if valid_answer_id == user_answer_id:

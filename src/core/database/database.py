@@ -3,17 +3,16 @@
 # ----------------------------------------------------------------------------
 
 import json
+import logging
+import os
+import time
+from contextlib import contextmanager
 
 import sqlalchemy
-import os
-from contextlib import contextmanager
-import logging
+from sqlalchemy import select
+from sqlalchemy.orm import joinedload, sessionmaker
 
-from sqlalchemy import select, insert
-import time
-from sqlalchemy.orm import sessionmaker, joinedload
-
-from .models import Base, Answer, Question, DailyFact
+from .models import Answer, Base, DailyFact, Question
 
 logger = logging.getLogger()
 

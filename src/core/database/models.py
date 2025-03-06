@@ -2,20 +2,14 @@
 # Python 3.10
 # ----------------------------------------------------------------------------
 
-from typing import Optional, List
-from dataclasses import dataclass
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import ForeignKey, UniqueConstraint
-from sqlalchemy.orm import (
-    Mapped,
-    mapped_column,
-    relationship,
-    composite,
-    object_session,
-)
+from typing import List
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
+
+    _database = None
 
     __abstract__ = True
 
@@ -24,6 +18,8 @@ class Base(DeclarativeBase):
         cls._database = database
 
     def save(self):
+        if not self._database:
+            raise Exception("set_database must be called before save")
         with self._database.Session() as session:
             session.add(self)
             session.commit()

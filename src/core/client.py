@@ -5,23 +5,24 @@
 import asyncio
 import logging
 import pathlib
-import discord
 import traceback
+import sys
+import discord
 
+from .config import load_config, validate_config
 from .cooldowns import CooldownsManager
-from src.core.embeds import ErrorEmbed
-from .managers.daily_fact_manager import DailyFactManager
 from .database.database import Database
 from .interaction import (
     Context,
     load_application_commands,
     register_application_commands,
 )
-from .config import load_config
+from .managers.daily_fact_manager import DailyFactManager
+from src.core.embeds import ErrorEmbed
 
 logger = logging.getLogger()
 
-config_path = pathlib.Path("config.yaml")
+config_path = pathlib.Path("config.json")
 
 
 class Freudy(discord.Client):
@@ -32,7 +33,12 @@ class Freudy(discord.Client):
         self.database = Database()
         self.database.init()
         self.application_commands = load_application_commands()
-        self.config = load_config(path=config_path)
+        try:
+            self.config = load_config(path=config_path)
+            validate_config(self.config)
+        except Exception as err:
+            logger.error(f"{err}")
+            sys.exit(1)
         self.cooldowns = CooldownsManager()
         self.loop = asyncio.get_event_loop()
 
@@ -47,17 +53,19 @@ class Freudy(discord.Client):
 
         DailyFactManager(self).start()
         logger.info(f"Logged as {self.user}")
-        test_channel = self.get_channel(self.config.get("TEST_CHANNEL_ID"))
+        test_channel_id: int = self.config["TEST_CHANNEL_ID"]
+        test_channel = self.get_channel(test_channel_id)
 
         if isinstance(test_channel, discord.TextChannel):
             await test_channel.send(f"{self.user} ready.")
 
-    async def on_interaction(self, interaction: discord.Interaction):
+    async def on_interaction(self, interaction: discord.Interaction["Freudy"]):
 
         if interaction.type == discord.InteractionType.application_command:
             context = Context(interaction)
             command = self.application_commands.get(context.name)
 
+        
             if not command:
                 return
 
@@ -75,7 +83,8 @@ class Freudy(discord.Client):
                     )
                 )
                 return
-
+            if not isinstance(context.user, discord.Member):
+                return
             if (
                 command.run_by_moderator_only()
                 and not context.user.guild_permissions.administrator
@@ -88,7 +97,7 @@ class Freudy(discord.Client):
                 return
 
             try:
-                await command.run(client=self, context=context)
+                await command.run(context=context)
                 logger.info(
                     f"Command {context.name} executed by {context.user} in #{context.channel}"
                 )

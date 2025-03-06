@@ -3,7 +3,6 @@
 # ----------------------------------------------------------------------------
 
 import os
-import dotenv
 import sys
 import dotenv
 
