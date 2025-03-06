@@ -101,19 +101,8 @@ class Context:
             if not (self.channel.permissions_for(self.guild.me).send_messages):
                 logger.error("Bot not have permission to send message")
                 return
-
-        if not isinstance(embed, discord.Embed):
-            return
         try:
-            if view:
-
                 await self.interaction.response.send_message(
-                content=content, file=file, view=view,
-                embed=embed, ephemeral=ephemeral
-            )
-            else:
-                await self.interaction.response.send_message(
-                content=content, file=file, 
-                embed=embed, ephemeral=ephemeral)
+                **response, ephemeral=ephemeral)
         except Exception as error:
             logger.error(error)
