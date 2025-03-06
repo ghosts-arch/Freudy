@@ -97,7 +97,7 @@ class Freudy(discord.Client):
                 return
 
             try:
-                await command.run(client=self, context=context)
+                await command.run(context=context)
                 logger.info(
                     f"Command {context.name} executed by {context.user} in #{context.channel}"
                 )
