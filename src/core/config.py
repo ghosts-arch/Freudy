@@ -1,15 +1,15 @@
-"""
-Filename: config.py
-Description: This module contains functions to load and validate configuration
-             settings from a JSON file. It ensures that the required keys are
-             present and have the correct data types.
-"""
+# Filename: config.py
+# Description: This module contains functions to load and validate configuration
+#             settings from a JSON file. It ensures that the required keys are
+#            present and have the correct data types.
+
 
 
 import json
 import logging
 from pathlib import Path
 from typing import Dict, Union
+
 
 logger = logging.getLogger()
 
@@ -40,8 +40,6 @@ def load_config(path : Path) -> Dict[str, Union[int, bool]]:
         logger.error(f"{path} does not exist.")
         raise
   
-    
-
 def validate_config(config : Dict[str, Union[int, bool]]) -> None:
     """
     Validates the given configuration dictionary to ensure it contains the required keys 
@@ -58,7 +56,7 @@ def validate_config(config : Dict[str, Union[int, bool]]) -> None:
         ValueError: If any of the values in the config dictionary are not of the expected type.
     """
    
-    config_keys = ["guild_id", "test_channel_id", "dev_mode", "administration_channel_id"]
+    config_keys : list[str] = ["guild_id", "test_channel_id", "dev_mode", "administration_channel_id"]
 
     for key in config_keys:
         if key not in config:
