@@ -6,7 +6,7 @@ import asyncio
 import logging
 import pathlib
 import traceback
-
+import sys
 import discord
 
 from .config import load_config, validate_config
@@ -22,7 +22,7 @@ from src.core.embeds import ErrorEmbed
 
 logger = logging.getLogger()
 
-config_path = pathlib.Path("config.yaml")
+config_path = pathlib.Path("config.json")
 
 
 class Freudy(discord.Client):
@@ -33,8 +33,12 @@ class Freudy(discord.Client):
         self.database = Database()
         self.database.init()
         self.application_commands = load_application_commands()
-        self.config = load_config(path=config_path)
-        self.config = validate_config(self.config)
+        try:
+            self.config = load_config(path=config_path)
+            validate_config(self.config)
+        except Exception as err:
+            logger.error(f"{err}")
+            sys.exit(1)
         self.cooldowns = CooldownsManager()
         self.loop = asyncio.get_event_loop()
 

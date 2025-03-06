@@ -167,7 +167,7 @@ database/__init__.py
 database/database.db
 ignores/*
 __base__.py
-config.yaml
+config.json
 logs/
 *.db
 config.yaml
