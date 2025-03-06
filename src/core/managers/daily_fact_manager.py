@@ -16,7 +16,7 @@ class DailyFactManager(Manager):
         except Exception as err:
             return ErrorEmbed(description=f"{err}")
         # #selfcare (test) - a laisser pour l'instant
-        daily_fact_channel = await self.__client.fetch_channel(1308922950702989342)
+        daily_fact_channel = await self.__client.fetch_channel(1335777452013916202)
 
         if not daily_fact_channel:
             raise Exception("daily_fact_channel is None")
