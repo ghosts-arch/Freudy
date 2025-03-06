@@ -2,10 +2,8 @@
 # Python 3.10
 # ----------------------------------------------------------------------------
 
-import os
 import importlib
-
-import time
+import os
 from types import ModuleType
 from typing import Dict
 

@@ -1,8 +1,8 @@
+import logging
 import os
 
-from src.core.interaction import Interaction, Context
 from src.core.embeds import ErrorEmbed
-import logging
+from src.core.interaction import Context, Interaction
 
 logger = logging.getLogger()
 

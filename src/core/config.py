@@ -2,10 +2,10 @@
 # Python 3.10
 # ----------------------------------------------------------------------------
 
-import yaml
-
-from typing import TypedDict
 from pathlib import Path
+from typing import TypedDict
+
+import yaml
 
 
 class Config(TypedDict):

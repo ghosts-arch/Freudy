@@ -5,19 +5,20 @@
 import asyncio
 import logging
 import pathlib
-import discord
 import traceback
 
+import discord
+
+from .config import load_config, validate_config
 from .cooldowns import CooldownsManager
-from src.core.embeds import ErrorEmbed
-from .managers.daily_fact_manager import DailyFactManager
 from .database.database import Database
 from .interaction import (
     Context,
     load_application_commands,
     register_application_commands,
 )
-from .config import load_config, validate_config
+from .managers.daily_fact_manager import DailyFactManager
+from src.core.embeds import ErrorEmbed
 
 logger = logging.getLogger()
 

@@ -2,16 +2,13 @@
 # Python 3.10
 # ----------------------------------------------------------------------------
 
-import random
-
-import threading
+import logging
 import time
 
 import discord
-from src.core.interaction import Interaction, Context
 from src.core.embeds import Embed, ErrorEmbed
+from src.core.interaction import Context, Interaction
 from src.core.ui.views import ReponsesView
-import logging
 
 logger = logging.getLogger()
 

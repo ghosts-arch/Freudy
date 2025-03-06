@@ -3,9 +3,9 @@
 # ----------------------------------------------------------------------------
 
 import logging.config
-import yaml
-import pathlib
 import logging
+import pathlib
+import yaml
 
 
 def setup_logging() -> logging.Logger:

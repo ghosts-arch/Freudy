@@ -3,14 +3,11 @@
 # ----------------------------------------------------------------------------
 
 import logging
-import os
 import traceback
-import discord
 import requests
 import dotenv
 import asyncio
 
-from types import ModuleType
 from typing import Dict
 
 from .interaction import Interaction

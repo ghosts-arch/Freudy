@@ -1,7 +1,5 @@
-import threading
 import asyncio
 from time import time
-from src.core.embeds import Embed
 
 
 class CooldownsManager:

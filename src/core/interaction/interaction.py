@@ -3,8 +3,8 @@
 # ----------------------------------------------------------------------------
 
 from abc import ABC, abstractmethod
-from typing import Any, Coroutine, NotRequired, TypedDict
-
+from typing import Any, Coroutine, TypedDict
+from typing_extensions import NotRequired
 
 from .context import Context
 

@@ -3,10 +3,11 @@
 # ----------------------------------------------------------------------------
 
 import logging
-import discord
 
-from src.core.embeds import Embed, ErrorEmbed
+import discord
 from discord.ui.view import View
+
+from src.core.embeds import Embed
 
 
 logger = logging.getLogger()

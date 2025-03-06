@@ -1,7 +1,7 @@
 import discord
+
+from src.core.embeds import ErrorEmbed, SuccessEmbed
 from src.core.ui.buttons import QuestionAnswerButton
-from src.core.embeds import SuccessEmbed, ErrorEmbed
-from src.core.interaction import Interaction
 
 
 class ReponsesView(discord.ui.View):
