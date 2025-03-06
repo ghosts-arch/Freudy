@@ -13,4 +13,4 @@ class QuestionAnswerButton(discord.ui.Button):
         super().__init__(
             label=label, style=discord.ButtonStyle.green, custom_id=custom_id
         )
-        self.on_click = on_click
+        self.callback = on_click
