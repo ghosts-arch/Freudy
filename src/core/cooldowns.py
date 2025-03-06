@@ -5,10 +5,11 @@ import asyncio
 from time import time
 from discord import TextChannel
 from typing import TYPE_CHECKING, Dict, Optional, Coroutine, Any
-
-if TYPE_CHECKING:
-    from discord import Message
-    from src.core.interaction import Context
+from src.core.interaction import Context
+from discord import Message
+# if TYPE_CHECKING:
+    # from discord import Message
+    # from src.core.interaction import Context
 
 class CooldownsManager:
     def __init__(self) -> None:
