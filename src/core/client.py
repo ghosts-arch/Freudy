@@ -55,12 +55,13 @@ class Freudy(discord.Client):
         if isinstance(test_channel, discord.TextChannel):
             await test_channel.send(f"{self.user} ready.")
 
-    async def on_interaction(self, interaction: discord.Interaction):
+    async def on_interaction(self, interaction: discord.Interaction["Freudy"]):
 
         if interaction.type == discord.InteractionType.application_command:
             context = Context(interaction)
             command = self.application_commands.get(context.name)
 
+        
             if not command:
                 return
 
@@ -78,7 +79,8 @@ class Freudy(discord.Client):
                     )
                 )
                 return
-
+            if not isinstance(context.user, discord.Member):
+                return
             if (
                 command.run_by_moderator_only()
                 and not context.user.guild_permissions.administrator

@@ -19,11 +19,11 @@ class ApplicationCommand(Interaction):
         self.name = "generate_question"
         self.description = "generer une question aléatoire"
 
-    async def run(self, client, context: Context) -> None:
+    async def run(self, context: Context) -> None:
         if not isinstance(context.guild, discord.Guild):
             return
-        result = client.cooldowns.find_user(context.user.id)
-
+        result = context.client.cooldowns.find_user(context.user.id)
+        
         if result:
             current_time = time.time()
             time_since_last_usage = current_time - result["last_usage"]
@@ -38,9 +38,9 @@ class ApplicationCommand(Interaction):
                 ephemeral=True,
             )
 
-        client.cooldowns.add_user(context.user.id, context)
+        context.client.cooldowns.add_user(context.user.id, context)
 
-        question = client.database.get_random_question()
+        question = context.client.database.get_random_question()
         logger.info(f"{question} triggered by {context.user}")
         member = context.guild.get_member(context.user.id)
         if not isinstance(member, discord.Member):

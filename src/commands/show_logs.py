@@ -14,7 +14,7 @@ class ApplicationCommand(Interaction):
         self.description = "affiche les logs du bot"
         self.administration_channel_only = True
 
-    async def run(self, client, context: Context) -> None:
+    async def run(self, context: Context) -> None:
         logs_file_path = os.path.join("logs", "bot.log")
 
         if not os.path.exists(logs_file_path):
