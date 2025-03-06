@@ -49,7 +49,7 @@ class ApplicationCommand(Interaction):
         if on_mobile:
             description = f"Question : {question.question}\n"
             for index, answer in enumerate(question.answers):
-                description += f"{index + 1}. {answer.response}\n"
+                description += f"{index + 1}. {answer.text}\n"
             view = ReponsesView(question=question, mobile_version=True)
         else:
             description = f"{question.question}"
