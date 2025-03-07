@@ -78,7 +78,7 @@ class Database:
         populate_facts(): Populates the database with new facts from a JSON file.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         echo = bool(os.getenv("DEV_MODE"))
         self.engine = sqlalchemy.create_engine(
             "sqlite:///./database.db",
@@ -86,7 +86,7 @@ class Database:
         )
         Base.metadata.create_all(self.engine)
         Base.set_database(self)
-        self.Session = sessionmaker(self.engine, expire_on_commit=False)
+        self.session = sessionmaker(self.engine, expire_on_commit=False)
 
     def init(self):
         """
@@ -126,7 +126,7 @@ class Database:
     Raises:
         Exception: If an error occurs during the session, the session is rolled back.
     """
-        session = self.Session()
+        session = self.session()
         try:
             yield session
             session.commit()

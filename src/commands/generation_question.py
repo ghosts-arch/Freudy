@@ -16,13 +16,13 @@ import time
 
 import discord
 from src.embeds import Embed, ErrorEmbed
-from src.interaction import Context, Interaction
+from src.interaction import Context, Command
 from src.ui.views import ReponsesView
 
 logger = logging.getLogger()
 
 
-class ApplicationCommand(Interaction):
+class ApplicationCommand(Command):
     """
     A command class to generate a random question for a Discord bot.
     Attributes:

@@ -59,7 +59,7 @@ class Freudy(discord.Client):
         self.cooldowns = CooldownsManager()
         self.loop = asyncio.get_event_loop()
 
-    async def on_ready(self):
+    async def on_ready(self) -> None:
         """
         Event handler for when the bot is ready.
         This function is called when the bot has successfully connected to Discord
@@ -72,14 +72,9 @@ class Freudy(discord.Client):
             Exception: If there is an error during the registration of application commands.
         """
 
-        try:
-            await register_application_commands(
+        await register_application_commands(
                 application_commands=self.application_commands
-            )
-        except Exception as error:
-            logger.error("Unexpected error: %s", error)
-            
-
+        )
         DailyFactManager(self).start()
         logger.info("Logged as %s", self.user)
         test_channel_id: int = self.config["test_channel_id"]
