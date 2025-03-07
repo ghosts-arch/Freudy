@@ -10,7 +10,7 @@ import asyncio
 from time import time
 from typing import  Dict, Optional, Coroutine, Any
 from discord import TextChannel, Message
-from src.core.interaction.context import Context
+from src.interaction.context import Context
 
 class CooldownsManager:
     """

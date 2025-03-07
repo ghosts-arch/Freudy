@@ -5,17 +5,11 @@
 # ----------------------------------------------------------------------------
 
 import requests
-import dotenv
+import os
 
+from src.utils.get_credentials import get_credentials
 
-path = dotenv.find_dotenv()
-
-application_id = dotenv.get_key(
-    dotenv_path=path, key_to_get="APPLICATION_ID", encoding="utf-8"
-)
-bot_token = dotenv.get_key(
-    dotenv_path=path, key_to_get="CLIENT_TOKEN", encoding="utf-8"
-)
+application_id, bot_token = get_credentials()
 
 url = f"https://discord.com/api/v10/applications/{application_id}/commands"
 headers = {

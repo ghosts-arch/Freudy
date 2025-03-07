@@ -13,8 +13,8 @@ Functions:
 import logging
 import os
 
-from src.core.embeds import ErrorEmbed
-from src.core.interaction import Context, Interaction
+from src.embeds import ErrorEmbed
+from src.interaction import Context, Interaction
 
 logger = logging.getLogger()
 

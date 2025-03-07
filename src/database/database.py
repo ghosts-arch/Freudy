@@ -81,7 +81,7 @@ class Database:
     def __init__(self):
         echo = bool(os.getenv("DEV_MODE"))
         self.engine = sqlalchemy.create_engine(
-            "sqlite:///src/core/database/database.db",
+            "sqlite:///./database.db",
             echo=echo,
         )
         Base.metadata.create_all(self.engine)

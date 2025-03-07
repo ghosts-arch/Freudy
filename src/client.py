@@ -12,7 +12,7 @@ import traceback
 
 import discord
 
-from src.core.embeds import ErrorEmbed
+from src.embeds import ErrorEmbed
 from .config import load_config, validate_config
 from .cooldowns import CooldownsManager
 from .database.database import Database

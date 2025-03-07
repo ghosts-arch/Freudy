@@ -8,7 +8,7 @@ import os
 import sys
 import dotenv
 
-from src.core.client import Freudy
+from src.client import Freudy
 from src.utils.logger import setup_logging
 
 
@@ -37,7 +37,7 @@ def setup_environment() -> None:
 setup_environment()
 
 
-def main():
+def main() -> None:
     """
     Main function to initialize and run the Freudy client.
 

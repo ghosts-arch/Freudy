@@ -15,9 +15,9 @@ import logging
 import time
 
 import discord
-from src.core.embeds import Embed, ErrorEmbed
-from src.core.interaction import Context, Interaction
-from src.core.ui.views import ReponsesView
+from src.embeds import Embed, ErrorEmbed
+from src.interaction import Context, Interaction
+from src.ui.views import ReponsesView
 
 logger = logging.getLogger()
 

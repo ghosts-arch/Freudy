@@ -11,8 +11,8 @@ from discord.ui import View
 if TYPE_CHECKING:
     from discord.interactions import InteractionChannel
     # import discord.types
-    from src.core.client import Freudy
-from src.core.embeds import Embed
+    from src.client import Freudy
+from src.embeds import Embed
 
 
 logger = logging.getLogger()

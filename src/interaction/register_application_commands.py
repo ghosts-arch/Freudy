@@ -7,20 +7,15 @@ import traceback
 import requests
 import dotenv
 import asyncio
-
+import os
 from typing import Dict
 
 from .interaction import Interaction
+from src.utils.get_credentials import get_credentials
 
-logger = logging.getLogger(__name__)
-path = dotenv.find_dotenv()
+logger = logging.getLogger()
 
-application_id = dotenv.get_key(
-    dotenv_path=path, key_to_get="APPLICATION_ID", encoding="utf-8"
-)
-bot_token = dotenv.get_key(
-    dotenv_path=path, key_to_get="CLIENT_TOKEN", encoding="utf-8"
-)
+application_id, bot_token = get_credentials()
 
 url = f"https://discord.com/api/v10/applications/{application_id}/commands"
 headers = {

@@ -1,7 +1,7 @@
 import discord
 
 from .manager import Manager
-from src.core.embeds import ErrorEmbed, Embed
+from src.embeds import ErrorEmbed, Embed
 
 
 class DailyFactManager(Manager):
