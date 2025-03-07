@@ -1,17 +1,27 @@
-# Filename: cooldowns.py
-# Description: This module manages cooldowns for users in a Discord bot context.
+"""
+This module manages cooldowns for users in a Discord bot context.
+
+Classes:
+    CooldownsManager: Manages cooldowns for users, providing methods to add, find, and delete 
+    users from the cooldown list.
+"""
 
 import asyncio
 from time import time
-from discord import TextChannel
-from typing import TYPE_CHECKING, Dict, Optional, Coroutine, Any
-from src.core.interaction import Context
-from discord import Message
-# if TYPE_CHECKING:
-    # from discord import Message
-    # from src.core.interaction import Context
+from typing import  Dict, Optional, Coroutine, Any
+from discord import TextChannel, Message
+from src.core.interaction.context import Context
 
 class CooldownsManager:
+    """
+    Manages cooldowns for users in a Discord bot context.
+
+    This class provides methods to add users to a cooldown list, find users in the list,
+    and delete users from the list after a specified delay. The cooldowns are managed
+    using a dictionary where each user ID maps to another dictionary containing cooldown
+    information.
+    """
+
     def __init__(self) -> None:
         """
         Initializes the cooldowns dictionary.
@@ -43,11 +53,14 @@ class CooldownsManager:
             user_id (int): The ID of the user to find.
 
         Returns:
-            Optional[Dict[str, float]]: The cooldown information for the user if found, otherwise None.
+            Optional[Dict[str, float]]: The cooldown information for the user if found, 
+            otherwise None.
         """
         return self.cooldowns.get(user_id, None)
 
-    async def delete_user(self, user_id : int, context : Context) -> Coroutine[Any, Any, Message] | Any:
+    async def delete_user(
+        self, user_id: int, context: Context
+    ) -> Coroutine[Any, Any, Message] | Any:
         """
         Deletes a user from the cooldowns list and sends a message in the context channel.
 
@@ -56,22 +69,22 @@ class CooldownsManager:
             context (Context): The context in which the command was invoked.
 
         Returns:
-            Coroutine[Any, Any, Message] | Any: A coroutine that sends a message in the context channel.
+            Coroutine[Any, Any, Message] | Any: A coroutine that sends a message in the 
+            context channel.
 
         Raises:
             Exception: If the context channel is not a TextChannel.
             Exception: If the user is not found in the cooldowns list.
         """
         if not isinstance(context.channel, TextChannel):
-            raise Exception("This function can be executed only in a guild channel.")
+            raise TypeError("This function can be executed only in a guild channel.")
         user = self.find_user(user_id=user_id)
         if not user:
-            raise Exception("User not found")
+            raise KeyError("User not found")
         del self.cooldowns[user_id]
         return await context.channel.send(
                 content=f"{context.user.mention}, vous pouvez à nouveau jouer !",
             )
-        
 
     async def schedule_delete_user(self, user_id : int, context : Context) -> None:
         """
