@@ -84,7 +84,7 @@ class Manager(ABC):
         Starts the manager by logging its initiation and creating an asynchronous task to run it.
 
         This method logs the start of the manager using the class name and schedules the `run`
-        method sto be executed in the event loop of the client.
+        method to be executed in the event loop of the client.
 
         Returns:
             None
