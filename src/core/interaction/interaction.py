@@ -43,7 +43,7 @@ class Interaction(ABC):
         return self.options
 
     @abstractmethod
-    def run(self, context: Context) -> Coroutine[Any, Any, Any]:
+    async def run(self, context: Context) -> Coroutine[Any, Any, None]:
         pass
 
     def in_adminstration_channel_only(self) -> bool:
