@@ -1,9 +1,9 @@
-# Filename: config.py
-# Description: This module contains functions to load and validate configuration
-#             settings from a JSON file. It ensures that the required keys are
-#            present and have the correct data types.
-
-
+"""
+Filename: config.py
+Description: This module contains functions to load and validate configuration
+             settings from a JSON file. It ensures that the required keys are
+             present and have the correct data types.
+"""
 
 import json
 import logging
@@ -34,12 +34,12 @@ def load_config(path : Path) -> Dict[str, Union[int, bool]]:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     except json.decoder.JSONDecodeError:
-        logger.error(f"Fail to decode {path}")
+        logger.error("Fail to decode %s", path)
         raise
     except FileNotFoundError:
-        logger.error(f"{path} does not exist.")
+        logger.error("%s does not exist.", path)
         raise
-  
+
 def validate_config(config : Dict[str, Union[int, bool]]) -> None:
     """
     Validates the given configuration dictionary to ensure it contains the required keys 
@@ -55,18 +55,21 @@ def validate_config(config : Dict[str, Union[int, bool]]) -> None:
         KeyError: If any of the required keys are missing from the config dictionary.
         ValueError: If any of the values in the config dictionary are not of the expected type.
     """
-   
-    config_keys : list[str] = ["guild_id", "test_channel_id", "dev_mode", "administration_channel_id"]
+    config_keys: list[str] = [
+        "guild_id", 
+        "test_channel_id", 
+        "dev_mode", 
+        "administration_channel_id"
+    ]
 
     for key in config_keys:
         if key not in config:
             raise KeyError(f'{key} is missing in config file.')
-        
     if not isinstance(config["guild_id"], int):
-        raise ValueError(f"guild_id must be an int")
+        raise ValueError("guild_id must be an int")
     if not isinstance(config["test_channel_id"], int):
-        raise ValueError(f'test_channel_id must be an int.')
+        raise ValueError('test_channel_id must be an int.')
     if not isinstance(config["dev_mode"], bool):
-        raise ValueError(f"dev_mode must an bool.")
+        raise ValueError("dev_mode must an bool.")
     if not isinstance(config["administration_channel_id"], int):
         raise ValueError("administration_channel_id must an int")
