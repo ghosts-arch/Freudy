@@ -6,8 +6,7 @@ import logging
 from typing import TYPE_CHECKING, Union, Optional
 
 import discord
-from discord.ui import View
-from src.embeds import Embed
+
 if TYPE_CHECKING:
     from discord.interactions import InteractionChannel
     # import discord.types
@@ -109,33 +108,3 @@ class Context:
         :return: The `options` value from the `data` dictionary is being returned.
         """
         return self.data.get("options")
-
-    async def send(
-        self,
-        *,
-        content: str | None = None,
-        embed: Embed | None = None,
-        file=None,
-        ephemeral: bool = False,
-    ):
-        """Envoie la reponse dans le salon du message."""
-
-        response: dict[str, str | Embed | View | None] = {}
-
-        if content:
-            response["content"] = content
-        if embed:
-            response["embed"] = embed
-        if file:
-            response["file"] = file
-
-        if self.guild and self.channel:
-            channel = self.guild.get_channel(self.channel.id)
-            if not channel:
-                logger.error("Channel not found")
-                return
-            if not self.channel.permissions_for(self.guild.me).send_messages:
-                logger.error("Bot not have permission to send message")
-                return
-            await self.interaction.response.send_message(
-                **response, ephemeral=ephemeral)

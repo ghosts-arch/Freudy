@@ -22,7 +22,7 @@ from src.ui.views import ReponsesView
 logger = logging.getLogger()
 
 
-class ApplicationCommand(Command):
+class QuestionCommand(Command):
     """
     A command class to generate a random question for a Discord bot.
     Attributes:
@@ -36,7 +36,7 @@ class ApplicationCommand(Command):
     """
 
     def __init__(self) -> None:
-        self.name = "generate_question"
+        self.name = "question"
         self.description = "generer une question aléatoire"
 
     async def run(self, context: Context):
@@ -47,7 +47,7 @@ class ApplicationCommand(Command):
             current_time = time.time()
             time_since_last_usage = current_time - result["last_usage"]
             remaining_time = 14400 - time_since_last_usage
-            return await context.send(
+            return await context.interaction.response.send_message(
                 embed=ErrorEmbed(
                     f"Vous pourrez à nouveau jouer dans {int(remaining_time // 3600)} heures "
                     f"{int((remaining_time % 3600) // 60)} minutes "
@@ -72,4 +72,4 @@ class ApplicationCommand(Command):
             description = f"{question.question}"
             view = ReponsesView(question=question, mobile_version=False)
         embed = Embed().set_description(description=description)
-        return await context.send(embed=embed, view=view)
+        return await context.interaction.response.send_message(embed=embed, view=view)
