@@ -1,24 +1,24 @@
 import logging
 import os
 
-from src.core.embeds import ErrorEmbed
-from src.core.interaction import Context, Interaction
+from src.embeds import ErrorEmbed
+from src.interaction import Context, Command
 
 logger = logging.getLogger()
 
 
-class ApplicationCommand(Interaction):
+class ShowLogsCommand(Command):
 
     def __init__(self) -> None:
         self.name = "show_logs"
         self.description = "affiche les logs du bot"
         self.administration_channel_only = True
 
-    async def run(self, context: Context) -> None:
+    async def run(self, context: Context):
         logs_file_path = os.path.join("logs", "bot.log")
 
         if not os.path.exists(logs_file_path):
-            await context.send(
+            await context.interaction.response.send_message(
                 embed=ErrorEmbed(
                     description="Le fichier de logs n'existe pas",
                 )
@@ -33,4 +33,4 @@ class ApplicationCommand(Interaction):
         if len(last_logs) > 2000:
             last_logs = "".join(logs[-10:])
 
-        await context.send(content=f"```{last_logs}```")
+        await context.interaction.response.send_message(content=f"```{last_logs}```")

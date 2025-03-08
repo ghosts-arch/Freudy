@@ -1,7 +1,3 @@
-# coding : utf-8
-# Python 3.10.12
-# ----------------------------------------------------------------------------
-
 from abc import ABC, abstractmethod
 import asyncio
 import datetime
@@ -34,5 +30,5 @@ class Manager(ABC):
             await self.callback()
 
     def start(self):
-        logger.info(f"Start {self.__class__.__name__} manager.")
+        logger.info("Start %s manager.", self.__class__.__name__)
         self.__client.loop.create_task(self.run())

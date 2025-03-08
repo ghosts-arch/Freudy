@@ -1,12 +1,8 @@
-# coding : utf-8
-# Python 3.10
-# ----------------------------------------------------------------------------
-
 import os
 import sys
 import dotenv
 
-from src.core.client import Freudy
+from src.client import Freudy
 from src.utils.logger import setup_logging
 
 
@@ -19,13 +15,13 @@ def setup_environment() -> None:
         logger.error("No .env file found.")
         sys.exit(1)
     dotenv.load_dotenv(dotenv_path=environment_file_path)
-    logger.info(f"{environment_file_path} loaded.")
+    logger.info("%s loaded.", environment_file_path)
 
 
 setup_environment()
 
 
-def main():
+def main() -> None:
     client = Freudy()
     client_token = os.getenv("CLIENT_TOKEN")
     if not client_token:

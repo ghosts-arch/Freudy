@@ -1,7 +1,3 @@
-# coding : utf-8
-# Python 3.10
-# ----------------------------------------------------------------------------
-
 import json
 import logging
 import os
@@ -14,6 +10,7 @@ from sqlalchemy.orm import joinedload, sessionmaker
 
 from .models import Answer, Base, DailyFact, Question
 
+
 logger = logging.getLogger()
 
 
@@ -25,15 +22,15 @@ def load_json_file(path: str):
 
 class Database:
 
-    def __init__(self):
+    def __init__(self) -> None:
         echo = bool(os.getenv("DEV_MODE"))
         self.engine = sqlalchemy.create_engine(
-            "sqlite:///src/core/database/database.db",
+            "sqlite:///./database.db",
             echo=echo,
         )
         Base.metadata.create_all(self.engine)
         Base.set_database(self)
-        self.Session = sessionmaker(self.engine, expire_on_commit=False)
+        self.session = sessionmaker(self.engine, expire_on_commit=False)
 
     def init(self):
         try:
@@ -47,7 +44,7 @@ class Database:
 
     @contextmanager
     def session_scope(self):
-        session = self.Session()
+        session = self.session()
         try:
             yield session
             session.commit()
@@ -90,7 +87,7 @@ class Database:
     def create_question(self, question: str) -> Question:
         return Question(question=question)
 
-    def populate_questions(self):
+    def populate_questions(self) -> None:
         start_time = time.perf_counter()
         questions = load_json_file("data.json")
         with self.session_scope() as session:
@@ -118,7 +115,9 @@ class Database:
                 session.add(question)
         end_time = time.perf_counter()
         logger.info(
-            f"Populated {len(new_questions)} questions in {(end_time - start_time) * 1000:.2f} seconds."
+            "Populated %d questions in %f:.2f seconds.",
+            len(new_questions),
+            (end_time - start_time) * 1000
         )
 
     def get_daily_facts(self):
@@ -146,5 +145,7 @@ class Database:
             )
         end_time = time.perf_counter()
         logger.info(
-            f"Populated {len(created_facts)} facts in {(end_time - start_time) * 1000:.2f} seconds."
+            "Populated %d facts in %f:.2f seconds.",
+            len(created_facts),
+            (end_time - start_time) * 1000
         )
