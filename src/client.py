@@ -3,7 +3,6 @@ import json
 import logging
 import pathlib
 import sys
-import traceback
 
 import discord
 
@@ -12,7 +11,6 @@ from .config import load_config, validate_config
 from .cooldowns import CooldownsManager
 from .database.database import Database
 from .interaction import (
-    Context,
     load_application_commands,
     register_application_commands,
 )
@@ -57,18 +55,17 @@ class Freudy(discord.Client):
     async def on_interaction(self, interaction: discord.Interaction["Freudy"]):
 
         if interaction.type == discord.InteractionType.application_command:
-            context = Context(interaction)
-            command = self.application_commands.get(context.name)
+            command = self.application_commands.get(interaction.data.get("name"))
 
             if not command:
                 return
 
             if (
                 command.in_adminstration_channel_only()
-                and not context.channel.id
+                and not interaction.channel.id
                 == self.config.get("ADMINSTRATION_CHANNEL_ID")
             ):
-                await context.interaction.response.send_message(
+                await interaction.response.send_message(
                     embed=ErrorEmbed(
                         description=(
                             "This command can only be used"
@@ -77,23 +74,23 @@ class Freudy(discord.Client):
                     )
                 )
                 return
-            if not isinstance(context.user, discord.Member):
+            if not isinstance(interaction.user, discord.Member):
                 return
             if (
                 command.run_by_moderator_only()
-                and not context.user.guild_permissions.administrator
+                and not interaction.user.guild_permissions.administrator
             ):
-                await context.interaction.response.send_message(
+                await interaction.response.send_message(
                     embed=ErrorEmbed(
                         description="This command can only be used by adminstrator."
                     )
                 )
                 return
 
-            try:
-                await command.run(context=context)
-                logger.info(
-                    "Command %s executed by %s in #%s", context.name, context.user, context.channel
+            await command.run(interaction=interaction)
+            logger.info(
+                    "Command %s executed by %s in #%s",
+                    command.get_name(),
+                    interaction.user,
+                    interaction.channel
                 )
-            except Exception:
-                logger.error(traceback.format_exc())

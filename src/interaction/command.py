@@ -1,13 +1,11 @@
-"""
-Classe abstraite représentant une commande.
-"""
-
 from abc import ABC, abstractmethod
-from typing import Any, Coroutine, TypedDict
+from typing import Any, Coroutine, TypedDict, TYPE_CHECKING
 from typing_extensions import NotRequired
 
-from .context import Context
+import discord
 
+if TYPE_CHECKING:
+    from src.client import Freudy
 
 class OptionChoice(TypedDict):
     name: str
@@ -43,7 +41,7 @@ class Command(ABC):
         return self.options
 
     @abstractmethod
-    async def run(self, context: Context) -> Coroutine[Any, Any, None]:
+    async def run(self, interaction : discord.Interaction['Freudy']) -> Coroutine[Any, Any, None]:
         pass
 
     def in_adminstration_channel_only(self) -> bool:
