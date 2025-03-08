@@ -1,15 +1,3 @@
-"""
-This module defines the `ApplicationCommand` class which is responsible for displaying
-the bot's logs. It includes functionality to check for the existence of the log file
-and send the last few lines of the log to a specified context.
-Classes:
-    ApplicationCommand: A class that inherits from `Interaction` and provides a command
-    to show the bot's logs.
-Functions:
-    run(context: Context): Asynchronously runs the command to display the bot's logs in
-    the specified context.
-"""
-
 import logging
 import os
 
@@ -20,20 +8,6 @@ logger = logging.getLogger()
 
 
 class ShowLogsCommand(Command):
-    """
-    A command to show the logs of the bot.
-    Attributes:
-        name (str): The name of the command.
-        description (str): The description of the command.
-        administration_channel_only (bool): Whether the command can only be used in
-        administration channels.
-    Methods:
-        run(context: Context):
-            Executes the command to show the last logs of the bot.
-            Sends an error message if the log file does not exist.
-            Sends the last 20 lines of the log file, or the last 10 lines if the
-            content exceeds 2000 characters.
-    """
 
     def __init__(self) -> None:
         self.name = "show_logs"

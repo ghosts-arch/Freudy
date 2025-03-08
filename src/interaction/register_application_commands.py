@@ -1,18 +1,3 @@
-"""
-This module provides functionality to register and update application commands to Discord.
-Functions:
-    update_command_to_discord(application_command_name: str, application_command: Interaction):
-    register_application_commands(application_commands: Dict[str, Interaction]) -> None:
-Modules:
-    logging: For logging errors and warnings.
-    asyncio: For handling asynchronous operations.
-    typing: For type hinting.
-    requests: For making HTTP requests.
-    src.utils.get_credentials: For retrieving application credentials.
-    .interaction: For the Interaction class used in application commands.
-
-"""
-
 import logging
 import asyncio
 from typing import Dict
@@ -35,18 +20,6 @@ headers = {
 def update_command_to_discord(
     application_command_name: str, application_command: Command
 ):
-    """
-    Updates a command to Discord with the given application command name and interaction.
-    Args:
-        application_command_name (str): The name of the application command to update.
-        application_command (Interaction): The interaction object containing command details.
-    Raises:
-        requests.exceptions.RequestException: If there is an issue with the HTTP request.
-        asyncio.CancelledError: If the asyncio task is cancelled.
-        Exception: For any other unexpected errors.
-    Logs:
-        Logs errors and warnings related to the request and response status.
-    """
     payload = {
         "name": application_command_name,
         "type": 1,
@@ -70,18 +43,6 @@ def update_command_to_discord(
 async def register_application_commands(
     application_commands: Dict[str, Command]
 ) -> None:
-    """
-    Registers application commands by updating them to Discord.
-
-    Args:
-        application_commands (Dict[str, Interaction]): A dictionary where the key is the
-        command name and the value is the Interaction object.
-
-    Raises:
-        requests.exceptions.RequestException: If there is an issue with the request to Discord.
-        asyncio.CancelledError: If the asyncio task is cancelled.
-        Exception: For any other unexpected errors.
-    """
     for data in application_commands.items():
         try:
             update_command_to_discord(*data)

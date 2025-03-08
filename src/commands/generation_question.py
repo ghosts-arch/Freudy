@@ -1,16 +1,3 @@
-"""
-This module defines the `ApplicationCommand` class, which handles the generation of random questions
-for a Discord bot. The command checks for user cooldowns, retrieves a random question
-from the database, and sends it to the user with appropriate formatting based on whether the user
-is on a mobile device.
-
-Classes:
-    ApplicationCommand: Represents the command to generate a random question.
-Functions:
-    run(context: Context) -> None: Executes the command, checking cooldowns and
-    sending a random question.
-"""
-
 import logging
 import time
 
@@ -23,17 +10,6 @@ logger = logging.getLogger()
 
 
 class QuestionCommand(Command):
-    """
-    A command class to generate a random question for a Discord bot.
-    Attributes:
-        name (str): The name of the command.
-        description (str): The description of the command.
-    Methods:
-        __init__(): Initializes the command with a name and description.
-        run(context: Context): Executes the command, checks for cooldowns, retrieves a random
-        question from the database, and sends it to the user.
-        If the user is on mobile, the question is formatted differently.
-    """
 
     def __init__(self) -> None:
         self.name = "question"

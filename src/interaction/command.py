@@ -10,17 +10,11 @@ from .context import Context
 
 
 class OptionChoice(TypedDict):
-    """
-    Represente un choix pour une option.
-    """
     name: str
     value: str
 
 
 class Option(TypedDict):
-    """
-    Represente une option d'une commande.
-    """
     name: str
     description: str
     type: int
@@ -30,9 +24,6 @@ class Option(TypedDict):
 
 
 class Command(ABC):
-    """
-    Classe abstraite représentant une slash commande.
-    """
     name: str
     description: str
     options: list[Option]
@@ -43,50 +34,20 @@ class Command(ABC):
         pass
 
     def get_name(self) -> str:
-        """
-        Retourne le nom de la commande.
-        """
         return self.name
 
     def get_description(self) -> str:
-        """
-        Retourne la description de la commande.
-        """
         return self.description
 
     def get_options(self) -> list[Option]:
-        """
-        Retourne les options de la commande.
-        """
         return self.options
 
     @abstractmethod
     async def run(self, context: Context) -> Coroutine[Any, Any, None]:
-        """
-    Abstract method to be implemented by subclasses to define the interaction logic.
-
-    Args:
-        context (Context): The context in which the interaction is executed.
-
-    Returns:
-        Coroutine[Any, Any, None]: A coroutine that performs the interaction.
-    """
+        pass
 
     def in_adminstration_channel_only(self) -> bool:
-        """
-        Check if the interaction is restricted to the administration channel only.
-
-        Returns:
-            bool: True if the interaction is restricted to the administration channel,
-            False otherwise.
-        """
         return self.adminstration_channel_only
 
     def run_by_moderator_only(self) -> bool:
-        """
-        Checks if the interaction is restricted to moderators only.
-
-        Returns:
-            bool: True if the interaction is restricted to moderators, False otherwise.
-        """
         return self.moderator_only

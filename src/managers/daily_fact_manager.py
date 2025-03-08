@@ -1,11 +1,3 @@
-""""
-This module contains the DailyFactManager class, which manages the daily fact functionality
-for the bot.
-It interacts with the bot's client to fetch and send random daily facts to a specific Discord
-channel.
-Classes:
-    DailyFactManager: Manages the daily fact functionality for the bot.
-"""
 import discord
 
 from src.embeds import ErrorEmbed, Embed
@@ -13,20 +5,6 @@ from .manager import Manager
 
 
 class DailyFactManager(Manager):
-    """
-    Manages the daily fact functionality for the bot.
-    Attributes:
-        client (Client): The client instance used to interact with the bot and its services.
-    Methods:
-        __init__(client):
-            Initializes the DailyFactManager with the given client.
-        callback(*args, **kwargs):
-            Asynchronous method that fetches a random daily fact from the database and
-            jsends it to a specific channel.
-            Raises:
-                ValueError: If the daily_fact_channel is None.
-                TypeError: If the daily_fact_channel is not a discord.TextChannel.
-    """
 
     def __init__(self, client):
         super().__init__(client)
