@@ -9,9 +9,9 @@ headers = {
     "Authorization": f"Bot {bot_token}",
 }
 
-def unload_application_commands() -> None:
+async def unload_application_commands():
 
-    response = requests.get(URL, headers=headers, timeout=5)
+    response = requests.get(URL, headers=headers)
 
     for data in response.json():
         requests.delete(
@@ -20,5 +20,5 @@ def unload_application_commands() -> None:
                 + f"/commands/{data['id']}"
             ),
             headers = headers,
-            timeout=5
+            
         )

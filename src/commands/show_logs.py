@@ -1,29 +1,27 @@
 import logging
 import os
+import discord
+from typing import TYPE_CHECKING, Coroutine, Any
+
+if TYPE_CHECKING:
+     from src.client import Freudy
 
 from src.embeds import ErrorEmbed
-from src.interaction import Context, Command
+from .command import Command
 
 logger = logging.getLogger()
 
 
-class ShowLogsCommand(Command):
-
-    def __init__(self) -> None:
-        self.name = "show_logs"
-        self.description = "affiche les logs du bot"
-        self.administration_channel_only = True
-
-    async def run(self, context: Context):
+async def run(interaction : discord.Interaction["Freudy"]) -> None:
         logs_file_path = os.path.join("logs", "bot.log")
 
         if not os.path.exists(logs_file_path):
-            await context.interaction.response.send_message(
+            await interaction.response.send_message(
                 embed=ErrorEmbed(
                     description="Le fichier de logs n'existe pas",
                 )
             )
-            return
+            return None
 
         with open(logs_file_path, "r", encoding="utf-8") as f:
             logs = f.readlines()
@@ -33,4 +31,12 @@ class ShowLogsCommand(Command):
         if len(last_logs) > 2000:
             last_logs = "".join(logs[-10:])
 
-        await context.interaction.response.send_message(content=f"```{last_logs}```")
+        await interaction.response.send_message(content=f"```{last_logs}```")
+        return None
+
+command : Command = {
+    "name" : "logs",
+    "description" : "Renvoie les logs du bot.",
+    "in_administration_channel_only" : True,
+    "run" : run
+}
