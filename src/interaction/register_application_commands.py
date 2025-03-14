@@ -5,7 +5,7 @@ from typing import Dict
 import requests
 
 from src.utils.get_credentials import get_credentials
-from .command import Command
+from src.commands.command import Command
 
 logger = logging.getLogger()
 
@@ -23,19 +23,20 @@ def update_command_to_discord(
     payload = {
         "name": application_command_name,
         "type": 1,
-        "description": application_command.get_description(),
+        "description": application_command.get("description"),
     }
 
+    """
     if hasattr(application_command, "options"):
-        payload["options"] = application_command.get_options()
+        payload["options"] = application_command.get()
+        """
 
     try:
-        response = requests.post(URL, headers=headers, json=payload, timeout=5)
+        response = requests.post(URL, headers=headers, json=payload)
     except requests.exceptions.RequestException as e:
         logger.error("Request exception: %s", e)
     except asyncio.CancelledError:
         logger.error("Asyncio task was cancelled")
-
     if response.status_code != response.ok:
         logger.warning("/!\\ %s not updated.", application_command_name)
 
