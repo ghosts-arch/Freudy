@@ -65,7 +65,7 @@ class Freudy(discord.Client):
             command_name = interaction.data.get("name")
             if not command_name or not isinstance(command_name, str) : 
                 return
-            command = self.application_commands.get(command_name)
+            command = self.application_commands.get_command(command_name=command_name)
 
             if not command:
                 return
@@ -77,9 +77,9 @@ class Freudy(discord.Client):
                 return
             
             if (
-                command.in_adminstration_channel_only()
-                and not interaction.channel.id
-                == self.config.get("ADMINSTRATION_CHANNEL_ID")
+                command["in_administration_channel_only"]
+                and not interaction.channel.id 
+                == self.config.get("ADMINISTRATION_CHANNEL_ID")
             ):
                 await interaction.response.send_message(
                     embed=ErrorEmbed(
@@ -90,10 +90,12 @@ class Freudy(discord.Client):
                     )
                 )
                 return
+            
             if not isinstance(interaction.user, discord.Member):
                 return
+            
             if (
-                command.run_by_moderator_only()
+                command["moderation_only"]
                 and not interaction.user.guild_permissions.administrator
             ):
                 await interaction.response.send_message(
@@ -102,9 +104,10 @@ class Freudy(discord.Client):
                     )
                 )
                 return
+            
 
-            run = command.get["run"]
-            await run(interaction)
+            run = command["run"]
+            await run(interaction=interaction)
             logger.info(
                     "Command %s executed by %s in #%s",
                     command_name,

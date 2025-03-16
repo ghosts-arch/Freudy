@@ -32,3 +32,6 @@ class CommandsHandler:
 
     def get_commands(self):
         return self.commands
+    
+    def get_command(self, command_name : str) -> Command | None :
+        return self.commands.get(command_name)
