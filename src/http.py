@@ -3,6 +3,8 @@ import logging
 from src.commands.command import Command
 from .utils.get_credentials import get_credentials
 
+logger = logging.getLogger()
+
 application_id, bot_token = get_credentials()
 
 url = f"https://discord.com/api/v10/applications/{application_id}/commands"
@@ -18,4 +20,14 @@ def register_command(command : Command) -> None:
     }
     response = requests.post(url, headers=headers, json=payload)
     # TODO : log 'command registered with success' and add error handler
-    print(response.status_code, response.text)
+    if response.ok:
+        logger.info("Command register successfully : %s", command["name"])
+    else:
+        logger.error(
+            "Failed to register command %s. Status : %d. Response : %s",
+            command["name"],
+            response.status_code,
+            response.text
+        )
+    # print(response.status_code, response.text, response.ok)
+
