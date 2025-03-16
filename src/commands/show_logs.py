@@ -38,5 +38,6 @@ command : Command = {
     "name" : "logs",
     "description" : "Renvoie les logs du bot.",
     "in_administration_channel_only" : True,
+    "moderation_only" : True,
     "run" : run
 }

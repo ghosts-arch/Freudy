@@ -14,6 +14,7 @@ from .command import Command
 
 logger = logging.getLogger()
 
+
 async def run(interaction : discord.Interaction["Freudy"]) -> None:
         result = interaction.client.cooldowns.find_user(interaction.user.id)
         if result:
@@ -51,5 +52,6 @@ command : Command = {
     "name" : "question",
     "description" : "Envoie une question aléatoire.",
     "run" : run,
-    "in_administration_channel_only" : False
+    "in_administration_channel_only" : False,
+    "moderation_only" : True
 }

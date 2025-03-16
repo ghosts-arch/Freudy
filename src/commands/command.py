@@ -10,3 +10,4 @@ class Command(TypedDict):
     description : str
     in_administration_channel_only : Optional[bool]
     run : Callable[[discord.Interaction["Freudy"]], Coroutine[Any, Any, None]]
+    moderation_only : Optional[bool]
