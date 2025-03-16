@@ -56,16 +56,7 @@ class Freudy(discord.Client):
         if isinstance(test_channel, discord.TextChannel):
             await test_channel.send(f"{self.user} ready.")
 
-    async def get_command_name(self, interaction : discord.Interaction) -> str:
-        if not interaction.data:
-            raise Exception
-        interaction_name = interaction.data.get("name")
-        if not interaction_name:
-            raise Exception
-        if not isinstance(interaction_name, str):
-            raise Exception
-        return interaction_name
-    
+   
     async def on_interaction(self, interaction: discord.Interaction["Freudy"]):
 
         if interaction.type == discord.InteractionType.application_command:
