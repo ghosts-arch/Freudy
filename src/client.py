@@ -8,6 +8,8 @@ import discord
 
 from typing import TYPE_CHECKING, Any
 
+from src.commands import Command, CommandsHandler
+
 if TYPE_CHECKING:
     from src.commands import Command
 
@@ -15,11 +17,6 @@ from src.embeds import ErrorEmbed
 from .config import load_config, validate_config
 from .cooldowns import CooldownsManager
 from .database.database import Database
-from .interaction import (
-    load_application_commands,
-    register_application_commands,
-    unload_application_commands
-)
 from .managers.daily_fact_manager import DailyFactManager
 
 
@@ -30,13 +27,12 @@ config_path = pathlib.Path("config.json")
 
 class Freudy(discord.Client):
 
-    application_commands : dict[str, Command]
     def __init__(self):
 
         super().__init__(intents=discord.Intents.all())
         self.database = Database()
         self.database.init()
-        self.application_commands = load_application_commands()
+        self.application_commands = CommandsHandler()
         try:
             self.config = load_config(path=config_path)
             validate_config(self.config)
@@ -44,17 +40,15 @@ class Freudy(discord.Client):
             logger.error("%s", error)
             sys.exit(1)
         
-        self.application_commands = load_application_commands()
+
+        
+        self.loop = asyncio.get_event_loop()
+        self.cooldowns = CooldownsManager()
+        
         
 
-        self.cooldowns = CooldownsManager()
-        DailyFactManager(self).start()
-        self.loop = asyncio.get_event_loop()
-
     async def on_ready(self) -> None:
-        await register_application_commands(
-                application_commands=self.application_commands
-        )
+        DailyFactManager(self).start()
         logger.info("Logged as %s", self.user)
         test_channel_id: int = self.config["test_channel_id"]
         test_channel = self.get_channel(test_channel_id)
@@ -118,7 +112,7 @@ class Freudy(discord.Client):
                 )
                 return
 
-            run = command.get("run")
+            run = command.get["run"]
             await run(interaction)
             logger.info(
                     "Command %s executed by %s in #%s",

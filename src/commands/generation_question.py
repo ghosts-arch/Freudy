@@ -50,5 +50,6 @@ async def run(interaction : discord.Interaction["Freudy"]) -> None:
 command : Command = {
     "name" : "question",
     "description" : "Envoie une question aléatoire.",
-    "run" : run
+    "run" : run,
+    "in_administration_channel_only" : False
 }
