@@ -1,9 +1,12 @@
 import os
 import importlib
+import logging
 
 from typing import Dict
 from .command import Command
 from src.http import register_command
+
+logger = logging.getLogger()
 
 class CommandsHandler:
 
@@ -24,11 +27,11 @@ class CommandsHandler:
             module_name = os.path.splitext(f)[0]
             module = importlib.import_module(name=f'.{module_name}', package="src.commands")
             if not hasattr(module, 'command'):
-                # TODO : raise error , missing command interface is missing in this command
-                return
+                logger.warning("Module %s is missing `Command` interface. Skipping.")
+                continue
             command : Command = getattr(module, 'command')
             self._load_command(command=command)
-        # TODO : log 'all commands loaded & registered with success'
+        logger.info(f"{len(files)} commands loaded and registered with success.")
 
     def get_commands(self):
         return self.commands

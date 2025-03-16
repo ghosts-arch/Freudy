@@ -19,7 +19,6 @@ def register_command(command : Command) -> None:
         "description": command["description"],
     }
     response = requests.post(url, headers=headers, json=payload)
-    # TODO : log 'command registered with success' and add error handler
     if response.ok:
         logger.info("Command register successfully : %s", command["name"])
     else:
@@ -29,5 +28,4 @@ def register_command(command : Command) -> None:
             response.status_code,
             response.text
         )
-    # print(response.status_code, response.text, response.ok)
 
