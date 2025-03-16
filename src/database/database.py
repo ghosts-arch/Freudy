@@ -115,9 +115,7 @@ class Database:
                 session.add(question)
         end_time = time.perf_counter()
         logger.info(
-            "Populated %d questions in %f:.2f seconds.",
-            len(new_questions),
-            (end_time - start_time) * 1000
+            f"Populated {len(new_questions)} questions in {(end_time - start_time) * 1000:.2f} seconds.",
         )
 
     def get_daily_facts(self):
@@ -145,7 +143,5 @@ class Database:
             )
         end_time = time.perf_counter()
         logger.info(
-            "Populated %d facts in %f:.2f seconds.",
-            len(created_facts),
-            (end_time - start_time) * 1000
+            f"Populated {len(created_facts)} facts in {(end_time - start_time) * 1000:.2f} seconds.",        
         )

@@ -1,6 +1,5 @@
 import os
+from typing import Tuple
 
-def get_credentials():
-    application_id = os.getenv("APPLICATION_ID")
-    bot_token = os.getenv("BOT_TOKEN")
-    return application_id, bot_token
+def get_credentials() -> Tuple[str | None, str | None]:
+    return os.getenv("APPLICATION_ID"), os.getenv("CLIENT_TOKEN")
