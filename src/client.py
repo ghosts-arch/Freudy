@@ -95,7 +95,7 @@ class Freudy(discord.Client):
                 return
             
             if (
-                command["moderation_only"]
+                command.get("moderation_only", False)
                 and not interaction.user.guild_permissions.administrator
             ):
                 await interaction.response.send_message(
