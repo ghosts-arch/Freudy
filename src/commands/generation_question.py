@@ -53,5 +53,5 @@ command : Command = {
     "description" : "Envoie une question aléatoire.",
     "run" : run,
     "in_administration_channel_only" : False,
-    "moderation_only" : True
+    "moderation_only" : False
 }
