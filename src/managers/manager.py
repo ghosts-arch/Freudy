@@ -25,8 +25,9 @@ class Manager(ABC):
         delay = (date - datetime.datetime.now()).total_seconds()
 
         while True:
-            await asyncio.sleep(delay=delay)
-            delay = datetime.timedelta(days=1).total_seconds()
+            #await asyncio.sleep(delay=delay)
+            #delay = datetime.timedelta(days=1).total_seconds()
+            await asyncio.sleep(30)
             await self.callback()
 
     def start(self):

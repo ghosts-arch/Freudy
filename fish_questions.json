@@ -1,0 +1,2452 @@
+[
+    {
+        "question": "Quelle est la principale fonction du système limbique ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "Le système limbique joue un rôle clé dans les émotions et la mémoire.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela est principalement géré par le tronc cérébral, pas le système limbique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "La motricité est contrôlée par le cortex moteur et le cervelet.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Ces fonctions sont contrôlées par les cortex sensoriels.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel psychologue a créé la théorie du conditionnement opérant ?",
+        "answers": [
+            {
+                "text": "🦑",
+                "explanation": "Skinner a proposé la théorie du conditionnement opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Freud est associé à la psychanalyse, pas au conditionnement opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Pavlov a développé la théorie du conditionnement classique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Rogers est connu pour la psychologie humaniste, pas pour le conditionnement.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le 'mécanisme de défense' selon Freud ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "Freud a décrit les mécanismes de défense comme des stratégies inconscientes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela correspond plus à des théories cognitives, pas freudiennes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Les mécanismes de défense sont inconscients, pas conscients.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Les mécanismes de défense sont personnels, pas sociaux.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le rôle principal de l'amygdale dans le cerveau ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "L'amygdale joue un rôle clé dans le traitement des émotions, surtout la peur.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela est assuré par le cervelet, pas l'amygdale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "La mémoire à long terme est liée à l'hippocampe, pas à l'amygdale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Ce rôle est assumé par le tronc cérébral.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le concept central de la psychologie humaniste ?",
+        "answers": [
+            {
+                "text": "🐙",
+                "explanation": "La psychologie humaniste met l'accent sur l'épanouissement individuel.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela est plus lié à la psychologie comportementaliste, pas humaniste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela correspond à la psychanalyse de Freud, pas à la psychologie humaniste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela correspond davantage à la psychologie cognitive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Laquelle de ces structures cérébrales est impliquée dans la mémoire ?",
+        "answers": [
+            {
+                "text": "🐡",
+                "explanation": "L'hippocampe est essentiel à la formation et à la consolidation de la mémoire.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Le cervelet est plus impliqué dans la coordination motrice.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "L'amygdale est impliquée dans les émotions, pas directement dans la mémoire.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Le tronc cérébral régule les fonctions vitales, pas la mémoire.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qui a développé la théorie des stades du développement psychosocial ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "Erikson a développé la théorie des stades du développement psychosocial.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Piaget est connu pour sa théorie du développement cognitif.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Jung a proposé une théorie sur l'inconscient collectif, pas les stades psychosociaux.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Vygotsky est connu pour ses travaux sur le développement social et culturel.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Lequel de ces comportements est un exemple de conditionnement classique ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "Le conditionnement classique a été démontré par Pavlov avec les chiens.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela correspond au conditionnement opérant, pas au conditionnement classique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela n'est pas un exemple de conditionnement, mais d'apprentissage moteur.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela est lié à un changement de comportement motivé par des objectifs personnels.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quelle est la théorie de l'attachement de John Bowlby ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "Bowlby a souligné l'importance des liens affectifs pour le développement de l'enfant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela est plus lié à la théorie du conditionnement opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Bowlby a vu l'attachement comme une réponse biologique essentielle, pas sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela fait plutôt référence à des théories sociologiques, pas à Bowlby.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qui a développé la théorie des stades du développement cognitif ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "Piaget est connu pour sa théorie du développement cognitif en quatre stades.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Erikson a développé une théorie sur le développement psychosocial, pas cognitif.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Vygotsky a étudié le développement cognitif à travers les interactions sociales.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Freud a proposé une théorie du développement psychosexuel, pas cognitif.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet placebo en psychologie ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "L'effet placebo se produit lorsque l'attente d'un effet produit un résultat.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "C'est un effet contraire, où la personne se sent moins bien.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "L'effet placebo n'est pas dû à un médicament, mais à la croyance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela concerne un effet indésirable dû à l'attente négative, pas un placebo.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est l'effet de la dissonance cognitive ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "Cela se produit lorsque nos croyances ou actions sont en conflit.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Il s'agit d'un effet motivé par l'acquisition d'informations, pas de dissonance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Ce n'est pas la dissonance cognitive, qui provoque de l'inconfort.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela ne concerne pas l'effet de dissonance, qui est basé sur la contradiction.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet Barnum ?",
+        "answers": [
+            {
+                "text": "🦑",
+                "explanation": "Les gens croient que des affirmations générales les concernent personnellement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Ce n'est pas lié à la réduction des biais, mais à des croyances floues.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela concerne plutôt la motivation, pas des descriptions imprécises.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Ce n'est pas lié à l'effet Barnum, qui concerne des perceptions fausses.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'intelligence fluide ?",
+        "answers": [
+            {
+                "text": "🐋",
+                "explanation": "L'intelligence fluide est la capacité à traiter de nouvelles informations.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Ce n'est pas l'intelligence fluide, mais plutôt l'intelligence cristallisée.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "L'intelligence fluide n'est pas spécifiquement liée à la mémorisation.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Ce n'est pas de l'intelligence fluide, mais des aptitudes sociales.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Que désigne le terme de 'biais de confirmation' ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "Le biais de confirmation nous amène à rechercher des preuves favorables.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela s'opposerait au biais, où les informations sont filtrées subjectivement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela ne correspond pas au biais de confirmation, qui est subjectif.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela n'est pas un biais de confirmation, qui vise à renforcer une idée.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la théorie de l'attachement ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "La théorie de l'attachement explique comment les relations précoces influencent.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Ce n'est pas lié à des rituels, mais à la sécurité affective de l'enfant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela ne concerne pas l'attachement, mais les relations sociales.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Elle est centrée sur la relation affective, pas sur l'intelligence sociale.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Que signifie le concept d'autodétermination ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "L'autodétermination est liée à l'autonomie et aux choix personnels.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Ce n'est pas l'autodétermination, qui est une capacité de choix libre.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela correspond à des stratégies d'émotion, pas à l'autodétermination.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "L'autodétermination implique l'indépendance vis-à-vis des pressions externes.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la mémoire de travail ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "Elle permet de traiter et d'utiliser l'information pendant un court moment.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela concerne la mémoire à long terme, pas la mémoire de travail.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Ce n'est pas un simple rappel, mais un processus actif de manipulation.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "La mémoire de travail est plus axée sur le traitement cognitif immédiat.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Que signifie l'effet halo ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "L'effet halo nous fait attribuer des qualités générales d'après un seul trait.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Ce n'est pas basé sur les actions passées, mais sur une impression générale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela ne correspond pas à l'effet halo, qui implique une évaluation positive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "C'est l'effet opposé, souvent désigné comme effet 'horns' (cornes).",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Que désigne le terme de 'neuroplasticité' ?",
+        "answers": [
+            {
+                "text": "🐳",
+                "explanation": "La neuroplasticité permet au cerveau de s'adapter en fonction des expériences.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Ce n'est pas un processus de dégradation, mais d'adaptation et de réparation.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "La neuroplasticité n'est pas une perte, mais une forme de compensation.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Elle concerne la reconfiguration des connexions, pas le nombre de neurones.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie cognitive ?",
+        "answers": [
+            {
+                "text": "🐡",
+                "explanation": "La psychologie cognitive analyse comment nous traitons et stockons l'information.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela fait partie de la psychologie comportementale, pas cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela correspond à la psychologie émotionnelle, pas à la psychologie cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela relève davantage de la psychologie sociale, pas cognitive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le rôle du lobe frontal dans le cerveau ?",
+        "answers": [
+            {
+                "text": "🦑",
+                "explanation": "Le lobe frontal est essentiel dans le contrôle exécutif et la gestion des émotions.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela concerne le lobe temporal, pas frontal.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "La régulation de la température est gérée par d'autres structures cérébrales.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela se produit dans le lobe occipital, pas frontal.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet placebo ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "L'effet placebo fonctionne en raison des attentes du patient, pas du traitement réel.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "L'effet placebo n'implique pas de médicament réel, mais une croyance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Ce n'est pas un effet placebo, mais un changement volontaire de comportement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "L'effet placebo n'est pas lié à un médicament efficace, mais à des croyances.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le conditionnement classique ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "Le conditionnement classique, étudié par Pavlov, implique cette association.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela relève du conditionnement opérant, pas classique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela est lié à l'apprentissage social, pas au conditionnement classique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela n'est pas spécifique au conditionnement classique.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'empathie ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "L'empathie implique une compréhension émotionnelle d'une autre personne.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Ce n'est pas de l'empathie, qui est liée à l'engagement émotionnel.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "L'empathie implique une réaction émotionnelle, pas juste un soutien.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Ce n'est pas lié à l'empathie, mais à la régulation émotionnelle.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la mémoire à long terme ?",
+        "answers": [
+            {
+                "text": "🐬",
+                "explanation": "La mémoire à long terme permet de conserver des informations pendant des années.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela décrit plutôt la mémoire à court terme, pas à long terme.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela correspond à la mémoire sensorielle, qui est très éphémère.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela correspond à la mémoire à court terme, pas à long terme.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le biais de confirmation ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "Le biais de confirmation influence la façon dont nous traitons l'information.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela n'est pas lié au biais de confirmation, mais plutôt au scepticisme.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela est opposé au biais de confirmation, qui renforce les croyances existantes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela pourrait être un biais, mais ce n'est pas spécifique à la confirmation.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le rôle du cortex préfrontal ?",
+        "answers": [
+            {
+                "text": "🐠",
+                "explanation": "Le cortex préfrontal est essentiel dans la planification et le contrôle des actions.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "La mémoire à long terme est gérée par d'autres parties du cerveau.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Le cortex préfrontal ne s'occupe pas des perceptions sensorielles.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela concerne d'autres régions, comme le cortex moteur.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'intelligence émotionnelle ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "L'intelligence émotionnelle inclut l'empathie et la gestion des émotions.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela correspond plutôt à l'intelligence logique, pas émotionnelle.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela relève de l'intelligence cognitive, pas émotionnelle.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "L'intelligence émotionnelle n'implique pas de prévision de l'avenir.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le test de Rorschach ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "Les taches d'encre de Rorschach révèlent des aspects inconscients de la personnalité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Ce n'est pas un test basé sur les réflexes, mais sur l'interprétation des images.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Ce n'est pas un test de mémoire, mais un test de projection psychologique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela évalue les aspects inconscients de la personnalité, pas directement les émotions.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie sociale ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "La psychologie sociale examine comment les individus sont influencés par leurs interactions.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela relève de la psychologie cognitive, pas sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela correspond à la psychologie biologique, pas sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela relève de la psychologie de la personnalité, pas sociale.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Que signifie l'effet de primauté ?",
+        "answers": [
+            {
+                "text": "🐚",
+                "explanation": "L'effet de primauté montre que les premiers éléments sont plus mémorisés.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela correspond à l'effet de récence, pas à l'effet de primauté.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela concerne la répétition, mais n'est pas lié spécifiquement à la primauté.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela n'est pas spécifique à l'effet de primauté.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la théorie de l'attachement de Bowlby ?",
+        "answers": [
+            {
+                "text": "🦑",
+                "explanation": "Bowlby a développé l'idée que les attachements précoces sont cruciaux.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela n'est pas spécifique à Bowlby, mais à d'autres théories du développement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Bowlby se concentrait sur l'attachement, pas l'isolement social.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Ce n'est pas le cas; Bowlby se concentrait sur les liens affectifs.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la dissonance cognitive ?",
+        "answers": [
+            {
+                "text": "🐙",
+                "explanation": "La dissonance cognitive est l'inconfort ressenti face à des idées opposées.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Ce n'est pas lié à la dissonance cognitive, mais à l'anxiété sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela n'a rien à voir avec la dissonance, qui se rapporte à des contradictions internes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "La dissonance cognitive concerne la gestion de conflits internes de croyances.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le but principal de la thérapie cognitivo-comportementale ?",
+        "answers": [
+            {
+                "text": "🐠",
+                "explanation": "La TCC vise à transformer les schémas de pensée négatifs en comportements positifs.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela correspond à la psychanalyse, pas à la TCC.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela se rapporte à la psychanalyse, pas à la TCC.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Bien que la TCC inclut le changement de pensées, ce n'est pas son objectif principal.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la procrastination ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "La procrastination implique un retard dans l'accomplissement des tâches importantes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela correspond à la perfectionnisme, pas à la procrastination.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela se rapporte à la gestion du temps, pas à la procrastination.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela correspond à la régulation émotionnelle, pas à la procrastination.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de halo ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "L'effet de halo affecte notre jugement en généralisant une première impression.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Ce n'est pas lié à l'effet de halo, mais plutôt à un biais négatif.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "L'effet de halo consiste à voir une qualité positive et à généraliser cela.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela décrit plutôt un biais de focalisation, pas l'effet de halo.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychanalyse ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "La psychanalyse se concentre sur l'inconscient, l'enfance et les conflits internes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela correspond à la thérapie comportementale, pas à la psychanalyse.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Ce n'est pas une méthode de la psychanalyse, mais des thérapies somatiques.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela correspond à la TCC, pas à la psychanalyse.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le but de la psychologie évolutionniste ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "La psychologie évolutionniste étudie comment les comportements se sont développés pour s'adapter.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela relève de la psychologie du développement, pas de l'évolution.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela concerne plus la psychologie de l'éducation que l'évolution.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela fait partie de la psychologie sociale, pas de la psychologie évolutionniste.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le stress ?",
+        "answers": [
+            {
+                "text": "🐚",
+                "explanation": "Le stress survient lorsqu'une personne perçoit une situation comme dépassant ses capacités.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela ne correspond pas au stress, qui est plutôt une réponse de tension.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela n'est pas lié au stress, mais à un excès de confiance mal placé.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela décrit plus la dépression que le stress, qui est une réaction dynamique.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le concept de 'self-actualization' ?",
+        "answers": [
+            {
+                "text": "🐙",
+                "explanation": "Le concept de self-actualization vient de la psychologie humaniste de Maslow.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela correspond à la recherche d'approbation, pas à la self-actualization.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Ce n'est pas directement lié à la self-actualization, qui implique un épanouissement global.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "La self-actualization se rapporte à l'épanouissement personnel, mais pas nécessairement à l'absence de conflits.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie positive ?",
+        "answers": [
+            {
+                "text": "🐋",
+                "explanation": "La psychologie positive se concentre sur les aspects positifs de la vie humaine, comme la gratitude.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela correspond plus à la psychologie biologique que positive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "La psychologie positive s'intéresse à l'épanouissement personnel, pas à la compétition.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela relève davantage de la psychologie clinique, pas de la psychologie positive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'auto-efficacité ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "L'auto-efficacité décrit la croyance en ses propres capacités pour réussir.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela n'est pas lié à l'auto-efficacité, qui concerne la confiance en soi.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela concerne plus la conformité sociale que l'auto-efficacité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela est plus lié à la gestion du stress qu'à l'auto-efficacité.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la dépression ?",
+        "answers": [
+            {
+                "text": "🐡",
+                "explanation": "La dépression se manifeste par une humeur dépressive persistante et un manque d'énergie.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela pourrait être du stress ou du chagrin, mais pas de la dépression clinique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela décrit plutôt l'hypomanie que la dépression.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela pourrait être lié à l'isolement social, mais ce n'est pas spécifique à la dépression.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie clinique ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "La psychologie clinique se concentre sur les problèmes psychologiques et leur traitement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela relève de la psychologie sociale, pas clinique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela correspond à la psychologie cognitive, pas clinique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Les tests émotionnels sont parfois utilisés en psychologie clinique, mais ce n'est pas son but principal.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le biais de négativité ?",
+        "answers": [
+            {
+                "text": "🦐",
+                "explanation": "Le biais de négativité fait que les éléments négatifs influencent plus notre jugement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Ce n'est pas le biais de négativité, qui est centré sur les aspects négatifs.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela décrit le biais de confirmation, pas le biais de négativité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela n'est pas spécifique au biais de négativité, qui amplifie les événements négatifs.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le concept de 'cognition sociale' ?",
+        "answers": [
+            {
+                "text": "🐙",
+                "explanation": "La cognition sociale se concentre sur la compréhension des comportements sociaux.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela est plus lié à la psychologie émotionnelle qu'à la cognition sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela correspond davantage à la cognition, mais pas spécifiquement à la cognition sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela concerne plus la psychologie interculturelle que la cognition sociale.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le but de la psychologie humaniste ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "La psychologie humaniste se concentre sur l'accomplissement de soi et l'auto-actualisation.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela se rapporte plutôt à la psychologie cognitive, pas à la psychologie humaniste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela est plus lié à la psychanalyse que la psychologie humaniste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela relève de la psychologie comportementale, pas humaniste.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de primauté ?",
+        "answers": [
+            {
+                "text": "🐋",
+                "explanation": "L'effet de primauté se produit lorsque les premiers éléments sont mieux retenus.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela serait un biais d'oubli, pas un effet de primauté.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela correspond à l'effet de récence, pas à l'effet de primauté.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela décrit un biais perceptuel, mais pas l'effet de primauté.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le concept de l'illusion de contrôle ?",
+        "answers": [
+            {
+                "text": "🐚",
+                "explanation": "L'illusion de contrôle survient lorsqu'on pense influencer des événements aléatoires.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela décrit plutôt le fatalisme, pas l'illusion de contrôle.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela serait plus une forme de biais de confirmation, pas d'illusion de contrôle.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela se rapporte davantage à l'optimisme ou à l'aversion au risque.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le principe de la dissonance cognitive ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "La dissonance cognitive survient lorsque des actions et des croyances sont en conflit.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela décrit un processus d'accommodation, mais pas la dissonance cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela peut être une réponse à la dissonance cognitive, mais ce n'est pas le principe de base.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela concerne les mécanismes de défense, pas la dissonance cognitive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'anxiété sociale ?",
+        "answers": [
+            {
+                "text": "🐋",
+                "explanation": "L'anxiété sociale est caractérisée par une peur intense du regard des autres.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela décrit plus un stress léger, pas une anxiété sociale clinique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela est plus lié à l'isolement social qu'à l'anxiété sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela pourrait être lié à des troubles de l'estime de soi, pas à l'anxiété sociale.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le biais de confirmation ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "Le biais de confirmation affecte la manière dont nous traitons les informations.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela est une facette du biais de confirmation, mais ne le décrit pas entièrement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela correspond plus à l'effet de mémoire sélective.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela décrit plutôt le biais de négativité, non le biais de confirmation.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le syndrome de Stockholm ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "Le syndrome de Stockholm se produit lorsque les victimes d'une prise d'otage s'identifient à leurs ravisseurs.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela correspond à un état de choc, pas au syndrome de Stockholm.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela pourrait être lié au trouble de stress post-traumatique, mais pas au syndrome de Stockholm.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela décrit plutôt des symptômes de psychose.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie des foules ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "La psychologie des foules examine comment les comportements sont influencés par l'appartenance à un groupe.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela correspond à la psychologie sociale, pas spécifiquement à la psychologie des foules.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela pourrait être un aspect de la psychologie sociale, mais la psychologie des foules se concentre sur les grands groupes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela relève de la psychologie individuelle, pas des foules.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est l'objectif de l'approche comportementaliste ?",
+        "answers": [
+            {
+                "text": "🐬",
+                "explanation": "L'approche comportementaliste se concentre sur les comportements visibles et leur modification.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela est plus lié à la psychanalyse qu'à l'approche comportementaliste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela se rapproche de la thérapie cognitive, pas du comportementalisme.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela concerne la psychologie cognitive, non comportementaliste.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet Pygmalion ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "L'effet Pygmalion montre que les attentes des autres peuvent influencer les performances.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela décrit l'illusion de compétence, pas l'effet Pygmalion.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela est plus lié à la conformité sociale, pas à l'effet Pygmalion.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela pourrait être lié à la timidité sociale, mais pas à l'effet Pygmalion.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le conditionnement opérant ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "Le conditionnement opérant implique l'utilisation de renforcements pour modifier les comportements.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela se rapporte au conditionnement social ou à l'apprentissage social.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela est lié au conditionnement classique, pas opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela pourrait correspondre à l'apprentissage expérientiel, mais pas au conditionnement opérant.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de récence ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "L'effet de récence fait référence à une meilleure mémorisation des éléments récents.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela ne correspond pas à l'effet de récence, qui implique de retenir les éléments récents.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela correspond à l'effet de primauté, pas à l'effet de récence.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela pourrait correspondre à la mémoire sélective, mais pas à l'effet de récence.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le syndrome de l'imposteur ?",
+        "answers": [
+            {
+                "text": "🐳",
+                "explanation": "Le syndrome de l'imposteur se caractérise par un doute constant sur ses compétences.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela est lié à l'attribution externe, mais pas spécifiquement au syndrome de l'imposteur.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela pourrait être lié à un manque de confiance, mais ce n'est pas tout le syndrome de l'imposteur.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela pourrait être lié au perfectionnisme, mais ce n'est pas le syndrome de l'imposteur.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet Barnum ?",
+        "answers": [
+            {
+                "text": "🐋",
+                "explanation": "L'effet Barnum explique pourquoi nous trouvons des horoscopes souvent convaincants.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela correspond au biais de confirmation, pas à l'effet Barnum.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela est lié à l'effet Dunning-Kruger, pas à l'effet Barnum.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela est lié à l'effet de contagion émotionnelle, mais pas à l'effet Barnum.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie sociale étudie ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "La psychologie sociale analyse comment les gens sont influencés par leur environnement social.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela se rapporte à la psychologie cognitive, pas à la psychologie sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela correspond à la psychologie clinique, pas à la psychologie sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela relève plutôt de la neuropsychologie.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le phénomène de 'biais d'autocomplaisance' ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "Le biais d'autocomplaisance permet de maintenir une image positive de soi-même.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela pourrait être lié au biais de correspondance, mais pas au biais d'autocomplaisance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela pourrait être un biais de comparaison, mais pas un biais d'autocomplaisance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela est lié au biais de confirmation, pas au biais d'autocomplaisance.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'influence sociale ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "L'influence sociale fait référence à la manière dont les autres affectent nos actions et pensées.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela se rapproche du pouvoir coercitif, mais ne définit pas l'influence sociale en général.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela correspond à la non-conformité, pas à l'influence sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela peut être un aspect de l'influence sociale, mais ne couvre pas tous les types d'influence.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'assertivité ?",
+        "answers": [
+            {
+                "text": "🐬",
+                "explanation": "L'assertivité permet de défendre ses droits sans être agressif ni soumis.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela correspond à l'égoïsme, pas à l'assertivité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela est plus lié à la soumission ou la passivité, pas à l'assertivité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela correspond à l'agressivité, pas à l'assertivité.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la théorie de l'attachement ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "La théorie de l'attachement explore l'impact des premières relations sur l'individu.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela correspond plus à une vision utilitaire des relations que la théorie de l'attachement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela pourrait être un aspect de l'attachement, mais la théorie s'intéresse davantage à l'enfance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela simplifie la théorie de l'attachement, qui reconnaît des variations culturelles.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la théorie de la motivation humaine selon Maslow ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "La pyramide de Maslow décrit une progression des besoins fondamentaux aux besoins d'accomplissement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela correspond plus à la théorie du renforcement, pas à celle de Maslow.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Maslow se concentre sur les besoins fondamentaux et leur impact sur la motivation à long terme.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela se rapproche de théories plus sociales, mais pas de celle de Maslow.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la dissonance cognitive ?",
+        "answers": [
+            {
+                "text": "🐠",
+                "explanation": "La dissonance cognitive crée une tension mentale lorsque nos pensées et actions sont en conflit.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela peut être une conséquence de la dissonance cognitive, mais ce n'est pas le phénomène en lui-même.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela est une forme de rationalisation, liée à la dissonance cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela serait plus lié à l'accommodation cognitive qu'à la dissonance cognitive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le biais de confirmation ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "Le biais de confirmation nous conduit à rechercher et croire des informations qui nous confirment dans nos opinions.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Le biais de confirmation est aussi lié au rejet des informations discordantes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Ce n'est pas une caractéristique du biais de confirmation, qui est orienté vers les croyances.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela pourrait être lié à l'illusion de contrôle, mais pas au biais de confirmation.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet Halo ?",
+        "answers": [
+            {
+                "text": "🐋",
+                "explanation": "L'effet Halo est lorsque notre perception générale d'une personne influence nos jugements spécifiques.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela correspond au biais de négativité, pas à l'effet Halo.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela pourrait être un biais d'optimisme, mais pas un effet Halo.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela peut se rapprocher du stéréotype, mais ce n'est pas l'effet Halo.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la psychologie cognitive ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "La psychologie cognitive se concentre sur la manière dont les individus perçoivent, mémorisent et réfléchissent sur l'information.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela correspond au béhaviorisme, pas à la psychologie cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela relève plutôt de la psychologie sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela correspond à la neuropsychologie, pas à la psychologie cognitive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le rôle de la dopamine dans le cerveau ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "La dopamine joue un rôle clé dans les sensations de plaisir et de récompense.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela est plus lié à d'autres neurotransmetteurs comme la sérotonine ou le GABA.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Ce rôle est plutôt attribué à la mélatonine et à la sérotonine.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "La dopamine est davantage liée au plaisir, à la motivation, et à l'apprentissage.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la théorie de l'esprit ?",
+        "answers": [
+            {
+                "text": "🦑",
+                "explanation": "La théorie de l'esprit est essentielle pour comprendre et prédire le comportement des autres.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela correspond à l'apprentissage social, pas à la théorie de l'esprit.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela correspond plus à la rationalité, pas à la théorie de l'esprit.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela concerne l'intelligence émotionnelle, pas la théorie de l'esprit.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le biais de disponibilité ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "Le biais de disponibilité influence nos jugements basés sur la facilité avec laquelle des exemples viennent à l'esprit.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela pourrait être un biais d'importance personnelle, mais pas de disponibilité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela correspond au biais de rétrospection, pas au biais de disponibilité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela correspond à l'effet acteur-observateur, mais pas au biais de disponibilité.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de contraste ?",
+        "answers": [
+            {
+                "text": "🐬",
+                "explanation": "L'effet de contraste rend les différences plus marquées lorsqu'on compare deux éléments proches.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela serait plus proche de l'effet de similarité, mais ce n'est pas l'effet de contraste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela se rapporte plus à l'effet de rétrospection, pas à l'effet de contraste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela correspond à l'effet d'attention sélective, pas à l'effet de contraste.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la loi de Yerkes-Dodson ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "La loi de Yerkes-Dodson stipule qu'un certain niveau d'activation est nécessaire pour une performance optimale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela est incorrect, car trop de stress peut diminuer la performance.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela se rapporte à une vision plus générale du stress, mais pas spécifiquement à la loi de Yerkes-Dodson.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela n'est pas directement lié à la loi de Yerkes-Dodson.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le rôle de l'amygdale dans le cerveau ?",
+        "answers": [
+            {
+                "text": "🦞",
+                "explanation": "L'amygdale joue un rôle central dans la détection des menaces et la gestion des émotions comme la peur.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela est lié à l'hippocampe, pas à l'amygdale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela est plus le rôle du système de récompense, notamment de la dopamine.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela est une fonction du noyau suprachiasmatique dans l'hypothalamus.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le but de la thérapie cognitivo-comportementale ?",
+        "answers": [
+            {
+                "text": "🐡",
+                "explanation": "La thérapie cognitivo-comportementale (TCC) vise à identifier et à modifier les pensées et comportements négatifs.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela correspond plus à la psychanalyse qu'à la TCC.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela est lié à d'autres approches thérapeutiques, pas spécifiquement à la TCC.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela se rapproche plus des thérapies humanistes ou psychodynamiques.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le conditionnement classique ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "Le conditionnement classique est basé sur l'association entre stimuli.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela décrit plutôt le conditionnement opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela est lié à l'apprentissage social, pas au conditionnement classique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela correspond à l'apprentissage par observation, pas au conditionnement classique.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le conditionnement opérant ?",
+        "answers": [
+            {
+                "text": "🐳",
+                "explanation": "Le conditionnement opérant repose sur l'utilisation de renforts ou punitions pour modifier les comportements.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela correspond au conditionnement classique, pas au conditionnement opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Cela décrit l'apprentissage par observation, pas le conditionnement opérant.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela est lié à l'apprentissage, mais ne définit pas le conditionnement opérant.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de primauté ?",
+        "answers": [
+            {
+                "text": "🦞",
+                "explanation": "L'effet de primauté désigne l'impact des premiers éléments sur la mémoire.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela serait plus lié à l'effet de récence, pas à l'effet de primauté.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "C'est l'effet inverse, lié à l'oubli.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela correspond à l'effet de récence.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de récence ?",
+        "answers": [
+            {
+                "text": "🐠",
+                "explanation": "L'effet de récence est lié à la facilité de mémorisation des éléments récents.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela correspond à l'effet de primauté, pas à l'effet de récence.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela se rapporte à la mémoire émotionnelle, mais pas à l'effet de récence.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela serait l'effet opposé, lié à l'oubli.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le biais d'ancrage ?",
+        "answers": [
+            {
+                "text": "🐠",
+                "explanation": "Le biais d'ancrage influence nos jugements en nous ancrant sur une première donnée.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela correspond au biais de confirmation, pas au biais d'ancrage.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela correspond au biais de halo, pas au biais d'ancrage.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela est plus lié à l'effet de contraste.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la régulation émotionnelle ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "La régulation émotionnelle consiste à gérer les émotions pour une adaptation optimale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪼",
+                "explanation": "Cela peut être une stratégie, mais la régulation émotionnelle inclut des réponses plus variées.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela pourrait être un biais émotionnel, mais ce n'est pas la régulation émotionnelle.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela se rapproche de l'impact émotionnel sur la mémoire, mais pas de la régulation.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le modèle de développement psychosocial de Erikson ?",
+        "answers": [
+            {
+                "text": "🐬",
+                "explanation": "Erikson propose huit étapes qui couvrent l'ensemble de la vie, chaque étape ayant une crise à résoudre.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela correspond à la théorie du développement moral de Kohlberg, pas à Erikson.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Erikson souligne que toutes les étapes de la vie adulte sont importantes aussi.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Le modèle d'Erikson est psychosocial, prenant en compte l'interaction entre psychologie et société.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'illusion de savoir ?",
+        "answers": [
+            {
+                "text": "🦀",
+                "explanation": "L'illusion de savoir consiste à croire qu'on savait une réponse après l'avoir apprise.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela est lié à un biais de surestimation de ses connaissances, mais pas à l'illusion de savoir.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela correspond plus à un biais de confiance excessive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela peut être lié à l'effet de rétention, mais ne correspond pas à l'illusion de savoir.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le phénomène de l'effet placebo ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "L'effet placebo se produit lorsque la croyance en un traitement entraîne des effets positifs sur la santé.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦈",
+                "explanation": "Cela correspond au biais de négativité, pas à l'effet placebo.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela correspond à l'effet nocebo, pas à l'effet placebo.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela est souvent lié à l'effet placebo, mais n'en est pas une définition exacte.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que le phénomène de la dissonance cognitive ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "La dissonance cognitive survient lorsqu'il y a un conflit entre ce que nous croyons et ce que nous faisons.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela est plus lié à l'accommodation cognitive que à la dissonance cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela pourrait être de l'adaptation sociale, mais pas de la dissonance cognitive.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela pourrait être lié à un conflit interne, mais pas directement à la dissonance cognitive.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le rôle de l'hippocampe dans la mémoire ?",
+        "answers": [
+            {
+                "text": "🐟",
+                "explanation": "L'hippocampe est crucial pour la consolidation des souvenirs et la navigation spatiale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela est plutôt du ressort de l'amygdale, pas de l'hippocampe.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela correspond davantage au cortex préfrontal.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "La dopamine est produite dans le système mésolimbique, pas dans l'hippocampe.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la mémoire de travail ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "La mémoire de travail nous aide à maintenir et manipuler l'information pour résoudre des problèmes.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela correspond à la mémoire à long terme, pas à la mémoire de travail.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela correspond plutôt à la mémoire sensorielle, pas à la mémoire de travail.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦀",
+                "explanation": "Cela n'est pas lié à la mémoire de travail.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet Stroop ?",
+        "answers": [
+            {
+                "text": "🦞",
+                "explanation": "L'effet Stroop montre comment le conflit entre informations s'oppose à la lecture automatique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela concerne le traitement du langage, mais pas l'effet Stroop.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela n'est pas l'effet Stroop, qui traite de l'interférence entre différentes informations.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela concerne la mémoire visuelle, mais pas l'effet Stroop.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Quel est le but de la psychologie évolutionniste ?",
+        "answers": [
+            {
+                "text": "🦈",
+                "explanation": "La psychologie évolutionniste analyse les traits comportementaux en fonction de leur adaptabilité.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦐",
+                "explanation": "Cela pourrait être plus pertinent à la psychologie sociale, mais pas à la psychologie évolutionniste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela correspond plutôt à la psychologie cognitive, pas à la psychologie évolutionniste.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "La psychologie évolutionniste prend justement en compte cette dimension historique.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de faux souvenir ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "Les faux souvenirs sont des souvenirs de choses qui n'ont pas réellement eu lieu.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela pourrait être lié à la mémoire sous stress, mais ce n'est pas l'effet de faux souvenir.",
+                "correct_answer": false
+            },
+            {
+                "text": "🪸",
+                "explanation": "Cela correspond à l'amnésie traumatique, pas aux faux souvenirs.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦭",
+                "explanation": "Cela pourrait être un effet de distorsion de mémoire, mais pas spécifiquement un faux souvenir.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de simple exposition ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "L'effet de simple exposition montre qu'on aime davantage ce que l'on rencontre fréquemment.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐚",
+                "explanation": "Cela ne correspond pas à l'effet de simple exposition, qui consiste à apprécier ce qui est familier.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐠",
+                "explanation": "Cela serait plus lié à la rareté, pas à l'effet de simple exposition.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela pourrait correspondre à l'anxiété liée au changement, mais pas à l'effet de simple exposition.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la théorie de l'attachement ?",
+        "answers": [
+            {
+                "text": "🪸",
+                "explanation": "La théorie de l'attachement de Bowlby souligne l'importance des premières relations affectives.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela est lié à un autre concept, mais ne correspond pas directement à la théorie de l'attachement.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐳",
+                "explanation": "Bien que l'attachement soit important, la théorie se concentre sur les relations précoces.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela va à l'encontre de l'idée de Bowlby qui valorise l'attachement.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de groupe ?",
+        "answers": [
+            {
+                "text": "🐙",
+                "explanation": "L'effet de groupe montre comment les individus influencent leur comportement en fonction de l'appartenance au groupe.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐬",
+                "explanation": "Cela pourrait être lié à la dynamique de groupe, mais n'est pas un effet spécifique.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela correspond plus à la rébellion ou au rejet des normes sociales, mais pas à l'effet de groupe.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦞",
+                "explanation": "Cela pourrait être lié à la dynamique de compétition, mais ce n'est pas l'effet de groupe.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que la cognition sociale ?",
+        "answers": [
+            {
+                "text": "🪼",
+                "explanation": "La cognition sociale se concentre sur la façon dont nous comprenons et réagissons aux autres.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐙",
+                "explanation": "Cela correspond davantage à la psychologie cognitive, pas à la cognition sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐡",
+                "explanation": "Cela est plus lié à la neuropsychologie sensorielle que à la cognition sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela serait plus lié à l'intelligence émotionnelle.",
+                "correct_answer": false
+            }
+        ]
+    },
+    {
+        "question": "Qu'est-ce que l'effet de la norme sociale ?",
+        "answers": [
+            {
+                "text": "🦭",
+                "explanation": "L'effet de norme sociale montre comment nous ajustons nos actions pour correspondre aux attentes sociales.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐟",
+                "explanation": "Cela fait partie de la norme sociale, mais l'effet spécifique est l'ajustement des comportements.",
+                "correct_answer": false
+            },
+            {
+                "text": "🦑",
+                "explanation": "Cela correspond plus à la déviance ou à l'individualisme, pas à la norme sociale.",
+                "correct_answer": false
+            },
+            {
+                "text": "🐋",
+                "explanation": "Cela pourrait correspondre à la pression des pairs, mais ce n'est pas l'effet de la norme sociale.",
+                "correct_answer": false
+            }
+        ]
+    }
+]

@@ -89,7 +89,7 @@ class Database:
 
     def populate_questions(self) -> None:
         start_time = time.perf_counter()
-        questions = load_json_file("data.json")
+        questions = load_json_file("fish_questions.json")
         with self.session_scope() as session:
             select_questions_statement = select(Question.question)
             existing_questions = set(
@@ -132,7 +132,7 @@ class Database:
 
     def populate_facts(self) -> None:
         start_time = time.perf_counter()
-        facts = load_json_file("facts.json")
+        facts = load_json_file("cats_facts.json")
         existing_facts: set[str] = self.get_daily_facts()
         created_facts: list[DailyFact] = [
             DailyFact(fact=fact) for fact in facts if fact not in existing_facts

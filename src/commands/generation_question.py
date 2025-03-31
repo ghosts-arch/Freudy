@@ -16,7 +16,7 @@ logger = logging.getLogger()
 
 
 async def run(interaction : discord.Interaction["Freudy"]) -> None:
-        result = interaction.client.cooldowns.find_user(interaction.user.id)
+        """ result = interaction.client.cooldowns.find_user(interaction.user.id)
         if result:
             current_time = time.time()
             time_since_last_usage = current_time - result["last_usage"]
@@ -31,6 +31,7 @@ async def run(interaction : discord.Interaction["Freudy"]) -> None:
             )
 
         interaction.client.cooldowns.add_user(interaction.user.id, interaction)
+        """
 
         question = interaction.client.database.get_random_question()
         logger.info("%s triggered by %s", question, interaction.user)
