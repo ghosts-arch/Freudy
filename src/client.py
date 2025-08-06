@@ -48,8 +48,11 @@ class Freudy(discord.Client):
         self.loop = asyncio.get_event_loop()
         self.cooldowns = CooldownsManager()
 
+    async def init(self):
+        await DailyFactManager(self).start()
+
     async def on_ready(self) -> None:
-        DailyFactManager(self).start()
+
         logger.info("Logged as %s", self.user)
         test_channel_id: int = self.config["test_channel_id"]
         test_channel = self.get_channel(test_channel_id)
