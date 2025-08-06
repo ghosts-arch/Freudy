@@ -7,7 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 class Manager(ABC):
-    _task = None
 
     def __init__(self, client):
         self.__client = client
@@ -31,8 +30,5 @@ class Manager(ABC):
             await self.callback()
 
     def start(self):
-        if not self._task or self._task.done():
-            logger.info("Start %s manager.", self.__class__.__name__)
-            self._task = self.__client.loop.create_task(self.run())
-        else:
-            logger.warning("%s manager is already running.", self.__class__.__name__)
+        logger.info("Start %s manager.", self.__class__.__name__)
+        self._task = self.__client.loop.create_task(self.run())
