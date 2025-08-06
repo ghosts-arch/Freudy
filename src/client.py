@@ -36,16 +36,17 @@ class Freudy(discord.Client):
         try:
             self.config = load_config(path=config_path)
             validate_config(self.config)
-        except (KeyError, ValueError, FileNotFoundError, json.decoder.JSONDecodeError) as error:
+        except (
+            KeyError,
+            ValueError,
+            FileNotFoundError,
+            json.decoder.JSONDecodeError,
+        ) as error:
             logger.error("%s", error)
             sys.exit(1)
-        
 
-        
         self.loop = asyncio.get_event_loop()
         self.cooldowns = CooldownsManager()
-        
-        
 
     async def on_ready(self) -> None:
         DailyFactManager(self).start()
@@ -56,14 +57,13 @@ class Freudy(discord.Client):
         if isinstance(test_channel, discord.TextChannel):
             await test_channel.send(f"{self.user} ready.")
 
-   
     async def on_interaction(self, interaction: discord.Interaction["Freudy"]):
 
         if interaction.type == discord.InteractionType.application_command:
             if not interaction.data:
                 return
             command_name = interaction.data.get("name")
-            if not command_name or not isinstance(command_name, str) : 
+            if not command_name or not isinstance(command_name, str):
                 return
             command = self.application_commands.get_command(command_name=command_name)
 
@@ -71,15 +71,15 @@ class Freudy(discord.Client):
                 return
 
             if not interaction.channel:
-                return 
-            
+                return
+
             if not interaction.guild:
                 return
-            
-            if (
-                command["in_administration_channel_only"]
-                and not interaction.channel.id 
-                == self.config.get("ADMINISTRATION_CHANNEL_ID")
+
+            if command[
+                "in_administration_channel_only"
+            ] and not interaction.channel.id == self.config.get(
+                "ADMINISTRATION_CHANNEL_ID"
             ):
                 await interaction.response.send_message(
                     embed=ErrorEmbed(
@@ -90,10 +90,10 @@ class Freudy(discord.Client):
                     )
                 )
                 return
-            
+
             if not isinstance(interaction.user, discord.Member):
                 return
-            
+
             if (
                 command.get("moderation_only", False)
                 and not interaction.user.guild_permissions.administrator
@@ -104,13 +104,12 @@ class Freudy(discord.Client):
                     )
                 )
                 return
-            
 
             run = command["run"]
             await run(interaction=interaction)
             logger.info(
-                    "Command %s executed by %s in #%s",
-                    command_name,
-                    interaction.user,
-                    interaction.channel
-                )
+                "Command %s executed by %s in #%s",
+                command_name,
+                interaction.user,
+                interaction.channel,
+            )
