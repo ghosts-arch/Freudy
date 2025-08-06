@@ -29,6 +29,6 @@ class Manager(ABC):
             delay = datetime.timedelta(days=1).total_seconds()
             await self.callback()
 
-    async def start(self):
+    def start(self):
         logger.info("Start %s manager.", self.__class__.__name__)
-        self._task = self.__client.loop.create_task(await self.run())
+        self._task = self.__client.loop.create_task(self.run())

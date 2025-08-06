@@ -24,7 +24,6 @@ setup_environment()
 
 def main() -> None:
     client = Freudy()
-    asyncio.run(client.init())
     client_token = os.getenv("CLIENT_TOKEN")
     if not client_token:
         logger.error("CLIENT_TOKEN not found in environment variables or .env file")
