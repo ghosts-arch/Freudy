@@ -17,7 +17,7 @@ class Manager(ABC):
         pass
 
     async def run(self):
-
+        print("inside manager run function")
         date = datetime.datetime.now()
         if date.hour >= 6:  # 5h UTC => 7h TZ Paris
             date += datetime.timedelta(days=1)
