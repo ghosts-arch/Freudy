@@ -33,3 +33,4 @@ class Manager(ABC):
     async def start(self):
         logger.info("Start %s manager.", self.__class__.__name__)
         self._task = await self.__client.loop.create_task(self.run())
+        print("task created with success")

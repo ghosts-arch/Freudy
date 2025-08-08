@@ -25,6 +25,7 @@ setup_environment()
 async def main() -> None:
     client = Freudy()
     await client.init()
+    print("client initied with success")
     client_token = os.getenv("CLIENT_TOKEN")
     if not client_token:
         logger.error("CLIENT_TOKEN not found in environment variables or .env file")

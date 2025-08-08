@@ -49,7 +49,9 @@ class Freudy(discord.Client):
         self.cooldowns = CooldownsManager()
 
     async def init(self):
+        print("before manager starting")
         await DailyFactManager(self).start()
+        print("after manager starting")
 
     async def on_ready(self) -> None:
 
