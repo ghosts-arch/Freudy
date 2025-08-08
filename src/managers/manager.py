@@ -17,7 +17,6 @@ class Manager(ABC):
         pass
 
     async def run(self):
-        print("inside manager run function")
         date = datetime.datetime.now()
         if date.hour >= 6:  # 5h UTC => 7h TZ Paris
             date += datetime.timedelta(days=1)
@@ -32,6 +31,5 @@ class Manager(ABC):
 
     async def start(self):
         logger.info("Start %s manager.", self.__class__.__name__)
-        # print("loop ", repr(self.__client.loop))
-        self._task = self.__client.loop.create_task(self.run())
-        print("task created with success")
+        loop = asyncio.get_running_loop()
+        self._task = loop.create_task(self.run())

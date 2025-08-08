@@ -45,13 +45,11 @@ class Freudy(discord.Client):
             logger.error("%s", error)
             sys.exit(1)
 
-        self.loop = asyncio.get_event_loop()
+        # self.loop = asyncio.get_event_loop()
         self.cooldowns = CooldownsManager()
 
     async def init(self):
-        print("before manager starting")
         await DailyFactManager(self).start()
-        print("after manager starting")
 
     async def on_ready(self) -> None:
 
