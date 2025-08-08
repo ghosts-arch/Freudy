@@ -3,7 +3,8 @@ import asyncio
 import datetime
 import logging
 
-logger = logging.getLogger(__name__)
+
+logger = logging.getLogger()
 
 
 class Manager(ABC):
@@ -29,6 +30,6 @@ class Manager(ABC):
             delay = datetime.timedelta(days=1).total_seconds()
             await self.callback()
 
-    def start(self):
+    async def start(self):
         logger.info("Start %s manager.", self.__class__.__name__)
-        self._task = self.__client.loop.create_task(self.run())
+        self._task = await self.__client.loop.create_task(self.run())

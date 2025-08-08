@@ -22,8 +22,9 @@ def setup_environment() -> None:
 setup_environment()
 
 
-def main() -> None:
+async def main() -> None:
     client = Freudy()
+    await client.init()
     client_token = os.getenv("CLIENT_TOKEN")
     if not client_token:
         logger.error("CLIENT_TOKEN not found in environment variables or .env file")
@@ -32,4 +33,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("shutdown")
+    except asyncio.CancelledError:
+        print("async tasks cancelled")
