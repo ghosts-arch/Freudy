@@ -7,12 +7,9 @@ const registerCommands = async (
   commands: Collection<string, CommandInterface>
 ) => {
   const rest = new REST().setToken(process.env.CLIENT_TOKEN);
-  const data = await rest.put(
-    Routes.applicationCommands(process.env.APPLICATION_ID),
-    {
-      body: commands.map((command) => command.data.toJSON()),
-    }
-  );
+  await rest.put(Routes.applicationCommands(process.env.APPLICATION_ID), {
+    body: commands.map((command) => command.data.toJSON()),
+  });
 };
 
 export const commandsHandler = async (): Promise<
