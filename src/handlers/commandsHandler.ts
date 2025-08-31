@@ -3,9 +3,6 @@ import { CommandInterface } from "../types/command";
 import path from "path";
 import { readdirSync } from "fs";
 
-import { info } from "../utils/logging";
-import { get } from "http";
-
 const registerCommands = async (
   commands: Collection<string, CommandInterface>
 ) => {

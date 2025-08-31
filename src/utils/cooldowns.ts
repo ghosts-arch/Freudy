@@ -1,11 +1,21 @@
 import { Collection } from "discord.js";
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 
+type CooldownsConfig = {
+  duration: number;
+};
+
+export const cooldownConfig: CooldownsConfig = {
+  duration: 14_400_000,
+};
+
 export class Cooldowns {
   private declare cooldowns: Collection<string, number>;
+  private declare config: CooldownsConfig;
 
-  constructor() {
+  constructor(config: CooldownsConfig) {
     this.cooldowns = new Collection<string, number>();
+    this.config = config;
   }
 
   addUser = (
@@ -19,7 +29,7 @@ export class Cooldowns {
       interaction.channel.send({
         content: `<@!${interaction.user.id}>, vous pouvez a nouveau jouer !`,
       });
-    }, 14_400_000);
+    }, this.config.duration);
   };
 
   findUser = (userId: string): boolean => {
@@ -33,7 +43,7 @@ export class Cooldowns {
     }
     const now = Date.now();
     const timeSinceLastUsage = now - userRemaningCooldown;
-    return 14_400_000 - timeSinceLastUsage;
+    return this.config.duration - timeSinceLastUsage;
   };
 
   static formatCooldown = (cooldown: number): string => {

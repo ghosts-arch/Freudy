@@ -5,7 +5,7 @@ import { error, info } from "./utils/logging";
 import { Sequelize } from "sequelize";
 import { commandsHandler } from "./handlers/commandsHandler";
 import { CommandInterface } from "./types/command";
-import { Cooldowns } from "./utils/cooldowns";
+import { cooldownConfig, Cooldowns } from "./utils/cooldowns";
 
 export class Freudy extends Client {
   declare database: Sequelize;
@@ -19,7 +19,7 @@ export class Freudy extends Client {
         GatewayIntentBits.GuildMembers,
       ],
     });
-    this.cooldowns = new Cooldowns();
+    this.cooldowns = new Cooldowns(cooldownConfig);
   }
 
   async init() {
