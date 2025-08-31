@@ -1,0 +1,6 @@
+dist/
+logs/
+node_modules/
+.env
+*.db
+facts.json
