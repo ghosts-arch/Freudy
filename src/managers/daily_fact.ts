@@ -60,5 +60,5 @@ export const start = async (client: Freudy) => {
   timeout = setTimeout(async () => {
     await callback(client);
     interval = setInterval(async () => await callback(client), 86_400_000);
-  }, 86_400_000);
+  }, delay);
 };
