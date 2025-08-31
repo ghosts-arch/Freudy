@@ -1,5 +1,4 @@
 import {
-  ActionRow,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
@@ -21,10 +20,10 @@ const questionCommand: CommandInterface = {
     .setName("question")
     .setDescription("Question psy..."),
   async execute(interaction: CustomChatInputCommandInteraction) {
+    let container: ContainerBuilder | undefined;
     const question = await Question.getRandomQuestion();
     const member = await interaction.guild?.members.fetch(interaction.user.id);
     if (!member) return;
-    let container: ContainerBuilder | undefined;
     if (member.presence?.clientStatus?.mobile) {
       container = buildQuestionContainer(interaction, question, true);
     } else {
