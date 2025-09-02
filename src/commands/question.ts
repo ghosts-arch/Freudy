@@ -45,16 +45,13 @@ const questionCommand: CommandInterface = {
           filter: collectorFilter,
           time: 60_000,
         });
-
-      let userAnswerId: number | undefined;
-      if (userResponse?.customId.split("_")[1]) {
-        userAnswerId = parseInt(userResponse?.customId.split("_")[1], 10);
+      if (!userResponse) throw new Error("no userResponse");
+      const userAnswerId = parseInt(userResponse.customId.split("_")[1], 10);
+      if (isNaN(userAnswerId)) {
+        throw new Error(
+          `${userResponse.customId.split("_")[1]} is not an valid ID.`
+        );
       }
-      if (!userAnswerId) {
-        console.error("error with userAnswerId");
-      }
-
-      if (userAnswerId == null) return;
       if (validAnwserId == userAnswerId) {
         console.info("bonne reponse");
         const validTitle = new TextDisplayBuilder().setContent(
