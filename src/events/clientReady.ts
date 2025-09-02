@@ -7,7 +7,6 @@ const clientReady: EventInterface = {
   name: Events.ClientReady,
   once: true,
   execute: async (client: Freudy) => {
-    // console.info(`${client.user?.username} is ready !`);
     await info(`${client.user?.username} is ready !`);
   },
 };
