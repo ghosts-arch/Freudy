@@ -1,5 +1,4 @@
 import {
-  ActionRow,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
@@ -21,10 +20,10 @@ const questionCommand: CommandInterface = {
     .setName("question")
     .setDescription("Question psy..."),
   async execute(interaction: CustomChatInputCommandInteraction) {
+    let container: ContainerBuilder | undefined;
     const question = await Question.getRandomQuestion();
     const member = await interaction.guild?.members.fetch(interaction.user.id);
     if (!member) return;
-    let container: ContainerBuilder | undefined;
     if (member.presence?.clientStatus?.mobile) {
       container = buildQuestionContainer(interaction, question, true);
     } else {
@@ -46,16 +45,13 @@ const questionCommand: CommandInterface = {
           filter: collectorFilter,
           time: 60_000,
         });
-
-      let userAnswerId: number | undefined;
-      if (userResponse?.customId.split("_")[1]) {
-        userAnswerId = parseInt(userResponse?.customId.split("_")[1], 10);
+      if (!userResponse) throw new Error("no userResponse");
+      const userAnswerId = parseInt(userResponse.customId.split("_")[1], 10);
+      if (isNaN(userAnswerId)) {
+        throw new Error(
+          `${userResponse.customId.split("_")[1]} is not an valid ID.`
+        );
       }
-      if (!userAnswerId) {
-        console.error("error with userAnswerId");
-      }
-
-      if (userAnswerId == null) return;
       if (validAnwserId == userAnswerId) {
         console.info("bonne reponse");
         const validTitle = new TextDisplayBuilder().setContent(

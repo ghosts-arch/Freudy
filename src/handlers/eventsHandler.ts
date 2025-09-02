@@ -2,7 +2,6 @@ import { Freudy } from "../client";
 import path from "node:path";
 import { readdirSync } from "fs";
 import { EventInterface } from "../types/event";
-import { getIo } from "../ws/ws";
 
 export const eventsHandler = async (client: Freudy) => {
   const eventsPath = path.join(__dirname, "../events");
@@ -19,10 +18,5 @@ export const eventsHandler = async (client: Freudy) => {
     } else {
       client.on(event.name, (...args) => event.execute(...args));
     }
-    getIo().emit("event_handler", {
-      message: "test",
-      type: ["test"],
-      timestamp: Date(),
-    });
   }
 };

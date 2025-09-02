@@ -3,10 +3,9 @@ import { eventsHandler } from "./handlers/eventsHandler";
 import { start } from "./managers/daily_fact";
 import { error, info } from "./utils/logging";
 import { Sequelize } from "sequelize";
-import { getIo } from "./ws/ws";
 import { commandsHandler } from "./handlers/commandsHandler";
 import { CommandInterface } from "./types/command";
-import { Cooldowns } from "./utils/cooldowns";
+import { cooldownConfig, Cooldowns } from "./utils/cooldowns";
 
 export class Freudy extends Client {
   declare database: Sequelize;
@@ -20,7 +19,7 @@ export class Freudy extends Client {
         GatewayIntentBits.GuildMembers,
       ],
     });
-    this.cooldowns = new Cooldowns();
+    this.cooldowns = new Cooldowns(cooldownConfig);
   }
 
   async init() {
@@ -34,11 +33,6 @@ export class Freudy extends Client {
     } catch (err) {
       console.log(err);
       error((err as Error).message);
-      getIo().emit("login_error", {
-        message: `${(err as Error).message}`,
-        type: ["event", "client", "error"],
-        timestamp: Date(),
-      });
       process.exit(1);
     }
   }
