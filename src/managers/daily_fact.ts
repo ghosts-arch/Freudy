@@ -27,7 +27,9 @@ const calculateDelay = () => {
 };
 
 const callback = async (client: Freudy) => {
-  const channel = await client.channels.fetch("1402539896656367686");
+  const channel = await client.channels.fetch(
+    process.env.DAILY_FACT_CHANNEL_ID
+  );
   console.log(DailyFact);
   const fact = await DailyFact.findOne({
     order: Sequelize.literal("random()"),
