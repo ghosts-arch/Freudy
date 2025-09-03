@@ -18,7 +18,10 @@ const InteractionCreate: EventInterface = {
     if (!interaction.channel?.isSendable()) return;
     const command = interaction.client.commands.get(interaction.commandName);
     if (!command) return;
-    if (interaction.client.cooldowns.findUser(interaction.user.id)) {
+    if (
+      command.hasCooldown &&
+      interaction.client.cooldowns.findUser(interaction.user.id)
+    ) {
       const errorEmbed = new EmbedBuilder()
         .setColor("Red")
         .setDescription(
@@ -36,7 +39,9 @@ const InteractionCreate: EventInterface = {
     }
     try {
       command.execute(interaction);
-      interaction.client.cooldowns.addUser(interaction.user.id, interaction);
+      /* if (command.hasCooldown) {
+        interaction.client.cooldowns.addUser(interaction.user.id, interaction);
+      }*/
     } catch (err) {
       console.error(err);
     }

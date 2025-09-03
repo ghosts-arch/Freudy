@@ -3,23 +3,22 @@ import {
   ButtonBuilder,
   ButtonStyle,
   ContainerBuilder,
+  EmbedBuilder,
   MessageFlags,
-  SectionBuilder,
-  SeparatorBuilder,
-  SeparatorSpacingSize,
   SlashCommandBuilder,
-  TextDisplayBuilder,
-  ThumbnailBuilder,
 } from "discord.js";
 import { CommandInterface } from "../types/command";
-import { Question } from "../database/database";
+import { Question, User } from "../database/database";
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
+import { buildContainer } from "../ui/container";
 
 const questionCommand: CommandInterface = {
   data: new SlashCommandBuilder()
     .setName("question")
     .setDescription("Question psy..."),
+  hasCooldown: true,
   async execute(interaction: CustomChatInputCommandInteraction) {
+    if (!interaction?.channel?.isSendable()) return;
     let container: ContainerBuilder | undefined;
     const question = await Question.getRandomQuestion();
     const member = await interaction.guild?.members.fetch(interaction.user.id);
@@ -37,7 +36,6 @@ const questionCommand: CommandInterface = {
     let validAnwserId = question.answers?.findIndex(
       (answer) => answer.isCorrectAnswer
     );
-    if (!validAnwserId) return;
     const collectorFilter = (i: any) => i.user.id === interaction.user.id;
     try {
       const userResponse =
@@ -53,100 +51,55 @@ const questionCommand: CommandInterface = {
         );
       }
       if (validAnwserId == userAnswerId) {
-        console.info("bonne reponse");
-        const validTitle = new TextDisplayBuilder().setContent(
-          "## ✅ Bonne réponse !"
-        );
-        const questionReminder = new TextDisplayBuilder().setContent(
-          `\n${question.question}`
-        );
-        const validContainer = new ContainerBuilder().setAccentColor(0x7cfc8c);
-        const validSection = new SectionBuilder()
-          .setThumbnailAccessory(
-            new ThumbnailBuilder({
-              media: {
-                url: interaction.client.user.displayAvatarURL(),
-              },
-            })
-          )
-          .addTextDisplayComponents(validTitle)
-          .addTextDisplayComponents(questionReminder);
-
-        validContainer
-          .addSectionComponents(validSection)
-          .addSeparatorComponents(
-            new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large)
-          )
-          .addTextDisplayComponents(
-            new TextDisplayBuilder().setContent(
-              `▶️ ${question.answers?.[validAnwserId].explanation}`
-            )
-          );
-        await userResponse?.update({ components: [validContainer] });
+        let user = undefined;
+        try {
+          user = await User.findOne({
+            where: {
+              userId: interaction.user.id,
+            },
+          });
+        } catch (err) {
+          console.log(err);
+        }
+        if (!user) {
+          user = await User.create({ userId: interaction.user.id });
+        }
+        const hasLevelUp = user.setExperience(10);
+        if (hasLevelUp) {
+          const newTitleUnlockedEmbed = new EmbedBuilder().setColor("Blue")
+            .setDescription(`<@!${
+            interaction.user.id
+          }>, vous êtes maintenant ${user.getTitle()} !
+            `);
+          interaction.channel.send({ embeds: [newTitleUnlockedEmbed] });
+        }
+        const container = buildContainer({
+          color: 0x7cfc8c,
+          title: "## ✅ Bonne réponse !",
+          description: `\n${question.question}\n\n▶️ ${question.answers?.[validAnwserId].explanation}`,
+          footer: `Points de connaissance : ${user.experience} 🧠 *(+10 🧠)*`,
+          thumbnailUrl: interaction.client.user.displayAvatarURL(),
+        });
+        await userResponse?.update({ components: [container] });
       } else {
-        console.info("mauvaise reponse");
-        const wrongTitle = new TextDisplayBuilder().setContent(
-          "## ❌ Mauvaise réponse !"
-        );
-        const questionReminder = new TextDisplayBuilder().setContent(
-          `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`
-        );
-        const wrongContainer = new ContainerBuilder().setAccentColor(0xe57373);
-        const wrongSection = new SectionBuilder()
-          .setThumbnailAccessory(
-            new ThumbnailBuilder({
-              media: {
-                url: interaction.client.user.displayAvatarURL(),
-              },
-            })
-          )
-          .addTextDisplayComponents(wrongTitle)
-          .addTextDisplayComponents(questionReminder);
-
-        wrongContainer
-          .addSectionComponents(wrongSection)
-          .addSeparatorComponents(
-            new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large)
-          )
-          .addTextDisplayComponents(
-            new TextDisplayBuilder().setContent(
-              `▶️ ${question.answers?.[validAnwserId].explanation}`
-            )
-          );
-        await userResponse?.update({ components: [wrongContainer] });
+        const container = buildContainer({
+          color: 0xe57373,
+          title: "## ❌ Mauvaise réponse !",
+          description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
+          footer: `▶️ ${question.answers?.[validAnwserId].explanation}`,
+          thumbnailUrl: interaction.client.user.displayAvatarURL(),
+        });
+        await userResponse?.update({ components: [container] });
       }
     } catch {
-      const noResponseContainer = new ContainerBuilder().setAccentColor(
-        0xffb74d
-      );
-      const noResponseTitle = new TextDisplayBuilder().setContent(
-        ":confused:  Vous N'avez pas répondu a temps"
-      );
-      const questionReminder = new TextDisplayBuilder().setContent(
-        `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`
-      );
-      const noResponseSection = new SectionBuilder()
-        .setThumbnailAccessory(
-          new ThumbnailBuilder({
-            media: {
-              url: interaction.client.user.displayAvatarURL(),
-            },
-          })
-        )
-        .addTextDisplayComponents([noResponseTitle, questionReminder]);
-
-      noResponseContainer
-        .addSectionComponents(noResponseSection)
-        .addSeparatorComponents(
-          new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large)
-        )
-        .addTextDisplayComponents(
-          new TextDisplayBuilder().setContent(
-            `▶️ ${question.answers?.[validAnwserId].explanation}`
-          )
-        );
-
-      await interaction.editReply({ components: [noResponseContainer] });
+      const container = buildContainer({
+        color: 0xffb74d,
+        title: ":confused:  Vous N'avez pas répondu a temps",
+        description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
+        footer: `▶️ ${question.answers?.[validAnwserId].explanation}`,
+        thumbnailUrl: interaction.client.user.displayAvatarURL(),
+      });
+      await interaction.editReply({ components: [container] });
     }
   },
 };
@@ -158,49 +111,27 @@ const buildQuestionContainer = (
   question: Question,
   mobileVersion: boolean = false
 ): ContainerBuilder => {
-  const container = new ContainerBuilder().setAccentColor(0x9b8cff);
-
-  const section = new SectionBuilder()
-    .setThumbnailAccessory(
-      new ThumbnailBuilder({
-        media: {
-          url: interaction.client.user.displayAvatarURL(),
-        },
-      })
-    )
-    .addTextDisplayComponents(
-      new TextDisplayBuilder().setContent(`## ${question.question}`)
-    );
-
-  const responsesRow = new ActionRowBuilder<ButtonBuilder>();
-
+  let description: string | undefined;
   if (mobileVersion) {
-    section.addTextDisplayComponents(
-      new TextDisplayBuilder().setContent(
-        question.answers
-          ?.map((answer, index) => `${index + 1}. ${answer.text}`)
-          .join("\n")
-      )
-    );
+    description = question.answers
+      ?.map((answer, index) => `${index + 1}. ${answer.text}`)
+      .join("\n");
   }
+  const container = buildContainer({
+    color: 0x9b8cff,
+    title: `## ${question.question}`,
+    description: description,
+    thumbnailUrl: interaction.client.user.displayAvatarURL(),
+  });
+  const responsesRow = new ActionRowBuilder<ButtonBuilder>();
   question.answers?.forEach((answer, index) => {
-    let buttonLabel: string | undefined;
-    if (mobileVersion) {
-      buttonLabel = `${index + 1}`;
-    } else {
-      buttonLabel = `${answer.text}`;
-    }
+    let buttonLabel = mobileVersion ? `${index + 1}` : `${answer.text}`;
     const button = new ButtonBuilder()
       .setLabel(buttonLabel)
       .setCustomId(`answer_${index}`)
       .setStyle(ButtonStyle.Primary);
     responsesRow.addComponents(button);
   });
-  container
-    .addSectionComponents(section)
-    .addSeparatorComponents(
-      new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Large)
-    )
-    .addActionRowComponents(responsesRow);
+  container.addActionRowComponents(responsesRow);
   return container;
 };

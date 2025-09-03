@@ -1,15 +1,16 @@
-import { json, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 import { DailyFact, initModel as initDailyFactModel } from "./models/dailyFact";
 import { Answer, initModel as initAnswerModel } from "./models/answer";
 import { Question, initModel as initQuestionModel } from "./models/question";
-import { readFile, readSync } from "fs";
+import { User, initModel as initUserModel } from "./models/User";
+import { readFile } from "fs";
 import { error } from "../utils/logging";
-
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "./database.db",
 });
 
+initUserModel(sequelize);
 initQuestionModel(sequelize);
 initAnswerModel(sequelize);
 
@@ -49,7 +50,6 @@ sequelize.sync({ force: true }).then(async () => {
   });
 });
 */
-
 initDailyFactModel(sequelize);
 
-export { DailyFact, Answer, Question };
+export { DailyFact, Answer, Question, User };
