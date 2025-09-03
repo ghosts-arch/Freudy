@@ -1,8 +1,5 @@
 import { json, Sequelize } from "sequelize";
-import {
-  DailyFact,
-  initModel as initDailyFactModel,
-} from "./models/daily_fact";
+import { DailyFact, initModel as initDailyFactModel } from "./models/dailyFact";
 import { Answer, initModel as initAnswerModel } from "./models/answer";
 import { Question, initModel as initQuestionModel } from "./models/question";
 import { readFile, readSync } from "fs";
