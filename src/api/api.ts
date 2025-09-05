@@ -9,10 +9,10 @@ APP.get("/", (request, result) => {
 
 APP.get("/daily_fact", async (request, response) => {
   const dailyFact = await DailyFact.getRandomDailyFact();
-  response.send({ fact: dailyFact });
+  response.send({ dailyFact });
 });
 
 APP.get("/question", async (request, response) => {
   const question = await Question.getRandomQuestion();
-  response.json({ question: question });
+  response.json({ question });
 });

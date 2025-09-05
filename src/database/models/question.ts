@@ -2,9 +2,10 @@ import { DataTypes, Model, Sequelize } from "sequelize";
 import { Answer } from "./answer";
 
 export class Question extends Model {
-  declare question: string;
   declare id: number;
+  declare question: string;
   declare answers: Answer[];
+  declare explanation: string;
 
   static async getRandomQuestion(): Promise<Question> {
     const question = await Question.findOne({
@@ -28,6 +29,11 @@ export const initModel = (sequelize: Sequelize) => {
     {
       question: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      explanation: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {

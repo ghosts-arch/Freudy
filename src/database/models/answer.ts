@@ -2,8 +2,7 @@ import { DataTypes, Model, Sequelize } from "sequelize";
 
 export class Answer extends Model {
   declare text: string;
-  declare explanation: string;
-  declare isCorrectAnswer: boolean;
+  declare isValidAnswer: boolean;
   declare id: number;
 }
 
@@ -14,12 +13,9 @@ export const initModel = (sequelize: Sequelize): void => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      explanation: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      isCorrectAnswer: {
+      isValidAnswer: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
       },
     },
     {

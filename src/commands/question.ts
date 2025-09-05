@@ -34,8 +34,9 @@ const questionCommand: CommandInterface = {
       withResponse: true,
     });
     let validAnwserId = question.answers?.findIndex(
-      (answer) => answer.isCorrectAnswer
+      (answer) => answer.isValidAnswer
     );
+
     const collectorFilter = (i: any) => i.user.id === interaction.user.id;
     try {
       const userResponse =
@@ -76,7 +77,7 @@ const questionCommand: CommandInterface = {
         const container = buildContainer({
           color: 0x7cfc8c,
           title: "## ✅ Bonne réponse !",
-          description: `\n${question.question}\n\n▶️ ${question.answers?.[validAnwserId].explanation}`,
+          description: `\n${question.question}\n\n▶️ ${question.explanation}`,
           footer: `Points de connaissance : ${user.experience} 🧠 *(+10 🧠)*`,
           thumbnailUrl: interaction.client.user.displayAvatarURL(),
         });
@@ -86,7 +87,7 @@ const questionCommand: CommandInterface = {
           color: 0xe57373,
           title: "## ❌ Mauvaise réponse !",
           description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
-          footer: `▶️ ${question.answers?.[validAnwserId].explanation}`,
+          footer: `▶️ ${question.explanation}`,
           thumbnailUrl: interaction.client.user.displayAvatarURL(),
         });
         await userResponse?.update({ components: [container] });
@@ -96,7 +97,7 @@ const questionCommand: CommandInterface = {
         color: 0xffb74d,
         title: ":confused:  Vous N'avez pas répondu a temps",
         description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
-        footer: `▶️ ${question.answers?.[validAnwserId].explanation}`,
+        footer: `▶️ ${question.explanation}`,
         thumbnailUrl: interaction.client.user.displayAvatarURL(),
       });
       await interaction.editReply({ components: [container] });
