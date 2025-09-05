@@ -39,9 +39,9 @@ const InteractionCreate: EventInterface = {
     }
     try {
       command.execute(interaction);
-      /* if (command.hasCooldown) {
+      if (command.hasCooldown) {
         interaction.client.cooldowns.addUser(interaction.user.id, interaction);
-      }*/
+      }
     } catch (err) {
       console.error(err);
     }
