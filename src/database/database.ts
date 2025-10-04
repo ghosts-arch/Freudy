@@ -23,9 +23,7 @@ sequelize.sync({ force: true }).then(async () => {
       error(err.message);
     }
     const facts = JSON.parse(data.toString());
-    // console.log(facts);
     for (const fact of facts) {
-      // console.log(fact);
       await DailyFact.upsert({ fact: fact });
     }
   });

@@ -2,8 +2,11 @@ import { SlashCommandBuilder } from "discord.js";
 import { CommandInterface } from "../types/command";
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { Question, Answer } from "../database/database";
+import { Readable } from "stream";
+import csv from "csv-parser";
 
 const ACCEPTED_EXTENSIONS = ["csv", "json"];
+
 const uploadCommand: CommandInterface = {
   data: new SlashCommandBuilder()
     .setName("upload")
@@ -29,21 +32,15 @@ const uploadCommand: CommandInterface = {
         "Extension de fichier inconnue, veuillez recommencer !"
       );
     }
+    const result = await fetch(file.attachment.url);
     switch (fileExtension) {
       case "csv":
+        await parseFile(result);
         break;
       case "json":
-        const result = await fetch(file.attachment?.url);
         console.log(result);
         const data = await result.json();
         for (const question of data) {
-          const validAnswer =
-            question.answers[
-              question.answers.findIndex(
-                (answer: { text: string; isValidAnswer: boolean }) =>
-                  answer.isValidAnswer === true
-              )
-            ];
           const insertedQuestion = await Question.upsert({
             question: question.question,
             explanation: question.explanation,
@@ -65,3 +62,77 @@ const uploadCommand: CommandInterface = {
 };
 
 export default uploadCommand;
+
+const parseFile = async (response: Response) => {
+  const buffer = await response.arrayBuffer();
+  const text = Buffer.from(buffer).toString("utf-8");
+  const stream = Readable.from(text);
+  const results: {
+    question: string;
+    answers: { text: string; isValidAnswer: boolean }[];
+  }[] = [];
+  await new Promise<void>((resolve, reject) => {
+    stream.pipe(
+      csv({
+        separator: ";",
+        skipLines: 7,
+        headers: [
+          "id",
+          "Question - max 120 characters",
+          "Answer 1 - max 75 characters",
+          "Answer 2 - max 75 characters",
+          "Answer 3 - max 75 characters",
+          "Answer 4 - max 75 characters",
+          "Time limit (sec) – 5, 10, 20, 30, 60, 90, 120, or 240 secs",
+          "Correct answer(s) - choose at least one",
+        ],
+      })
+        .on("headers", (headers) => {
+          console.log(headers);
+        })
+        .on("data", (data) => {
+          if (data["Question - max 120 characters"] == "" || data["id"] == "")
+            return;
+          const question = {
+            question: data["Question - max 120 characters"],
+            answers: [
+              {
+                text: data["Answer 1 - max 75 characters"],
+                isValidAnswer: true,
+              },
+              {
+                text: data["Answer 2 - max 75 characters"],
+                isValidAnswer: false,
+              },
+              {
+                text: data["Answer 3 - max 75 characters"],
+                isValidAnswer: false,
+              },
+              {
+                text: data["Answer 4 - max 75 characters"],
+                isValidAnswer: false,
+              },
+            ],
+          };
+          results.push(question);
+        })
+        .on("end", () => {
+          resolve();
+        })
+        .on("error", reject)
+    );
+  });
+  for (const question of results) {
+    const insertedQuestion = await Question.upsert({
+      question: question.question,
+    });
+    for (const answer of question.answers) {
+      await Answer.upsert({
+        text: answer.text,
+        isValidAnswer: answer.isValidAnswer,
+        questionId: insertedQuestion[0].id,
+      });
+    }
+  }
+  return;
+};

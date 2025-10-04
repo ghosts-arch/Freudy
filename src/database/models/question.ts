@@ -5,7 +5,7 @@ export class Question extends Model {
   declare id: number;
   declare question: string;
   declare answers: Answer[];
-  declare explanation: string;
+  declare explanation?: string;
 
   static async getRandomQuestion(): Promise<Question> {
     const question = await Question.findOne({
@@ -33,7 +33,6 @@ export const initModel = (sequelize: Sequelize) => {
       },
       explanation: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
     },
     {
