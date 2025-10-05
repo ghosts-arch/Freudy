@@ -35,7 +35,7 @@ const giveExperienceCommand: CommandInterface = {
     user.setExperience(amount);
     await user.save();
     interaction.reply(
-      `${amount} experience gived to ${targetUser.username} ! ✅`
+      `${amount} experience given to ${targetUser.username} ! ✅`
     );
   },
 };
