@@ -24,17 +24,18 @@ const giveExperienceCommand: CommandInterface = {
     ),
   async execute(interaction: CustomChatInputCommandInteraction) {
     const amount = interaction.options.getInteger("amount", true);
+    const targetUser = interaction.options.getUser("user", true);
     let user;
     user = await User.findOne({
-      where: { userId: interaction.user.id },
+      where: { userId: targetUser.id },
     });
     if (!user) {
-      user = await User.create({ userId: interaction.user.id });
+      user = await User.create({ userId: targetUser.id });
     }
     user.setExperience(amount);
     await user.save();
     interaction.reply(
-      `${amount} experience gived to ${interaction.user.username} ! ✅`
+      `${amount} experience gived to ${targetUser.username} ! ✅`
     );
   },
 };
