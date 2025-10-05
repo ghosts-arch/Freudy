@@ -32,6 +32,7 @@ const uploadCommand: CommandInterface = {
       interaction.editReply(
         "Extension de fichier inconnue, veuillez recommencer !"
       );
+      return;
     }
     const result = await fetch(file.attachment.url);
     switch (fileExtension) {
