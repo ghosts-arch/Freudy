@@ -1,8 +1,8 @@
 import { EmbedBuilder, Events, MessageFlags } from "discord.js";
 import { EventInterface } from "../types/event";
-
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { Cooldowns } from "../utils/cooldowns";
+import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 
 const InteractionCreate: EventInterface = {
   name: Events.InteractionCreate,
@@ -24,12 +24,21 @@ const InteractionCreate: EventInterface = {
       );
     }
     if (
-      command.isAdministratorCommand &&
+      command.permission_level === PERMISSIONS_LEVEL.ADMINISTRATOR &&
       !interaction.memberPermissions?.has("Administrator")
     ) {
       return await sendErrorEmbed(
         interaction,
         "Vous ne pouvez pas utiliser la commande suivante !"
+      );
+    }
+    if (
+      command.permission_level === PERMISSIONS_LEVEL.OWNER &&
+      interaction.user.id !== "467818337599225866"
+    ) {
+      return await sendErrorEmbed(
+        interaction,
+        "Vous ne pouvez pas utiliser cette commande !"
       );
     }
     try {

@@ -4,11 +4,12 @@ import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { Question, Answer } from "../database/database";
 import { Readable } from "stream";
 import csv from "csv-parser";
+import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 
 const ACCEPTED_EXTENSIONS = ["csv", "json"];
 
 const uploadCommand: CommandInterface = {
-  isAdministratorCommand: true,
+  permission_level: PERMISSIONS_LEVEL.ADMINISTRATOR,
   data: new SlashCommandBuilder()
     .setName("upload")
     .setDescription("commande pour upload des commands")
