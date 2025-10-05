@@ -25,7 +25,7 @@ const InteractionCreate: EventInterface = {
     }
     if (
       command.isAdministratorCommand &&
-      interaction.memberPermissions?.has("Administrator")
+      !interaction.memberPermissions?.has("Administrator")
     ) {
       return await sendErrorEmbed(
         interaction,
