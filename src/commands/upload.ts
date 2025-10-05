@@ -8,6 +8,7 @@ import csv from "csv-parser";
 const ACCEPTED_EXTENSIONS = ["csv", "json"];
 
 const uploadCommand: CommandInterface = {
+  isAdministratorCommand: true,
   data: new SlashCommandBuilder()
     .setName("upload")
     .setDescription("commande pour upload des commands")

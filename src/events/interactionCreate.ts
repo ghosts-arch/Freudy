@@ -1,10 +1,4 @@
-import {
-  Embed,
-  EmbedBuilder,
-  Events,
-  Interaction,
-  MessageFlags,
-} from "discord.js";
+import { EmbedBuilder, Events, MessageFlags } from "discord.js";
 import { EventInterface } from "../types/event";
 
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
@@ -22,20 +16,21 @@ const InteractionCreate: EventInterface = {
       command.hasCooldown &&
       interaction.client.cooldowns.findUser(interaction.user.id)
     ) {
-      const errorEmbed = new EmbedBuilder()
-        .setColor("Red")
-        .setDescription(
-          `Vous pourrez rejouer dans ${Cooldowns.formatCooldown(
-            interaction.client.cooldowns.getRemainingTimeFor(
-              interaction.user.id
-            )
-          )}`
-        );
-      await interaction.reply({
-        embeds: [errorEmbed],
-        flags: MessageFlags.Ephemeral,
-      });
-      return;
+      return await sendErrorEmbed(
+        interaction,
+        `Vous pourrez rejouer dans ${Cooldowns.formatCooldown(
+          interaction.client.cooldowns.getRemainingTimeFor(interaction.user.id)
+        )}`
+      );
+    }
+    if (
+      command.isAdministratorCommand &&
+      interaction.memberPermissions?.has("Administrator")
+    ) {
+      return await sendErrorEmbed(
+        interaction,
+        "Vous ne pouvez pas utiliser la commande suivante !"
+      );
     }
     try {
       command.execute(interaction);
@@ -49,3 +44,14 @@ const InteractionCreate: EventInterface = {
 };
 
 export default InteractionCreate;
+
+const sendErrorEmbed = async (
+  interaction: CustomChatInputCommandInteraction,
+  error: string
+) => {
+  const errorEmbed = new EmbedBuilder().setColor("Red").setDescription(error);
+  await interaction.reply({
+    embeds: [errorEmbed],
+    flags: [MessageFlags.Ephemeral],
+  });
+};

@@ -13,6 +13,7 @@ import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { buildContainer } from "../ui/container";
 
 const questionCommand: CommandInterface = {
+  isAdministratorCommand: false,
   data: new SlashCommandBuilder()
     .setName("question")
     .setDescription("Question psy..."),

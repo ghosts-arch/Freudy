@@ -5,6 +5,7 @@ import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { User } from "../database/database";
 
 const questionCommand: CommandInterface = {
+  isAdministratorCommand: false,
   data: new SlashCommandBuilder()
     .setName("profil")
     .setDescription("Mon profil"),
