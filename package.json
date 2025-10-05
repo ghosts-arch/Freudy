@@ -12,11 +12,11 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@types/express": "^5.0.3",
     "typescript": "^5.9.2"
   },
   "dependencies": {
     "@types/node": "^24.2.0",
+    "csv-parser": "^3.2.0",
     "discord.js": "^14.21.0",
     "dotenv": "^17.2.1",
     "sequelize": "^6.37.7",

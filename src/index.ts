@@ -9,8 +9,3 @@ const client = new Freudy();
 (async () => {
   await client.init();
 })();
-
-process.on("SIGINT", async () => {
-  await info(`Bot is disconnected !`);
-  process.exit(0);
-});
