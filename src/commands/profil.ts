@@ -3,9 +3,10 @@ import { CommandInterface } from "../types/command";
 
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { User } from "../database/database";
+import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 
 const questionCommand: CommandInterface = {
-  isAdministratorCommand: false,
+  permission_level: PERMISSIONS_LEVEL.USER,
   data: new SlashCommandBuilder()
     .setName("profil")
     .setDescription("Mon profil"),

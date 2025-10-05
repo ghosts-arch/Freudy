@@ -11,9 +11,10 @@ import { CommandInterface } from "../types/command";
 import { Question, User } from "../database/database";
 import { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { buildContainer } from "../ui/container";
+import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 
 const questionCommand: CommandInterface = {
-  isAdministratorCommand: false,
+  permission_level: PERMISSIONS_LEVEL.USER,
   data: new SlashCommandBuilder()
     .setName("question")
     .setDescription("Question psy..."),
