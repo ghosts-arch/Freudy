@@ -1,7 +1,7 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
-import { CommandInterface } from "../types/command";
+import type { CommandInterface } from "../types/command";
 import { User } from "../database/database";
-import { CustomChatInputCommandInteraction } from "../types/customInteraction";
+import type { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 
 const giveExperienceCommand: CommandInterface = {

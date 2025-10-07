@@ -1,5 +1,5 @@
 import { Collection, REST, Routes } from "discord.js";
-import { CommandInterface } from "../types/command";
+import type { CommandInterface } from "../types/command";
 import path from "path";
 import { readdirSync } from "fs";
 
@@ -17,9 +17,7 @@ export const commandsHandler = async (): Promise<
 > => {
   const commands = new Collection<string, CommandInterface>();
   const commandsPath = path.join(__dirname, "../commands");
-  const commandsFiles = readdirSync(commandsPath).filter((file) =>
-    file.endsWith(".js")
-  );
+  const commandsFiles = readdirSync(commandsPath);
   for (const commandFile of commandsFiles) {
     const filePath = path.join(commandsPath, commandFile);
     const { default: command } = (await import(filePath)) as {

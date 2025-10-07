@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
-import { CommandInterface } from "../types/command";
-import { CustomChatInputCommandInteraction } from "../types/customInteraction";
+import type { CommandInterface } from "../types/command";
+import type { CustomChatInputCommandInteraction } from "../types/customInteraction";
 import { Question, Answer } from "../database/database";
 import { Readable } from "stream";
 import csv from "csv-parser";

@@ -5,9 +5,12 @@ import { Question, initModel as initQuestionModel } from "./models/question";
 import { User, initModel as initUserModel } from "./models/User";
 import { readFile } from "fs";
 import { error } from "../utils/logging";
+import path from "path";
+
+const STORAGE_PATH = path.resolve(process.cwd(), "database.db");
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: "./database.db",
+  storage: STORAGE_PATH,
 });
 
 initUserModel(sequelize);
@@ -17,8 +20,8 @@ initAnswerModel(sequelize);
 Question.hasMany(Answer, { foreignKey: "questionId", as: "answers" });
 Answer.belongsTo(Question, { foreignKey: "questionId", as: "question" });
 
-sequelize.sync({ force: true }).then(async () => {
-  readFile("facts.json", async (err, data) => {
+sequelize.sync({ force: false }).then(async () => {
+  /* readFile("facts.json", async (err, data) => {
     if (err) {
       error(err.message);
     }
@@ -27,6 +30,7 @@ sequelize.sync({ force: true }).then(async () => {
       await DailyFact.upsert({ fact: fact });
     }
   });
+  */
 });
 
 initDailyFactModel(sequelize);

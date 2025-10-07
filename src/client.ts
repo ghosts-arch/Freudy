@@ -4,7 +4,7 @@ import { start } from "./managers/daily_fact";
 import { error, info } from "./utils/logging";
 import { Sequelize } from "sequelize";
 import { commandsHandler } from "./handlers/commandsHandler";
-import { CommandInterface } from "./types/command";
+import type { CommandInterface } from "./types/command";
 import { cooldownConfig, Cooldowns } from "./utils/cooldowns";
 
 export class Freudy extends Client {

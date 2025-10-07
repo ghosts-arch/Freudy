@@ -44,13 +44,11 @@ const callback = async (client: Freudy) => {
 };
 
 export const start = async (client: Freudy) => {
-  console.log(timeout);
   if (timeout) {
     clearTimeout(timeout);
     timeout = null;
     console.warn("clean old timeout");
   }
-  console.log(interval);
   if (interval) {
     clearInterval(interval);
     interval = null;
