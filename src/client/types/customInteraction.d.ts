@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, Interaction } from "discord.js";
-import { Freudy } from "../client";
+import { Freudy } from "..";
 
 export type CustomChatInputCommandInteraction = ChatInputCommandInteraction & {
   client: Freudy;

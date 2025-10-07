@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import { Freudy } from "../client";
+import { Freudy } from "..";
 import { DailyFact } from "../database/database";
 import { info } from "../utils/logging";
 import { EmbedBuilder } from "discord.js";

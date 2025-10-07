@@ -1,6 +1,6 @@
 import { Events } from "discord.js";
 import { EventInterface } from "../types/event";
-import { Freudy } from "../client";
+import { Freudy } from "..";
 import { info } from "../utils/logging";
 
 const clientReady: EventInterface = {

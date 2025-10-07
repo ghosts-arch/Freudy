@@ -1,4 +1,4 @@
-import { Freudy } from "../client";
+import { Freudy } from "..";
 import path from "path";
 import { readdirSync } from "fs";
 import type { EventInterface } from "../types/event";

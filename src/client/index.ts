@@ -1,4 +1,4 @@
-import { Freudy } from "./client";
+import { Freudy } from ".";
 
 const client = new Freudy();
 (async () => {
