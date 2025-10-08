@@ -1,5 +1,5 @@
 export enum PERMISSIONS_LEVEL {
-  "USER",
-  "ADMINISTRATOR",
-  "OWNER",
+	USER,
+	ADMINISTRATOR,
+	OWNER,
 }
