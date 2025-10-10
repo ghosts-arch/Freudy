@@ -14,6 +14,7 @@ import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import type { CommandInterface } from "../types/command";
 
 import { buildContainer } from "../ui/container";
+import { info } from "../utils/logging";
 
 const questionCommand: CommandInterface = {
 	permission_level: PERMISSIONS_LEVEL.USER,
@@ -25,6 +26,7 @@ const questionCommand: CommandInterface = {
 		if (!interaction?.channel?.isSendable()) return;
 		let container: ContainerBuilder | undefined;
 		const question = await Question.getRandomQuestion();
+		info(`${interaction.user.id} get question with id ${question.id}`);
 		const member = await interaction.guild?.members.fetch(interaction.user.id);
 		if (!member) return;
 		if (member.presence?.clientStatus?.mobile) {
@@ -37,7 +39,7 @@ const questionCommand: CommandInterface = {
 			flags: MessageFlags.IsComponentsV2,
 			withResponse: true,
 		});
-		const validAnwserId = question.answers?.findIndex(
+		const validAnwserId = question.answers.findIndex(
 			(answer) => answer.isValidAnswer,
 		);
 		const collectorFilter = (i: MessageComponentInteraction) =>
@@ -55,6 +57,7 @@ const questionCommand: CommandInterface = {
 					`${userResponse.customId.split("_")[1]} is not an valid ID.`,
 				);
 			}
+			info(`${interaction.user.id} replied answer with id ${userAnswerId}`);
 			if (validAnwserId === userAnswerId) {
 				let user = await User.findOne({
 					where: { userId: interaction.user.id },
@@ -84,7 +87,7 @@ const questionCommand: CommandInterface = {
 				const container = buildContainer({
 					color: 0xe57373,
 					title: "## ❌ Mauvaise réponse !",
-					description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
+					description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId]?.text}`,
 					footer: question.explanation ? `▶️ ${question.explanation}` : "",
 					thumbnailUrl: interaction.client.user.displayAvatarURL(),
 				});
@@ -94,7 +97,7 @@ const questionCommand: CommandInterface = {
 			const container = buildContainer({
 				color: 0xffb74d,
 				title: ":confused:  Vous N'avez pas répondu a temps",
-				description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
+				description: `\n${question.question}\n\n La bonne réponse était : ${question.answers[validAnwserId]?.text}`,
 				footer: question.explanation ? `▶️ ${question.explanation}` : "",
 				thumbnailUrl: interaction.client.user.displayAvatarURL(),
 			});
