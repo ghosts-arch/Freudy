@@ -85,7 +85,7 @@ const questionCommand: CommandInterface = {
 					color: 0xe57373,
 					title: "## ❌ Mauvaise réponse !",
 					description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
-					footer: `▶️ ${question.explanation}`,
+					footer: question.explanation ? `▶️ ${question.explanation}` : "",
 					thumbnailUrl: interaction.client.user.displayAvatarURL(),
 				});
 				await userResponse?.update({ components: [container] });
@@ -95,7 +95,7 @@ const questionCommand: CommandInterface = {
 				color: 0xffb74d,
 				title: ":confused:  Vous N'avez pas répondu a temps",
 				description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId].text}`,
-				footer: `▶️ ${question.explanation}`,
+				footer: question.explanation ? `▶️ ${question.explanation}` : "",
 				thumbnailUrl: interaction.client.user.displayAvatarURL(),
 			});
 			await interaction.editReply({ components: [container] });
