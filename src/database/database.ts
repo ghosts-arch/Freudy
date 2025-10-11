@@ -14,6 +14,7 @@ const sequelize = new Sequelize({
 initUserModel(sequelize);
 initQuestionModel(sequelize);
 initAnswerModel(sequelize);
+initDailyFactModel(sequelize);
 
 Question.hasMany(Answer, { foreignKey: "questionId", as: "answers" });
 Answer.belongsTo(Question, { foreignKey: "questionId", as: "question" });
@@ -31,6 +32,6 @@ sequelize.sync({ force: false }).then(async () => {
   */
 });
 
-initDailyFactModel(sequelize);
+
 
 export { DailyFact, Answer, Question, User };
