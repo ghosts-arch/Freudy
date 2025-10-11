@@ -32,6 +32,4 @@ sequelize.sync({ force: false }).then(async () => {
   */
 });
 
-
-
 export { DailyFact, Answer, Question, User };
