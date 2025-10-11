@@ -11,11 +11,11 @@ jobs:
             contents: read
         steps:
             - name: Checkout
-              uses: actions/checkout@v5
+              uses: actions/checkout@08c6903
               with:
                 persist-credentials: false
             - name: Setup biome
-              uses: biomejs/setup-biome@v2
+              uses: biomejs/setup-biome@454fa0d
               with:
                 version: latest
             - name: Run biome
