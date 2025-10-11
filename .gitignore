@@ -4,4 +4,4 @@ node_modules/
 .env
 *.db
 facts.json
-*.json
+data3.json

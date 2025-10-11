@@ -1,25 +1,23 @@
 {
-  "name": "freudy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "typescript": "^5.9.2"
-  },
-  "dependencies": {
-    "@types/node": "^24.2.0",
-    "csv-parser": "^3.2.0",
-    "discord.js": "^14.21.0",
-    "dotenv": "^17.2.1",
-    "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7"
-  }
+	"name": "freudy",
+	"version": "4.0.0",
+	"module": "src/index.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"start": "bun run src/index.ts"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.5",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"csv-parser": "^3.2.0",
+		"discord.js": "^14.22.1",
+		"sequelize": "^6.37.7",
+		"sqlite3": "^5.1.7"
+	}
 }
