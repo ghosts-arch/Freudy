@@ -1,10 +1,10 @@
-import {
+import type {
+	ChatInputCommandInteraction,
 	SlashCommandBuilder,
 	SlashCommandOptionsOnlyBuilder,
-	ChatInputCommandInteraction,
 } from "discord.js";
 
-import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import type { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 
 export interface CommandInterface {
 	data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
