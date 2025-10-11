@@ -3,22 +3,22 @@ import { User } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import type { CommandInterface } from "../types/command";
 
-const giveExperienceCommand: CommandInterface = {
+const setExperience: CommandInterface = {
 	permission_level: PERMISSIONS_LEVEL.OWNER,
 	data: new SlashCommandBuilder()
-		.setName("addexperience")
-		.setDescription("Add experience to targeted user.")
+		.setName("setexperience")
+		.setDescription("Set experience of targeted user.")
 		.setContexts(InteractionContextType.Guild)
 		.addUserOption((option) =>
 			option
 				.setName("user")
-				.setDescription("Give experience to ...")
+				.setDescription("set experience of ...")
 				.setRequired(true),
 		)
 		.addIntegerOption((option) =>
 			option
 				.setName("amount")
-				.setDescription("Amount of experience to give...")
+				.setDescription("new experience of user")
 				.setRequired(true),
 		),
 	async execute(interaction) {
@@ -28,7 +28,7 @@ const giveExperienceCommand: CommandInterface = {
 		if (!user) {
 			user = await User.create({ userId: targetUser.id });
 		}
-		user.setExperience(amount);
+		user.experience = amount;
 		await user.save();
 		interaction.reply(
 			`${amount} experience given to ${targetUser.username} ! ✅`,
@@ -36,4 +36,4 @@ const giveExperienceCommand: CommandInterface = {
 	},
 };
 
-export default giveExperienceCommand;
+export default setExperience;
