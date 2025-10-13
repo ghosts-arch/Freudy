@@ -3,8 +3,8 @@ import {
 	EmbedBuilder,
 	SlashCommandBuilder,
 } from "discord.js";
-import { User } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import { getUser } from "../services/userService";
 import type { CommandInterface } from "../types/command";
 import { sendErrorMessage } from "../utils/sendErrorMessage";
 
@@ -14,7 +14,7 @@ const questionCommand: CommandInterface = {
 		.setName("profil")
 		.setDescription("Mon profil"),
 	async execute(interaction: ChatInputCommandInteraction) {
-		const user = await User.findOne({ where: { userId: interaction.user.id } });
+		const user = await getUser(interaction.user.id);
 		if (!user)
 			return sendErrorMessage(
 				interaction,
