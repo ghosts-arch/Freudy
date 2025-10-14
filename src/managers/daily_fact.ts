@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "discord.js";
 import { Sequelize } from "sequelize";
-import type { Freudy } from "..";
+import type { Freudy } from "../client";
 import { DailyFact } from "../database/database";
 import { info } from "../utils/logging";
 
