@@ -1,0 +1,37 @@
+import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { Sequelize } from "sequelize";
+import { initModel } from "../../src/database/models/User";
+import {
+	getTitle,
+	processLevelProgression,
+} from "../../src/services/experienceService";
+import { createUser } from "../../src/services/userService";
+
+describe("experience integration", () => {
+	let sequelize: Sequelize;
+
+	beforeEach(async () => {
+		sequelize = new Sequelize({
+			dialect: "sqlite",
+			storage: ":memory:",
+			logging: false,
+		});
+		initModel(sequelize);
+		await sequelize.sync({ force: true });
+	});
+
+	test("processLevelProgression", async () => {
+		const user = await createUser("467818337599225866");
+		expect(user.level).toBe(0);
+		expect(user.experience).toBe(0);
+		expect(getTitle(user.level)).toBe("Apprenti Freudy");
+		await processLevelProgression(user);
+		expect(user.level).toBe(0);
+		expect(user.experience).toBe(10);
+		expect(getTitle(user.level)).toBe("Apprenti Freudy");
+	});
+
+	afterEach(async () => {
+		await sequelize.close();
+	});
+});

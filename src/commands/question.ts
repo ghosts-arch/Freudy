@@ -9,10 +9,10 @@ import {
 	MessageFlags,
 	SlashCommandBuilder,
 } from "discord.js";
-import { Question, User } from "../database/database";
+import { Question } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import { createUser, getUser } from "../services/userService";
 import type { CommandInterface } from "../types/command";
-
 import { buildContainer } from "../ui/container";
 import { info } from "../utils/logging";
 
@@ -59,11 +59,9 @@ const questionCommand: CommandInterface = {
 			}
 			info(`${interaction.user.id} replied answer with id ${userAnswerId}`);
 			if (validAnwserId === userAnswerId) {
-				let user = await User.findOne({
-					where: { userId: interaction.user.id },
-				});
+				let user = await getUser(interaction.user.id);
 				if (!user) {
-					user = await User.create({ userId: interaction.user.id });
+					user = await createUser(interaction.user.id);
 				}
 				const hasLevelUp = user.setExperience(10);
 				if (hasLevelUp) {
