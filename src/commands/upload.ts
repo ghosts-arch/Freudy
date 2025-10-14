@@ -1,15 +1,14 @@
 import { Readable } from "node:stream";
 import csv from "csv-parser";
 import { SlashCommandBuilder } from "discord.js";
-
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { createQuestion } from "../services/questionsService";
-import type { CommandInterface } from "../types/command";
+import type { ICommand } from "./commandInterface";
 
 const ACCEPTED_EXTENSIONS = ["csv", "json"];
 
-const uploadCommand: CommandInterface = {
-	permission_level: PERMISSIONS_LEVEL.ADMINISTRATOR,
+const uploadCommand: ICommand = {
+	permissionLevel: PERMISSIONS_LEVEL.ADMINISTRATOR,
 	data: new SlashCommandBuilder()
 		.setName("upload")
 		.setDescription("commande pour upload des commands")
@@ -19,13 +18,13 @@ const uploadCommand: CommandInterface = {
 				.setDescription("fichier csv a upload")
 				.setRequired(true),
 		),
-	async execute(interaction) {
-		await interaction.deferReply();
-		const attachment = interaction.options.getAttachment("file", true);
+	async execute(context) {
+		await context.interaction.deferReply();
+		const attachment = context.interaction.options.getAttachment("file", true);
 		const fileExtension = attachment.name.split(".")[1];
 		if (!fileExtension) return; // TODO: error , unknown extension
 		if (!ACCEPTED_EXTENSIONS.includes(fileExtension)) {
-			interaction.editReply(
+			context.interaction.editReply(
 				"Extension de fichier inconnue, veuillez recommencer !",
 			);
 			return;
@@ -46,7 +45,7 @@ const uploadCommand: CommandInterface = {
 			default:
 				break;
 		}
-		interaction.editReply("questions rajoutées !");
+		context.interaction.editReply("questions rajoutées !");
 	},
 };
 

@@ -1,14 +1,13 @@
 import type {
-	ChatInputCommandInteraction,
 	SlashCommandBuilder,
 	SlashCommandOptionsOnlyBuilder,
 } from "discord.js";
-
 import type { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import type { Context } from "./context";
 
-export interface CommandInterface {
+export interface ICommand {
 	data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
-	hasCooldown?: boolean;
-	permission_level: PERMISSIONS_LEVEL;
-	execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
+	hasCooldown?: true;
+	permissionLevel: PERMISSIONS_LEVEL;
+	execute: (interation: Context) => Promise<void>;
 }

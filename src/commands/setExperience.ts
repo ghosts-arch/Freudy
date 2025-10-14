@@ -5,10 +5,10 @@ import {
 	getUser,
 	setExperience as setUserExperience,
 } from "../services/userService";
-import type { CommandInterface } from "../types/command";
+import type { ICommand } from "./commandInterface";
 
-const setExperience: CommandInterface = {
-	permission_level: PERMISSIONS_LEVEL.OWNER,
+const setExperience: ICommand = {
+	permissionLevel: PERMISSIONS_LEVEL.OWNER,
 	data: new SlashCommandBuilder()
 		.setName("setexperience")
 		.setDescription("Set experience of targeted user.")
@@ -25,17 +25,15 @@ const setExperience: CommandInterface = {
 				.setDescription("new experience of user")
 				.setRequired(true),
 		),
-	async execute(interaction) {
-		const amount = interaction.options.getInteger("amount", true);
-		const targetUser = interaction.options.getUser("user", true);
+	async execute(context) {
+		const amount = context.interaction.options.getInteger("amount", true);
+		const targetUser = context.interaction.options.getUser("user", true);
 		let user = await getUser(targetUser.id);
 		if (!user) {
 			user = await createUser(targetUser.id);
 		}
 		setUserExperience(user, 10);
-		interaction.reply(
-			`${amount} experience given to ${targetUser.username} ! ✅`,
-		);
+		context.reply(`${amount} experience given to ${targetUser.username} ! ✅`);
 	},
 };
 

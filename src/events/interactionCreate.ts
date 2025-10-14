@@ -1,12 +1,6 @@
-import {
-	type CommandInteraction,
-	EmbedBuilder,
-	Events,
-	type Interaction,
-	MessageFlags,
-} from "discord.js";
+import { Events, type Interaction } from "discord.js";
+import { Context } from "../commands/context";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-
 import type { EventInterface } from "../types/event";
 import { Cooldowns } from "../utils/cooldowns";
 
@@ -17,13 +11,13 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 		if (!interaction.isChatInputCommand()) return;
 		if (!interaction.channel?.isSendable()) return;
 		const command = interaction.client.commands.get(interaction.commandName);
+		const context = new Context(interaction);
 		if (!command) return;
 		if (
 			command.hasCooldown &&
 			interaction.client.cooldowns.findUser(interaction.user.id)
 		) {
-			return await sendErrorEmbed(
-				interaction,
+			return await context.sendErrorEmbed(
 				`Vous pourrez rejouer dans ${Cooldowns.formatCooldown(
 					interaction.client.cooldowns.getRemainingTimeFor(interaction.user.id),
 				)}`,
@@ -33,8 +27,7 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 			command.permission_level === PERMISSIONS_LEVEL.ADMINISTRATOR &&
 			!interaction.memberPermissions?.has("Administrator")
 		) {
-			return await sendErrorEmbed(
-				interaction,
+			return await context.sendErrorEmbed(
 				"Vous ne pouvez pas utiliser la commande suivante !",
 			);
 		}
@@ -42,15 +35,18 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 			command.permission_level === PERMISSIONS_LEVEL.OWNER &&
 			interaction.user.id !== "467818337599225866"
 		) {
-			return await sendErrorEmbed(
-				interaction,
+			return await context.sendErrorEmbed(
 				"Vous ne pouvez pas utiliser cette commande !",
 			);
 		}
 		try {
-			command.execute(interaction);
+			command.execute(context);
 			if (command.hasCooldown) {
-				interaction.client.cooldowns.addUser(interaction.user.id, interaction);
+				interaction.client.cooldowns.addUser(interaction.user.id, () => {
+					context.send(
+						`<@!${interaction.user.id}>, vous pouvez a nouveau jouer !`,
+					);
+				});
 			}
 		} catch (err) {
 			console.error(err);
@@ -59,14 +55,3 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 };
 
 export default InteractionCreate;
-
-const sendErrorEmbed = async (
-	interaction: CommandInteraction,
-	error: string,
-) => {
-	const errorEmbed = new EmbedBuilder().setColor("Red").setDescription(error);
-	await interaction.reply({
-		embeds: [errorEmbed],
-		flags: [MessageFlags.Ephemeral],
-	});
-};
