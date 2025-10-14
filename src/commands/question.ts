@@ -31,6 +31,7 @@ const questionCommand: CommandInterface = {
 		if (!interaction?.channel?.isSendable()) return;
 		let container: ContainerBuilder | undefined;
 		const question = await getRandomQuestion();
+		if (!question) return;
 		info(`${interaction.user.id} get question with id ${question.id}`);
 		const member = await interaction.guild?.members.fetch(interaction.user.id);
 		if (!member) return;

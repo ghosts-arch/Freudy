@@ -1,8 +1,9 @@
 import { Readable } from "node:stream";
 import csv from "csv-parser";
 import { SlashCommandBuilder } from "discord.js";
-import { Answer, Question } from "../database/database";
+
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import { createQuestion } from "../services/questionsService";
 import type { CommandInterface } from "../types/command";
 
 const ACCEPTED_EXTENSIONS = ["csv", "json"];
@@ -38,17 +39,7 @@ const uploadCommand: CommandInterface = {
 				console.log(result);
 				const data = await result.json();
 				for (const question of data) {
-					const insertedQuestion = await Question.upsert({
-						question: question.question,
-						explanation: question.explanation,
-					});
-					for (const answer of question.answers) {
-						await Answer.upsert({
-							text: answer.text,
-							isValidAnswer: answer.isValidAnswer,
-							questionId: insertedQuestion[0].id,
-						});
-					}
+					await createQuestion(question);
 				}
 				break;
 			}
@@ -121,16 +112,7 @@ const parseFile = async (response: Response) => {
 		);
 	});
 	for (const question of results) {
-		const insertedQuestion = await Question.upsert({
-			question: question.question,
-		});
-		for (const answer of question.answers) {
-			await Answer.upsert({
-				text: answer.text,
-				isValidAnswer: answer.isValidAnswer,
-				questionId: insertedQuestion[0].id,
-			});
-		}
+		await createQuestion(question);
 	}
 	return;
 };
