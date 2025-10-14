@@ -27,19 +27,19 @@ describe("Testing user related functions", () => {
 		expect(user).toBeInstanceOf(User);
 	});
 
-	test("getUser with non-existant discord id", async () => {
+	test("get inexistant user", async () => {
 		const user = await getUser("467818337599225866");
 		expect(user).toBeNull();
 	});
 
-	test("getUser with existing discord id", async () => {
+	test("get existant user", async () => {
 		const userId = "467818337599225866";
 		await User.create({ userId: userId });
 		const user = await getUser(userId);
 		expect(user).toBeInstanceOf(User);
 	});
 
-	test("setExperience", async () => {
+	test("set experience", async () => {
 		const userId = "467818337599225866";
 		const amount = 50;
 		const user = await createUser(userId);
@@ -48,7 +48,7 @@ describe("Testing user related functions", () => {
 		expect(updatedUser.experience).toBe(amount);
 	});
 
-	test("setLevel", async () => {
+	test("set level", async () => {
 		const userId = "467818337599225866";
 		const user = await createUser(userId);
 		expect(user.level).toBe(0);

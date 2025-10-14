@@ -1,13 +1,6 @@
+import { levels } from "../../data/titles";
 import type { User } from "../database/models/User";
 import { addLevel, setExperience } from "./userService";
-
-const levels: Record<number, string> = {
-	0: "Apprenti Freudy",
-	1: "Disciple de Freud",
-	2: "Explorateur de l’inconscient",
-	3: "Maître des pulsions",
-	4: "Freud suprême",
-};
 
 export const calculateExperienceForLevelUp = (level: number): number => {
 	return 50 * (level + 1) ** 2;

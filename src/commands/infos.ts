@@ -1,6 +1,6 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
-import { Question } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import { getQuestionsCount } from "../services/questionsService";
 import type { CommandInterface } from "../types/command";
 
 const infosCommand: CommandInterface = {
@@ -11,7 +11,7 @@ const infosCommand: CommandInterface = {
 		.setContexts(InteractionContextType.Guild),
 
 	async execute(interaction) {
-		const questionsCount = await Question.count();
+		const questionsCount = await getQuestionsCount();
 		interaction.reply(`Nombre de questions : ${questionsCount}.`);
 	},
 };

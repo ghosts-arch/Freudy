@@ -20,7 +20,7 @@ describe("experience integration", () => {
 		await sequelize.sync({ force: true });
 	});
 
-	test("processLevelProgression", async () => {
+	test("process level progression", async () => {
 		const user = await createUser("467818337599225866");
 		expect(user.level).toBe(0);
 		expect(user.experience).toBe(0);

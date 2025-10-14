@@ -1,6 +1,10 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
-import { User } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import {
+	createUser,
+	getUser,
+	setExperience as setUserExperience,
+} from "../services/userService";
 import type { CommandInterface } from "../types/command";
 
 const setExperience: CommandInterface = {
@@ -24,12 +28,11 @@ const setExperience: CommandInterface = {
 	async execute(interaction) {
 		const amount = interaction.options.getInteger("amount", true);
 		const targetUser = interaction.options.getUser("user", true);
-		let user = await User.findOne({ where: { userId: targetUser.id } });
+		let user = await getUser(targetUser.id);
 		if (!user) {
-			user = await User.create({ userId: targetUser.id });
+			user = await createUser(targetUser.id);
 		}
-		user.experience = amount;
-		await user.save();
+		setUserExperience(user, 10);
 		interaction.reply(
 			`${amount} experience given to ${targetUser.username} ! ✅`,
 		);

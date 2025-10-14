@@ -4,6 +4,7 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import { getTitle } from "../services/experienceService";
 import { getUser } from "../services/userService";
 import type { CommandInterface } from "../types/command";
 import { sendErrorMessage } from "../utils/sendErrorMessage";
@@ -23,7 +24,7 @@ const questionCommand: CommandInterface = {
 		const profilEmbed = new EmbedBuilder().setColor("Blue").setDescription(`
         Vos points de connaissance : ${
 					user.experience
-				} 🧠\n\n Votre titre actuel : \`${user.getTitle()}\``);
+				} 🧠\n\n Votre titre actuel : \`${getTitle(user.level)}\``);
 		interaction.reply({ embeds: [profilEmbed] });
 	},
 };

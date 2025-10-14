@@ -9,8 +9,13 @@ import {
 	MessageFlags,
 	SlashCommandBuilder,
 } from "discord.js";
-import { Question } from "../database/database";
+import type { Question } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import {
+	getTitle,
+	processLevelProgression,
+} from "../services/experienceService";
+import { getRandomQuestion } from "../services/questionsService";
 import { createUser, getUser } from "../services/userService";
 import type { CommandInterface } from "../types/command";
 import { buildContainer } from "../ui/container";
@@ -25,7 +30,7 @@ const questionCommand: CommandInterface = {
 	async execute(interaction) {
 		if (!interaction?.channel?.isSendable()) return;
 		let container: ContainerBuilder | undefined;
-		const question = await Question.getRandomQuestion();
+		const question = await getRandomQuestion();
 		info(`${interaction.user.id} get question with id ${question.id}`);
 		const member = await interaction.guild?.members.fetch(interaction.user.id);
 		if (!member) return;
@@ -63,13 +68,13 @@ const questionCommand: CommandInterface = {
 				if (!user) {
 					user = await createUser(interaction.user.id);
 				}
-				const hasLevelUp = user.setExperience(10);
+				const hasLevelUp = processLevelProgression(user); // TODO:  processLevelProgression needs to return bool
 				if (hasLevelUp) {
 					const newTitleUnlockedEmbed = new EmbedBuilder()
 						.setColor("Blue")
 						.setDescription(`<@!${
 							interaction.user.id
-						}>, vous êtes maintenant ${user.getTitle()} !
+						}>, vous êtes maintenant ${getTitle(user.level)} !
             `);
 					interaction.channel.send({ embeds: [newTitleUnlockedEmbed] });
 				}
