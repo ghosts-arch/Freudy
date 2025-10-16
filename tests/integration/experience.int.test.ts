@@ -21,14 +21,24 @@ describe("experience integration", () => {
 	});
 
 	test("process level progression", async () => {
+		let hasLevelUp: boolean | undefined;
 		const user = await createUser("467818337599225866");
 		expect(user.level).toBe(0);
 		expect(user.experience).toBe(0);
 		expect(getTitle(user.level)).toBe("Apprenti Freudy");
-		await processLevelProgression(user);
+		hasLevelUp = await processLevelProgression(user);
+		expect(hasLevelUp).toBeFalse();
 		expect(user.level).toBe(0);
 		expect(user.experience).toBe(10);
 		expect(getTitle(user.level)).toBe("Apprenti Freudy");
+		await processLevelProgression(user);
+		await processLevelProgression(user);
+		await processLevelProgression(user);
+		hasLevelUp = await processLevelProgression(user);
+		expect(hasLevelUp).toBeTrue();
+		expect(user.level).toBe(1);
+		expect(user.experience).toBe(50);
+		expect(getTitle(user.level)).toBe("Disciple de Freud");
 	});
 
 	afterEach(async () => {

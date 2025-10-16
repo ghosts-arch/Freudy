@@ -14,9 +14,11 @@ export const checkLevelUp = (experience: number, level: number): boolean => {
 	return experience >= calculateExperienceForLevelUp(level);
 };
 
-export const processLevelProgression = async (user: User) => {
+export const processLevelProgression = async (user: User): Promise<boolean> => {
 	await setExperience(user, 10);
 	if (checkLevelUp(user.experience, user.level)) {
 		addLevel(user);
+		return true;
 	}
+	return false;
 };

@@ -71,7 +71,7 @@ const questionCommand: ICommand = {
 				if (!user) {
 					user = await createUser(context.interaction.user.id);
 				}
-				const hasLevelUp = processLevelProgression(user); // TODO:  processLevelProgression needs to return bool
+				const hasLevelUp = await processLevelProgression(user);
 				if (hasLevelUp) {
 					context.send(`<@!${
 						context.interaction.user.id
