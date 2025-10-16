@@ -1,12 +1,14 @@
+import path from "node:path";
 import { Readable } from "node:stream";
 import csv from "csv-parser";
 import type { Attachment } from "discord.js";
 import type { QuestionData } from "./questionsService";
 
-const ACCEPTED_EXTENSIONS = ["csv", "json"];
+const ACCEPTED_EXTENSIONS = [".csv", ".json"];
 
-export const getFileExtension = (fileName: string): string | null => {
-	return fileName.split(".").pop() ?? null;
+export const getFileExtension = (fileName: string): string => {
+	return path.extname(fileName);
+	// return fileName.split(".").pop() ?? null;
 };
 
 export const isAcceptedExtension = (fileExtension: string): boolean => {
@@ -48,9 +50,6 @@ export const parseCSV = async (response: Response) => {
 					"Correct answer(s) - choose at least one",
 				],
 			})
-				.on("headers", (headers) => {
-					console.log(headers);
-				})
 				.on("data", (data) => {
 					if (data["Question - max 120 characters"] === "" || data.id === "")
 						return;
@@ -97,10 +96,10 @@ export const processFileParsing = async (
 	const response = await downloadFile(attachment.url);
 	let questions: QuestionData[] = [];
 	switch (extension) {
-		case "json":
+		case ".json":
 			questions = await parseJson(response);
 			break;
-		case "csv":
+		case ".csv":
 			questions = await parseCSV(response);
 			break;
 	}
