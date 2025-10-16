@@ -5,7 +5,7 @@ import {
 	getUser,
 	setExperience as setUserExperience,
 } from "../services/userService";
-import type { ICommand } from "./commandInterface";
+import type { ICommand } from "../types/commandInterface";
 
 const setExperience: ICommand = {
 	permissionLevel: PERMISSIONS_LEVEL.OWNER,

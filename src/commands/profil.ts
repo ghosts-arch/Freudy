@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { getTitle } from "../services/experienceService";
 import { getUser } from "../services/userService";
-import type { ICommand } from "./commandInterface";
+import type { ICommand } from "../types/commandInterface";
 
 const questionCommand: ICommand = {
 	permissionLevel: PERMISSIONS_LEVEL.USER,

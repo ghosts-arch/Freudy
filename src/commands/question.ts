@@ -16,9 +16,9 @@ import {
 } from "../services/experienceService";
 import { getRandomQuestion } from "../services/questionsService";
 import { createUser, getUser } from "../services/userService";
+import type { ICommand } from "../types/commandInterface";
 import { buildContainer } from "../ui/container";
 import { info } from "../utils/logging";
-import type { ICommand } from "./commandInterface";
 
 const questionCommand: ICommand = {
 	permissionLevel: PERMISSIONS_LEVEL.USER,

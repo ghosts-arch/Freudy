@@ -1,6 +1,6 @@
 import { Events, type Interaction } from "discord.js";
-import { Context } from "../commands/context";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import { Context } from "../types/context";
 import type { EventInterface } from "../types/event";
 import { Cooldowns } from "../utils/cooldowns";
 

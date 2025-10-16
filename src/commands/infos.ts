@@ -1,7 +1,7 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { getQuestionsCount } from "../services/questionsService";
-import type { ICommand } from "./commandInterface";
+import type { ICommand } from "../types/commandInterface";
 
 const infosCommand: ICommand = {
 	permissionLevel: PERMISSIONS_LEVEL.OWNER,
