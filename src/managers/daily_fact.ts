@@ -1,3 +1,4 @@
+import { GoogleGenAI } from "@google/genai";
 import { EmbedBuilder } from "discord.js";
 import { Sequelize } from "sequelize";
 import type { Freudy } from "../client";
@@ -27,6 +28,23 @@ const calculateDelay = () => {
 };
 
 const callback = async (client: Freudy) => {
+	const ai = new GoogleGenAI({
+		apiKey: process.env.GEMINI_KEY,
+	});
+
+	const response = await ai.models.generateContent({
+		model: "gemini-2.5-flash",
+		contents:
+			"Sélectionne un signe du zodiaque aléatoire et génére un conseil très très aléatoire dans le domaine que tu veux (amour, santé, travail...). Génére une réponse au format {emote} {signe} - {sujet} \n {conseil}.",
+		config: {
+			systemInstruction:
+				"Tu es freudy, un bot chargé de l'horoscope quotidien du serveur. Ton but est de donner des conseils très aproximatifs dans le domaine que tu veux (amour, santé, travail...), voir borderline.",
+			thinkingConfig: {
+				thinkingBudget: 0,
+			},
+		},
+	});
+
 	const channel = await client.channels.fetch(
 		process.env.DAILY_FACT_CHANNEL_ID,
 	);
@@ -34,10 +52,12 @@ const callback = async (client: Freudy) => {
 	const fact = await DailyFact.findOne({
 		order: Sequelize.literal("random()"),
 	});
-	console.log(fact);
 	if (!fact) return;
 	if (channel?.isSendable()) {
-		const embed = new EmbedBuilder().setColor("Blue").setDescription(fact.fact);
+		const description = `${fact.fact} \n ${response.text}`;
+		const embed = new EmbedBuilder()
+			.setColor("Blue")
+			.setDescription(description);
 		channel.send({ embeds: [embed] });
 	}
 	await info("daily message sended with success !");
