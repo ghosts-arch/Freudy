@@ -1,18 +1,18 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
-import { Question } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-import type { CommandInterface } from "../types/command";
+import { getQuestionsCount } from "../services/questionsService";
+import type { ICommand } from "../types/commandInterface";
 
-const infosCommand: CommandInterface = {
-	permission_level: PERMISSIONS_LEVEL.OWNER,
+const infosCommand: ICommand = {
+	permissionLevel: PERMISSIONS_LEVEL.OWNER,
 	data: new SlashCommandBuilder()
 		.setName("infos")
 		.setDescription("Infos about bot.")
 		.setContexts(InteractionContextType.Guild),
 
-	async execute(interaction) {
-		const questionsCount = await Question.count();
-		interaction.reply(`Nombre de questions : ${questionsCount}.`);
+	async execute(context) {
+		const questionsCount = await getQuestionsCount();
+		context.reply(`Nombre de questions : ${questionsCount}.`);
 	},
 };
 

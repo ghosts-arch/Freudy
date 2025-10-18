@@ -6,7 +6,8 @@
 	"private": true,
 	"scripts": {
 		"start": "bun run src/index.ts",
-		"lint": "bunx --bun biome check --write"
+		"lint": "bunx --bun biome check --write",
+		"test": "bun test --coverage"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.5",
@@ -16,6 +17,7 @@
 		"typescript": "^5"
 	},
 	"dependencies": {
+		"@google/genai": "^1.25.0",
 		"csv-parser": "^3.2.0",
 		"discord.js": "^14.22.1",
 		"sequelize": "^6.37.7",

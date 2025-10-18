@@ -1,5 +1,4 @@
 import { Collection } from "discord.js";
-import type { CustomChatInputCommandInteraction } from "../types/customInteraction";
 
 type CooldownsConfig = {
 	duration: number;
@@ -18,17 +17,11 @@ export class Cooldowns {
 		this.config = config;
 	}
 
-	addUser = (
-		userId: string,
-		interaction: CustomChatInputCommandInteraction,
-	): void => {
+	addUser = (userId: string, callback: () => void): void => {
 		this.cooldowns.set(userId, Date.now());
 		setTimeout(() => {
 			this.cooldowns.delete(userId);
-			if (!interaction.channel?.isSendable()) return;
-			interaction.channel.send({
-				content: `<@!${interaction.user.id}>, vous pouvez a nouveau jouer !`,
-			});
+			callback();
 		}, this.config.duration);
 	};
 

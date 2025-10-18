@@ -4,37 +4,43 @@ import {
 	ButtonStyle,
 	type ChatInputCommandInteraction,
 	type ContainerBuilder,
-	EmbedBuilder,
 	type MessageComponentInteraction,
 	MessageFlags,
 	SlashCommandBuilder,
 } from "discord.js";
-import { Question, User } from "../database/database";
+import type { Question } from "../database/models/question";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-import type { CommandInterface } from "../types/command";
-
+import {
+	getTitle,
+	processLevelProgression,
+} from "../services/experienceService";
+import { getRandomQuestion } from "../services/questionsService";
+import { createUser, getUser } from "../services/userService";
+import type { ICommand } from "../types/commandInterface";
 import { buildContainer } from "../ui/container";
 import { info } from "../utils/logging";
 
-const questionCommand: CommandInterface = {
-	permission_level: PERMISSIONS_LEVEL.USER,
+const questionCommand: ICommand = {
+	permissionLevel: PERMISSIONS_LEVEL.USER,
 	data: new SlashCommandBuilder()
 		.setName("question")
 		.setDescription("Question psy..."),
 	hasCooldown: true,
-	async execute(interaction) {
-		if (!interaction?.channel?.isSendable()) return;
+	async execute(context) {
 		let container: ContainerBuilder | undefined;
-		const question = await Question.getRandomQuestion();
-		info(`${interaction.user.id} get question with id ${question.id}`);
-		const member = await interaction.guild?.members.fetch(interaction.user.id);
+		const question = await getRandomQuestion();
+		if (!question) return;
+		info(`${context.interaction.user.id} get question with id ${question.id}`);
+		const member = await context.interaction.guild?.members.fetch(
+			context.interaction.user.id,
+		);
 		if (!member) return;
 		if (member.presence?.clientStatus?.mobile) {
-			container = buildQuestionContainer(interaction, question, true);
+			container = buildQuestionContainer(context.interaction, question, true);
 		} else {
-			container = buildQuestionContainer(interaction, question);
+			container = buildQuestionContainer(context.interaction, question);
 		}
-		const response = await interaction.reply({
+		const response = await context.interaction.reply({
 			components: [container],
 			flags: MessageFlags.IsComponentsV2,
 			withResponse: true,
@@ -43,7 +49,7 @@ const questionCommand: CommandInterface = {
 			(answer) => answer.isValidAnswer,
 		);
 		const collectorFilter = (i: MessageComponentInteraction) =>
-			i.user.id === interaction.user.id;
+			i.user.id === context.interaction.user.id;
 		try {
 			const userResponse =
 				await response.resource?.message?.awaitMessageComponent({
@@ -57,30 +63,27 @@ const questionCommand: CommandInterface = {
 					`${userResponse.customId.split("_")[1]} is not an valid ID.`,
 				);
 			}
-			info(`${interaction.user.id} replied answer with id ${userAnswerId}`);
+			info(
+				`${context.interaction.user.id} replied answer with id ${userAnswerId}`,
+			);
 			if (validAnwserId === userAnswerId) {
-				let user = await User.findOne({
-					where: { userId: interaction.user.id },
-				});
+				let user = await getUser(context.interaction.user.id);
 				if (!user) {
-					user = await User.create({ userId: interaction.user.id });
+					user = await createUser(context.interaction.user.id);
 				}
-				const hasLevelUp = user.setExperience(10);
+				const hasLevelUp = await processLevelProgression(user);
 				if (hasLevelUp) {
-					const newTitleUnlockedEmbed = new EmbedBuilder()
-						.setColor("Blue")
-						.setDescription(`<@!${
-							interaction.user.id
-						}>, vous êtes maintenant ${user.getTitle()} !
+					context.send(`<@!${
+						context.interaction.user.id
+					}>, vous êtes maintenant ${getTitle(user.level)} !
             `);
-					interaction.channel.send({ embeds: [newTitleUnlockedEmbed] });
 				}
 				const container = buildContainer({
 					color: 0x7cfc8c,
 					title: "## ✅ Bonne réponse !",
 					description: `\n${question.question}\n\n▶️ ${question.explanation}`,
 					footer: `Points de connaissance : ${user.experience} 🧠 *(+10 🧠)*`,
-					thumbnailUrl: interaction.client.user.displayAvatarURL(),
+					thumbnailUrl: context.interaction.client.user.displayAvatarURL(),
 				});
 				await userResponse?.update({ components: [container] });
 			} else {
@@ -89,7 +92,7 @@ const questionCommand: CommandInterface = {
 					title: "## ❌ Mauvaise réponse !",
 					description: `\n${question.question}\n\n La bonne réponse était : ${question.answers?.[validAnwserId]?.text}`,
 					footer: question.explanation ? `▶️ ${question.explanation}` : "",
-					thumbnailUrl: interaction.client.user.displayAvatarURL(),
+					thumbnailUrl: context.interaction.client.user.displayAvatarURL(),
 				});
 				await userResponse?.update({ components: [container] });
 			}
@@ -99,9 +102,9 @@ const questionCommand: CommandInterface = {
 				title: ":confused:  Vous N'avez pas répondu a temps",
 				description: `\n${question.question}\n\n La bonne réponse était : ${question.answers[validAnwserId]?.text}`,
 				footer: question.explanation ? `▶️ ${question.explanation}` : "",
-				thumbnailUrl: interaction.client.user.displayAvatarURL(),
+				thumbnailUrl: context.interaction.client.user.displayAvatarURL(),
 			});
-			await interaction.editReply({ components: [container] });
+			await context.interaction.editReply({ components: [container] });
 		}
 	},
 };
