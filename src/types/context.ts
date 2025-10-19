@@ -12,10 +12,11 @@ export class Context {
 	}
 
 	send = (description: string) => {
+		if (!this.interaction.channel?.isSendable()) return;
 		const sendedEmbed = new EmbedBuilder()
 			.setColor("Blue")
 			.setDescription(description);
-		this.interaction.reply({ embeds: [sendedEmbed] });
+		this.interaction.channel.send({ embeds: [sendedEmbed] });
 	};
 
 	reply = (description: string) => {
