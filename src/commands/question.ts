@@ -8,14 +8,15 @@ import {
 	MessageFlags,
 	SlashCommandBuilder,
 } from "discord.js";
-import type { Question } from "../database/models/question";
+import type { QuestionWithAnswers } from "@/types";
+import { db } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import {
 	getTitle,
 	processLevelProgression,
 } from "../services/experienceService";
 import { getRandomQuestion } from "../services/questionsService";
-import { createUser, getUser } from "../services/userService";
+import { UserService } from "../services/userService";
 import type { ICommand } from "../types/commandInterface";
 import { buildContainer } from "../ui/container";
 import { info } from "../utils/logging";
@@ -27,8 +28,9 @@ const questionCommand: ICommand = {
 		.setDescription("Question psy..."),
 	hasCooldown: true,
 	async execute(context) {
+		const userService = new UserService(db);
 		let container: ContainerBuilder | undefined;
-		const question = await getRandomQuestion();
+		const question = await getRandomQuestion(db);
 		if (!question) return;
 		info(`${context.interaction.user.id} get question with id ${question.id}`);
 		const member = await context.interaction.guild?.members.fetch(
@@ -67,11 +69,11 @@ const questionCommand: ICommand = {
 				`${context.interaction.user.id} replied answer with id ${userAnswerId}`,
 			);
 			if (validAnwserId === userAnswerId) {
-				let user = await getUser(context.interaction.user.id);
+				let user = await userService.getUser(context.interaction.user.id);
 				if (!user) {
-					user = await createUser(context.interaction.user.id);
+					user = await userService.createUser(context.interaction.user.id);
 				}
-				const hasLevelUp = await processLevelProgression(user);
+				const hasLevelUp = await processLevelProgression(db, user.userId);
 				if (hasLevelUp) {
 					context.send(`<@!${
 						context.interaction.user.id
@@ -113,7 +115,7 @@ export default questionCommand;
 
 const buildQuestionContainer = (
 	interaction: ChatInputCommandInteraction,
-	question: Question,
+	question: QuestionWithAnswers,
 	mobileVersion: boolean = false,
 ): ContainerBuilder => {
 	let description: string | undefined;

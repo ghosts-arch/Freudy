@@ -1,20 +1,8 @@
 import { sql } from "drizzle-orm";
 import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
-
+import type { InsertedQuestion, Question, QuestionData } from "@/types";
 import type * as schema from "../database/schema";
 import { answers, questions } from "../database/schema";
-import type { Question } from "../database/types";
-
-export interface AnswerData {
-	text: string;
-	isValidAnswer: boolean;
-}
-
-export interface QuestionData {
-	question: string;
-	explanation?: string;
-	answers: AnswerData[];
-}
 
 export const getQuestionsCount = async (
 	db: BunSQLiteDatabase<typeof schema>,
@@ -36,18 +24,28 @@ export const getRandomQuestion = async (
 export const createQuestion = async (
 	database: BunSQLiteDatabase<typeof schema>,
 	question: QuestionData,
-): Promise<Question> => {
-	const [insertedQuestion] = await database
-		.insert(questions)
-		.values({ question: question.question, explanation: question.explanation })
-		.returning();
-	if (!insertedQuestion) throw Error();
-	await database.insert(answers).values(
-		question.answers.map((answer) => ({
-			text: answer.text,
-			isValidAnswer: answer.isValidAnswer,
-			questionId: insertedQuestion?.id,
-		})),
-	);
+): Promise<InsertedQuestion> => {
+	const insertedQuestion = database.transaction(async (transaction) => {
+		const [insertedQuestion] = await transaction
+			.insert(questions)
+			.values({
+				question: question.question,
+				explanation: question.explanation,
+			})
+			.returning();
+		if (!insertedQuestion) {
+			transaction.rollback();
+			throw new Error();
+		}
+		await transaction.insert(answers).values(
+			question.answers.map((answer) => ({
+				text: answer.text,
+				isValidAnswer: answer.isValidAnswer,
+				questionId: insertedQuestion?.id,
+			})),
+		);
+		return insertedQuestion;
+	});
+
 	return insertedQuestion;
 };

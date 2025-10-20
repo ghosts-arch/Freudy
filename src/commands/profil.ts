@@ -1,7 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
+import { db } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { getTitle } from "../services/experienceService";
-import { getUser } from "../services/userService";
+import { UserService } from "../services/userService";
 import type { ICommand } from "../types/commandInterface";
 
 const questionCommand: ICommand = {
@@ -10,7 +11,7 @@ const questionCommand: ICommand = {
 		.setName("profil")
 		.setDescription("Mon profil"),
 	async execute(context) {
-		const user = await getUser(context.interaction.user.id);
+		const user = await new UserService(db).getUser(context.interaction.user.id);
 		if (!user)
 			return context.sendErrorEmbed(
 				"Vous n'avez pas encore commencer à étudier la voie de Freud !",

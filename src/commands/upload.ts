@@ -1,10 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
+import type { QuestionData } from "@/types";
+import { db } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { processFileParsing } from "../services/fileService";
-import {
-	createQuestion,
-	type QuestionData,
-} from "../services/questionsService";
+import { createQuestion } from "../services/questionsService";
 import type { ICommand } from "../types/commandInterface";
 
 const uploadCommand: ICommand = {
@@ -28,7 +27,7 @@ const uploadCommand: ICommand = {
 			context.sendErrorEmbed(`${error}`);
 		}
 		for (const question of questionsData) {
-			await createQuestion(question);
+			await createQuestion(db, question);
 		}
 		context.interaction.editReply("questions rajoutées !");
 	},
