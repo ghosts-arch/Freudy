@@ -1,13 +1,8 @@
+import { Database } from "bun:sqlite";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
-import { Sequelize } from "sequelize";
-import {
-	Answer,
-	initModel as initAnswersModel,
-} from "../../src/database/models/answer";
-import {
-	initModel as initQuestionsModel,
-	Question,
-} from "../../src/database/models/question";
+import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
+import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+import * as schema from "../../src/database/schema";
 import {
 	createQuestion,
 	getQuestionsCount,
@@ -29,22 +24,16 @@ const createSampleQuestion = (
 		})),
 	};
 };
+
 describe("Testing questions related functions", () => {
-	let sequelize: Sequelize;
-
+	let database: BunSQLiteDatabase<typeof schema>;
+	let db: Database;
 	beforeEach(async () => {
-		sequelize = new Sequelize({
-			dialect: "sqlite",
-			storage: ":memory:",
-			logging: false,
+		db = new Database(":memory:");
+		database = drizzle(db, { schema: schema });
+		migrate(database, {
+			migrationsFolder: "drizzle",
 		});
-		initQuestionsModel(sequelize);
-		initAnswersModel(sequelize);
-
-		Question.hasMany(Answer, { foreignKey: "questionId", as: "answers" });
-		Answer.belongsTo(Question, { foreignKey: "questionId", as: "question" });
-
-		await sequelize.sync({ force: true });
 	});
 
 	describe("createQuestion", () => {
@@ -71,19 +60,19 @@ describe("Testing questions related functions", () => {
 					},
 				],
 			};
-			const createdQuestion = await createQuestion(question);
-			expect(createdQuestion[0]).toBeInstanceOf(Question);
+			const createdQuestion = await createQuestion(database, question);
+			expect(createdQuestion).toBeObject();
 		});
 		test("create question without explanation", async () => {
 			const question = createSampleQuestion(false);
-			const createdQuestion = await createQuestion(question);
-			expect(createdQuestion[0]).toBeInstanceOf(Question);
+			const createdQuestion = await createQuestion(database, question);
+			expect(createdQuestion).toBeObject();
 		});
 	});
 
 	describe("getQuestionsCount", () => {
 		test("should return 0 when database is empty", async () => {
-			const questionsCount = await getQuestionsCount();
+			const questionsCount = await getQuestionsCount(database);
 			expect(questionsCount).toBeNumber();
 			expect(questionsCount).toBe(0);
 		});
@@ -155,10 +144,10 @@ describe("Testing questions related functions", () => {
 					},
 				],
 			};
-			await createQuestion(question);
-			await createQuestion(question2);
-			await createQuestion(question3);
-			const questionsCount = await getQuestionsCount();
+			await createQuestion(database, question);
+			await createQuestion(database, question2);
+			await createQuestion(database, question3);
+			const questionsCount = await getQuestionsCount(database);
 			expect(questionsCount).toBeNumber();
 			expect(questionsCount).toBe(3);
 		});
@@ -166,15 +155,15 @@ describe("Testing questions related functions", () => {
 
 	describe("getRandomQuestion", () => {
 		test("should returns null if no question found", async () => {
-			expect(await getRandomQuestion()).toBeNull();
+			expect(await getRandomQuestion(database)).toBeNull();
 		});
 		test("should returns random question when questions exist in database", async () => {
-			await createQuestion(createSampleQuestion());
-			expect(await getRandomQuestion()).toBeInstanceOf(Question);
+			await createQuestion(database, createSampleQuestion());
+			expect(await getRandomQuestion(database)).toBeObject();
 		});
 	});
 
 	afterEach(async () => {
-		await sequelize.close();
+		db.close();
 	});
 });

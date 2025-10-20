@@ -1,6 +1,9 @@
-import { Sequelize } from "sequelize";
-import { Answer } from "../database/models/answer";
-import { Question } from "../database/models/question";
+import { sql } from "drizzle-orm";
+import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
+
+import type * as schema from "../database/schema";
+import { answers, questions } from "../database/schema";
+import type { Question } from "../database/types";
 
 export interface AnswerData {
 	text: string;
@@ -13,35 +16,38 @@ export interface QuestionData {
 	answers: AnswerData[];
 }
 
-export const getQuestionsCount = async (): Promise<number> => {
-	return await Question.count();
+export const getQuestionsCount = async (
+	db: BunSQLiteDatabase<typeof schema>,
+): Promise<number> => {
+	return await db.$count(questions);
 };
 
-export const getRandomQuestion = async (): Promise<Question | null> => {
-	return await Question.findOne({
-		order: Sequelize.literal("random()"),
-		include: [
-			{
-				model: Answer,
-				as: "answers",
-			},
-		],
+export const getRandomQuestion = async (
+	db: BunSQLiteDatabase<typeof schema>,
+): Promise<Question | null> => {
+	const question = await db.query.questions.findFirst({
+		with: { answers: true },
+		orderBy: sql`RANDOM()`,
 	});
+	if (!question) return null;
+	return question;
 };
 
 export const createQuestion = async (
+	database: BunSQLiteDatabase<typeof schema>,
 	question: QuestionData,
-): Promise<[Question, boolean | null]> => {
-	const insertedQuestion = await Question.upsert({
-		question: question.question,
-		explanation: question.explanation,
-	});
-	for (const answer of question.answers) {
-		await Answer.upsert({
+): Promise<Question> => {
+	const [insertedQuestion] = await database
+		.insert(questions)
+		.values({ question: question.question, explanation: question.explanation })
+		.returning();
+	if (!insertedQuestion) throw Error();
+	await database.insert(answers).values(
+		question.answers.map((answer) => ({
 			text: answer.text,
 			isValidAnswer: answer.isValidAnswer,
-			questionId: insertedQuestion[0].id,
-		});
-	}
+			questionId: insertedQuestion?.id,
+		})),
+	);
 	return insertedQuestion;
 };

@@ -1,26 +1,52 @@
-import { User } from "../database/models/User";
+import { eq, sql } from "drizzle-orm";
+import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
+import type * as schema from "../database/schema";
+import { users } from "../database/schema";
+import type { User } from "../database/types";
 
-export const getUser = async (userId: string): Promise<User | null> => {
-	const user = await User.findOne({ where: { userId: userId } });
-	return user;
-};
+export class UserService {
+  constructor(private database: BunSQLiteDatabase<typeof schema>) {}
 
-export const createUser = async (userId: string): Promise<User> => {
-	const user = await User.create({ userId: userId });
-	return user;
-};
+  getUser = async (userId: string): Promise<User | null> => {
+    const [user] = await this.database
+      .select()
+      .from(users)
+      .where(eq(users.userId, userId))
+      .limit(1);
+    if (!user) return null;
+    return user;
+  };
 
-export const setExperience = async (
-	user: User,
-	amount: number,
-): Promise<User> => {
-	user.experience += amount;
-	await user.save();
-	return user;
-};
+  createUser = async (userId: string): Promise<User | null> => {
+    const [user] = await this.database
+      .insert(users)
+      .values({ userId })
+      .returning();
+    if (!user) return null;
+    return user;
+  };
 
-export const addLevel = async (user: User) => {
-	user.level += 1;
-	await user.save();
-	return user;
-};
+  setExperience = async (userId: string, amount: number): Promise<User> => {
+    const user = await this.getUser(userId);
+    if (!user) throw new Error();
+    const [updatedUser] = await this.database
+      .update(users)
+      .set({ experience: sql`${users.experience} + ${amount}` })
+      .where(eq(users.userId, user.userId))
+      .returning();
+    if (!updatedUser) throw new Error();
+    return updatedUser;
+  };
+
+  addLevel = async (userId: string): Promise<User> => {
+    const user = await this.getUser(userId);
+    if (!user) throw new Error();
+    const [updatedUser] = await this.database
+      .update(users)
+      .set({ level: sql`${users.level} + 1` })
+      .where(eq(users.userId, user.userId))
+      .returning();
+    if (!updatedUser) throw new Error();
+    return updatedUser;
+  };
+}

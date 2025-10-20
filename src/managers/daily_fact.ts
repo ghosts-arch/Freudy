@@ -1,8 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 import { EmbedBuilder } from "discord.js";
-import { Sequelize } from "sequelize";
+import { sql } from "drizzle-orm";
 import type { Freudy } from "../client";
-import { DailyFact } from "../database/database";
+import { db } from "../database/database";
+import { dailyFacts } from "../database/schema";
 import { info } from "../utils/logging";
 
 let interval: NodeJS.Timeout | null = null;
@@ -48,10 +49,13 @@ const callback = async (client: Freudy) => {
 	const channel = await client.channels.fetch(
 		process.env.DAILY_FACT_CHANNEL_ID,
 	);
-	console.log(DailyFact);
-	const fact = await DailyFact.findOne({
-		order: Sequelize.literal("random()"),
-	});
+
+	const [fact] = await db
+		.select()
+		.from(dailyFacts)
+		.orderBy(sql`RANDOM()`)
+		.limit(1);
+
 	if (!fact) return;
 	if (channel?.isSendable()) {
 		const description = `${fact.fact} \n ${response.text}`;

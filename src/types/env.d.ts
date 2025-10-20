@@ -4,5 +4,6 @@ declare module "bun" {
 		APPLICATION_ID: string;
 		API_PORT: number;
 		DAILY_FACT_CHANNEL_ID: string;
+		DB_FILE_NAME: string;
 	}
 }
