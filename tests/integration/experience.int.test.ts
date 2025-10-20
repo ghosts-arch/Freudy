@@ -2,12 +2,12 @@ import { Database } from "bun:sqlite";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
 import { migrate } from "drizzle-orm/bun-sqlite/migrator";
-import * as schema from "../../src/database/schema";
+import * as schema from "../../src/core/database/schema";
 import {
 	getTitle,
 	processLevelProgression,
-} from "../../src/services/experienceService";
-import { UserService } from "../../src/services/userService";
+} from "../../src/core/services/experienceService";
+import { UserService } from "../../src/core/services/userService";
 
 describe("experience integration", () => {
 	let database: BunSQLiteDatabase<typeof schema>;

@@ -9,8 +9,8 @@ import {
 } from "bun:test";
 import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
 import { migrate } from "drizzle-orm/bun-sqlite/migrator";
-import * as schema from "../../src/database/schema";
-import { UserService } from "../../src/services/userService";
+import * as schema from "../../src/core/database/schema";
+import { UserService } from "../../src/core/services/userService";
 
 describe("Testing user related functions", () => {
 	let database: BunSQLiteDatabase<typeof schema>;

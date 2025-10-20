@@ -2,13 +2,9 @@ import { Database } from "bun:sqlite";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
 import { migrate } from "drizzle-orm/bun-sqlite/migrator";
-import * as schema from "../../src/database/schema";
-import {
-	createQuestion,
-	getQuestionsCount,
-	getRandomQuestion,
-	type QuestionData,
-} from "../../src/services/questionsService";
+import type { QuestionData } from "@/types";
+import * as schema from "../../src/core/database/schema";
+import { QuestionsService } from "../../src/core/services/questionsService";
 
 const createSampleQuestion = (
 	withExplanation: boolean = true,
@@ -28,12 +24,14 @@ const createSampleQuestion = (
 describe("Testing questions related functions", () => {
 	let database: BunSQLiteDatabase<typeof schema>;
 	let db: Database;
+	let questionsService: QuestionsService;
 	beforeEach(async () => {
 		db = new Database(":memory:");
 		database = drizzle(db, { schema: schema });
 		migrate(database, {
 			migrationsFolder: "drizzle",
 		});
+		questionsService = new QuestionsService(database);
 	});
 
 	describe("createQuestion", () => {
@@ -60,19 +58,19 @@ describe("Testing questions related functions", () => {
 					},
 				],
 			};
-			const createdQuestion = await createQuestion(database, question);
+			const createdQuestion = await questionsService.createQuestion(question);
 			expect(createdQuestion).toBeObject();
 		});
 		test("create question without explanation", async () => {
 			const question = createSampleQuestion(false);
-			const createdQuestion = await createQuestion(database, question);
+			const createdQuestion = await questionsService.createQuestion(question);
 			expect(createdQuestion).toBeObject();
 		});
 	});
 
 	describe("getQuestionsCount", () => {
 		test("should return 0 when database is empty", async () => {
-			const questionsCount = await getQuestionsCount(database);
+			const questionsCount = await questionsService.getQuestionsCount();
 			expect(questionsCount).toBeNumber();
 			expect(questionsCount).toBe(0);
 		});
@@ -144,10 +142,10 @@ describe("Testing questions related functions", () => {
 					},
 				],
 			};
-			await createQuestion(database, question);
-			await createQuestion(database, question2);
-			await createQuestion(database, question3);
-			const questionsCount = await getQuestionsCount(database);
+			await questionsService.createQuestion(question);
+			await questionsService.createQuestion(question2);
+			await questionsService.createQuestion(question3);
+			const questionsCount = await questionsService.getQuestionsCount();
 			expect(questionsCount).toBeNumber();
 			expect(questionsCount).toBe(3);
 		});
@@ -155,11 +153,11 @@ describe("Testing questions related functions", () => {
 
 	describe("getRandomQuestion", () => {
 		test("should returns null if no question found", async () => {
-			expect(await getRandomQuestion(database)).toBeNull();
+			expect(await questionsService.getRandomQuestion()).toBeNull();
 		});
 		test("should returns random question when questions exist in database", async () => {
-			await createQuestion(database, createSampleQuestion());
-			expect(await getRandomQuestion(database)).toBeObject();
+			await questionsService.createQuestion(createSampleQuestion());
+			expect(await questionsService.getRandomQuestion()).toBeObject();
 		});
 	});
 

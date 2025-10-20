@@ -1,8 +1,8 @@
 import { sql } from "drizzle-orm";
 import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import type { InsertedQuestion, Question, QuestionData } from "@/types";
-import type * as schema from "../../database/schema";
-import { answers, questions } from "../../database/schema";
+import type * as schema from "../database/schema";
+import { answers, questions } from "../database/schema";
 
 export class QuestionsService {
 	constructor(private database: BunSQLiteDatabase<typeof schema>) {}

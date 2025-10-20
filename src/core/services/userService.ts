@@ -1,8 +1,8 @@
 import { eq, sql } from "drizzle-orm";
 import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import type { User } from "@/types";
-import type * as schema from "../../database/schema";
-import { users } from "../../database/schema";
+import type * as schema from "../database/schema";
+import { users } from "../database/schema";
 
 export class UserService {
 	constructor(private database: BunSQLiteDatabase<typeof schema>) {}

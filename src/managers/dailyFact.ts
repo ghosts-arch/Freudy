@@ -1,8 +1,8 @@
 import { EmbedBuilder } from "discord.js";
 import type { Freudy } from "../client";
-import { db } from "../database/database";
-import { FactService } from "../services/factService";
-import { GeminiService } from "../services/geminiService";
+import { db } from "../core/database/database";
+import { FactService } from "../core/services/factService";
+import { GeminiService } from "../core/services/geminiService";
 import { info } from "../utils/logging";
 
 let interval: NodeJS.Timeout | null = null;

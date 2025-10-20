@@ -1,5 +1,5 @@
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import type * as schema from "@/database/schema";
+import type * as schema from "@/core/database/schema";
 
 export interface AnswerData {
 	text: string;
