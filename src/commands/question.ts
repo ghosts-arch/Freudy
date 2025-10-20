@@ -8,7 +8,7 @@ import {
 	MessageFlags,
 	SlashCommandBuilder,
 } from "discord.js";
-import type { QuestionWithAnswers } from "@/types";
+import type { Question } from "@/types";
 import { db } from "../database/database";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import {
@@ -115,7 +115,7 @@ export default questionCommand;
 
 const buildQuestionContainer = (
 	interaction: ChatInputCommandInteraction,
-	question: QuestionWithAnswers,
+	question: Question,
 	mobileVersion: boolean = false,
 ): ContainerBuilder => {
 	let description: string | undefined;
