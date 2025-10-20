@@ -1,7 +1,7 @@
 import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
-import { levels } from "../../data/titles";
-import type * as schema from "../database/schema";
-import type { users } from "../database/schema";
+import { levels } from "../../../data/titles";
+import type * as schema from "../../database/schema";
+import type { users } from "../../database/schema";
 import { UserService } from "./userService";
 export const calculateExperienceForLevelUp = (level: number): number => {
 	return 50 * (level + 1) ** 2;
