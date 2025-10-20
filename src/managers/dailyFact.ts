@@ -9,53 +9,53 @@ let interval: NodeJS.Timeout | null = null;
 let timeout: NodeJS.Timeout | null = null;
 
 const getDateInMilliseconds = () => {
-  const date = new Date();
-  return (
-    date.getHours() * 3_600_000 +
-    date.getMinutes() * 60_000 +
-    date.getSeconds() * 1000 +
-    date.getMilliseconds()
-  );
+	const date = new Date();
+	return (
+		date.getHours() * 3_600_000 +
+		date.getMinutes() * 60_000 +
+		date.getSeconds() * 1000 +
+		date.getMilliseconds()
+	);
 };
 
 const calculateDelay = () => {
-  const now = getDateInMilliseconds();
-  if (now < 32_400_000) {
-    return 32_400_000 - now;
-  } else {
-    return 86_400_000 - now + 32_400_000;
-  }
+	const now = getDateInMilliseconds();
+	if (now < 32_400_000) {
+		return 32_400_000 - now;
+	} else {
+		return 86_400_000 - now + 32_400_000;
+	}
 };
 
 const callback = async (client: Freudy) => {
-  const dailyHoroscope = await new GeminiService().getDailyHoroscope();
-  const dailyFact = await new FactService(db).getRandomFact();
-  const channel = await client.channels.fetch(
-    process.env.DAILY_FACT_CHANNEL_ID
-  );
-  if (!channel?.isSendable()) throw new Error();
-  const description = `${dailyFact.fact} \n ${dailyHoroscope}`;
-  const embed = new EmbedBuilder().setColor("Blue").setDescription(description);
-  channel.send({ embeds: [embed] });
-  await info("daily message sended with success !");
+	const dailyHoroscope = await new GeminiService().getDailyHoroscope();
+	const dailyFact = await new FactService(db).getRandomFact();
+	const channel = await client.channels.fetch(
+		process.env.DAILY_FACT_CHANNEL_ID,
+	);
+	if (!channel?.isSendable()) throw new Error();
+	const description = `${dailyFact.fact} \n ${dailyHoroscope}`;
+	const embed = new EmbedBuilder().setColor("Blue").setDescription(description);
+	channel.send({ embeds: [embed] });
+	await info("daily message sended with success !");
 };
 
 export const start = async (client: Freudy) => {
-  if (timeout) {
-    clearTimeout(timeout);
-    timeout = null;
-    console.warn("clean old timeout");
-  }
-  if (interval) {
-    clearInterval(interval);
-    interval = null;
-    console.warn("clean old interval");
-  }
+	if (timeout) {
+		clearTimeout(timeout);
+		timeout = null;
+		console.warn("clean old timeout");
+	}
+	if (interval) {
+		clearInterval(interval);
+		interval = null;
+		console.warn("clean old interval");
+	}
 
-  await info("daily message manager starded !");
-  const delay = calculateDelay();
-  timeout = setTimeout(async () => {
-    await callback(client);
-    interval = setInterval(async () => await callback(client), 86_400_000);
-  }, delay);
+	await info("daily message manager starded !");
+	const delay = calculateDelay();
+	timeout = setTimeout(async () => {
+		await callback(client);
+		interval = setInterval(async () => await callback(client), 86_400_000);
+	}, delay);
 };
