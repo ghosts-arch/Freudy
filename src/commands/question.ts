@@ -66,10 +66,10 @@ const questionCommand: ICommand = {
 				`${context.interaction.user.id} replied answer with id ${userAnswerId}`,
 			);
 			if (validAnwserId === userAnswerId) {
-				let user = await services.users.getUser(context.interaction.user.id);
-				if (!user) {
-					user = await services.users.createUser(context.interaction.user.id);
-				}
+				const user = await services.users.getOrCreateUser(
+					context.interaction.user.id,
+				);
+
 				const hasLevelUp = await processLevelProgression(db, user.userId);
 				if (hasLevelUp) {
 					context.send(`<@!${
