@@ -3,7 +3,7 @@ import {
 	calculateExperienceForLevelUp,
 	checkLevelUp,
 	getTitle,
-} from "../../src/services/experienceService";
+} from "../../src/core/services/experienceService";
 
 describe("Testing experience related functions", () => {
 	test("calculateExperienceNeededForLevelUp", async () => {

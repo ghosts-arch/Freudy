@@ -1,10 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
+import type { QuestionData } from "@/types";
+import { processFileParsing } from "../core/services/fileService";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-import { processFileParsing } from "../services/fileService";
-import {
-	createQuestion,
-	type QuestionData,
-} from "../services/questionsService";
 import type { ICommand } from "../types/commandInterface";
 
 const uploadCommand: ICommand = {
@@ -18,7 +15,7 @@ const uploadCommand: ICommand = {
 				.setDescription("fichier csv a upload")
 				.setRequired(true),
 		),
-	async execute(context) {
+	async execute(context, services) {
 		await context.interaction.deferReply();
 		const attachment = context.interaction.options.getAttachment("file", true);
 		let questionsData: QuestionData[] = [];
@@ -28,7 +25,7 @@ const uploadCommand: ICommand = {
 			context.sendErrorEmbed(`${error}`);
 		}
 		for (const question of questionsData) {
-			await createQuestion(question);
+			await services.questions.createQuestion(question);
 		}
 		context.interaction.editReply("questions rajoutées !");
 	},

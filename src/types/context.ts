@@ -19,7 +19,7 @@ export class Context {
 		this.interaction.channel.send({ embeds: [sendedEmbed] });
 	};
 
-	reply = (description: string) => {
+	reply = async (description: string) => {
 		const replyEmbed = new EmbedBuilder()
 			.setColor("Blue")
 			.setDescription(description);

@@ -5,3 +5,5 @@ node_modules/
 *.db
 facts.json
 data3.json
+drizzle/
+*.sqlite

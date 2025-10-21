@@ -2,14 +2,14 @@ import { Client, type Collection, GatewayIntentBits } from "discord.js";
 import type { Sequelize } from "sequelize";
 import { commandsHandler } from "./handlers/commandsHandler";
 import { eventsHandler } from "./handlers/eventsHandler";
-import { start } from "./managers/daily_fact";
-import type { CommandInterface } from "./types/command";
+import { start } from "./managers/dailyFact";
+import type { ICommand } from "./types/commandInterface";
 import { Cooldowns, cooldownConfig } from "./utils/cooldowns";
 import { error, info } from "./utils/logging";
 
 export class Freudy extends Client {
 	declare database: Sequelize;
-	declare commands: Collection<string, CommandInterface>;
+	declare commands: Collection<string, ICommand>;
 	declare cooldowns: Cooldowns;
 	constructor() {
 		super({

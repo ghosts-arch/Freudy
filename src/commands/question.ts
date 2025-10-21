@@ -8,14 +8,13 @@ import {
 	MessageFlags,
 	SlashCommandBuilder,
 } from "discord.js";
-import type { Question } from "../database/models/question";
-import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
+import type { Question } from "@/types";
+import { db } from "../core/database/database";
 import {
 	getTitle,
 	processLevelProgression,
-} from "../services/experienceService";
-import { getRandomQuestion } from "../services/questionsService";
-import { createUser, getUser } from "../services/userService";
+} from "../core/services/experienceService";
+import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import type { ICommand } from "../types/commandInterface";
 import { buildContainer } from "../ui/container";
 import { info } from "../utils/logging";
@@ -26,9 +25,9 @@ const questionCommand: ICommand = {
 		.setName("question")
 		.setDescription("Question psy..."),
 	hasCooldown: true,
-	async execute(context) {
+	async execute(context, services) {
 		let container: ContainerBuilder | undefined;
-		const question = await getRandomQuestion();
+		const question = await services.questions.getRandomQuestion();
 		if (!question) return;
 		info(`${context.interaction.user.id} get question with id ${question.id}`);
 		const member = await context.interaction.guild?.members.fetch(
@@ -67,11 +66,11 @@ const questionCommand: ICommand = {
 				`${context.interaction.user.id} replied answer with id ${userAnswerId}`,
 			);
 			if (validAnwserId === userAnswerId) {
-				let user = await getUser(context.interaction.user.id);
-				if (!user) {
-					user = await createUser(context.interaction.user.id);
-				}
-				const hasLevelUp = await processLevelProgression(user);
+				const user = await services.users.getOrCreateUser(
+					context.interaction.user.id,
+				);
+
+				const hasLevelUp = await processLevelProgression(db, user.userId);
 				if (hasLevelUp) {
 					context.send(`<@!${
 						context.interaction.user.id

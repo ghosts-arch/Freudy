@@ -2,7 +2,7 @@ import path from "node:path";
 import { Readable } from "node:stream";
 import csv from "csv-parser";
 import type { Attachment } from "discord.js";
-import type { QuestionData } from "./questionsService";
+import type { QuestionData } from "@/types";
 
 const ACCEPTED_EXTENSIONS = [".csv", ".json"];
 
