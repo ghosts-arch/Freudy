@@ -1,4 +1,4 @@
-import { Database } from "bun:sqlite";
+import { Database, SQLiteError } from "bun:sqlite";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
 import { migrate } from "drizzle-orm/bun-sqlite/migrator";
@@ -21,7 +21,7 @@ const createSampleQuestion = (
 	};
 };
 
-describe("Testing questions related functions", () => {
+describe("QuestionsService", () => {
 	let database: BunSQLiteDatabase<typeof schema>;
 	let db: Database;
 	let questionsService: QuestionsService;
@@ -32,6 +32,45 @@ describe("Testing questions related functions", () => {
 			migrationsFolder: "drizzle",
 		});
 		questionsService = new QuestionsService(database);
+	});
+
+	describe("test constraints", () => {
+		test("pass null question should raise NOT NULL constraint error", async () => {
+			try {
+				await database
+					.insert(schema.questions)
+					//@ts-expect-error
+					.values({ question: null })
+					.returning();
+				throw new Error(
+					"ERROR : NOT NULL constraint on questions.question was violated",
+				);
+			} catch (error) {
+				if ((error as Error).message.startsWith("ERROR :")) throw error;
+				expect(error).toBeInstanceOf(SQLiteError);
+				expect((error as Error).message).toContain(
+					"NOT NULL constraint failed: questions.question",
+				);
+			}
+		});
+		test("pass null text should raise NOT NULL constraint error", async () => {
+			try {
+				await database
+					.insert(schema.answers)
+					//@ts-expect-error
+					.values({ text: null })
+					.returning();
+				throw new Error(
+					"ERROR : NOT NULL constraint on answers.text was violated",
+				);
+			} catch (error) {
+				if ((error as Error).message.startsWith("ERROR :")) throw error;
+				expect(error).toBeInstanceOf(SQLiteError);
+				expect((error as Error).message).toContain(
+					"NOT NULL constraint failed: answers.text",
+				);
+			}
+		});
 	});
 
 	describe("createQuestion", () => {
