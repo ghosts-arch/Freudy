@@ -1,9 +1,9 @@
 import { Events, type Interaction } from "discord.js";
+import { CooldownService } from "@/core/game/cooldowns/cooldowns.service";
 import { services } from "@/core/services";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { Context } from "../types/context";
 import type { EventInterface } from "../types/event";
-import { CooldownService } from "@/core/game/cooldowns/cooldowns.service";
 
 const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 	name: Events.InteractionCreate,

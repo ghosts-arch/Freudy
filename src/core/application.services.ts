@@ -1,15 +1,15 @@
 import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import type * as schema from "@/core/database/schema";
 import { BoardService } from "./game/board/board.service";
+import {
+	type CooldownConfig,
+	CooldownService,
+} from "./game/cooldowns/cooldowns.service";
 import { GameService } from "./game/game.service";
 import { PlayerRepository } from "./game/player/player.repository";
 import { PlayerService } from "./game/player/player.service";
 import { QuestionRepository } from "./game/question/question.repository";
 import { QuestionService } from "./game/question/question.service";
-import {
-	CooldownService,
-	type CooldownConfig,
-} from "./game/cooldowns/cooldowns.service";
 
 export class ApplicationServices {
 	private readonly playerRepository: PlayerRepository;

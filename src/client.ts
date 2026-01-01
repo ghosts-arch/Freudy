@@ -3,12 +3,12 @@ import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import type { Sequelize } from "sequelize";
 import type * as schema from "@/core/database/schema";
 import { ApplicationServices } from "./core/application.services";
+import type { CooldownConfig } from "./core/game/cooldowns/cooldowns.service";
 import { commandsHandler } from "./handlers/commandsHandler";
 import { eventsHandler } from "./handlers/eventsHandler";
 import { start } from "./managers/dailyFact";
 import type { ICommand } from "./types/commandInterface";
 import { error, info } from "./utils/logging";
-import type { CooldownConfig } from "./core/game/cooldowns/cooldowns.service";
 
 export class Freudy extends Client {
 	declare database: Sequelize;
