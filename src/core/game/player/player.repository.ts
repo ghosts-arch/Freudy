@@ -10,7 +10,7 @@ export class PlayerRepository {
 
 	createUser = async (
 		userId: string,
-	): Promise<typeof schema.users.$inferInsert> => {
+	): Promise<typeof schema.users.$inferSelect> => {
 		const [user] = await this.database
 			.insert(schema.users)
 			.values({ userId })

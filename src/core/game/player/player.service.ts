@@ -7,15 +7,15 @@ export class PlayerService {
 		this.userRepository = userRepository;
 	}
 
-	initPlayer = (userId: string) => {
+	initPlayer = async (userId: string)  => {
 		if (!isValidDiscordId(userId)) throw new Error();
-		this.userRepository.createUser(userId);
+		return await this.userRepository.createUser(userId);
 	};
 
 	getPlayerCurrentPosition = async (userId: string): Promise<number> => {
 		if (!isValidDiscordId(userId)) throw new Error();
-		const user = await this.userRepository.getUser(userId);
-		if (!user) throw new Error();
+		let user = await this.userRepository.getUser(userId);
+		if (!user) user = await this.initPlayer(userId);
 		return user.position;
 	};
 
