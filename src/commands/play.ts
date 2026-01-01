@@ -16,7 +16,7 @@ const playCommand: ICommand = {
 	data: new SlashCommandBuilder()
 		.setName("play")
 		.setDescription("play your turn"),
-	// hasCooldown: true,
+	hasCooldown: true,
 	async execute(context) {
 		const { diceRoll, playerNewPosition, question } =
 			await context.interaction.client.applicationServices.gameService.handlePlayerTurn(
