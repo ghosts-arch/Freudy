@@ -3,7 +3,7 @@ import { services } from "@/core/services";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { Context } from "../types/context";
 import type { EventInterface } from "../types/event";
-import { Cooldowns } from "../utils/cooldowns";
+import { CooldownService } from "@/core/game/cooldowns/cooldowns.service";
 
 const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 	name: Events.InteractionCreate,
@@ -16,11 +16,15 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 		if (!command) return;
 		if (
 			command.hasCooldown &&
-			interaction.client.cooldowns.findUser(interaction.user.id)
+			interaction.client.applicationServices.cooldownsService.findUser(
+				interaction.user.id,
+			)
 		) {
 			return await context.sendErrorEmbed(
-				`Vous pourrez rejouer dans ${Cooldowns.formatCooldown(
-					interaction.client.cooldowns.getRemainingTimeFor(interaction.user.id),
+				`Vous pourrez rejouer dans ${CooldownService.formatCooldown(
+					interaction.client.applicationServices.cooldownsService.getRemainingTimeFor(
+						interaction.user.id,
+					),
 				)}`,
 			);
 		}
@@ -43,11 +47,14 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 		try {
 			command.execute(context, services);
 			if (command.hasCooldown) {
-				interaction.client.cooldowns.addUser(interaction.user.id, () => {
-					context.send(
-						`<@!${interaction.user.id}>, vous pouvez a nouveau jouer !`,
-					);
-				});
+				interaction.client.applicationServices.cooldownsService.addUser(
+					interaction.user.id,
+					() => {
+						context.send(
+							`<@!${interaction.user.id}>, vous pouvez a nouveau jouer !`,
+						);
+					},
+				);
 			}
 		} catch (err) {
 			console.error(err);

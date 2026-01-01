@@ -1,18 +1,12 @@
 import { Collection } from "discord.js";
 
-type CooldownsConfig = {
+export type CooldownConfig = {
 	duration: number;
 };
 
-export const cooldownConfig: CooldownsConfig = {
-	duration: 14_400_000,
-};
-
-export class Cooldowns {
+export class CooldownService {
 	private declare cooldowns: Collection<string, number>;
-	private declare config: CooldownsConfig;
-
-	constructor(config: CooldownsConfig) {
+	constructor(private config: CooldownConfig) {
 		this.cooldowns = new Collection<string, number>();
 		this.config = config;
 	}

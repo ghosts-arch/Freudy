@@ -37,4 +37,5 @@ export const users = sqliteTable("users", {
 	userId: text("user_id").notNull(),
 	level: int("level").notNull().default(0),
 	experience: int("experience").notNull().default(0),
+	position: int("position").notNull().default(0),
 });
