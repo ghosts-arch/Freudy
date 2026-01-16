@@ -1,19 +1,10 @@
+import { Database, SQLiteError } from "bun:sqlite";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
-import { Sequelize } from "sequelize";
-import {
-	Answer,
-	initModel as initAnswersModel,
-} from "../../src/database/models/answer";
-import {
-	initModel as initQuestionsModel,
-	Question,
-} from "../../src/database/models/question";
-import {
-	createQuestion,
-	getQuestionsCount,
-	getRandomQuestion,
-	type QuestionData,
-} from "../../src/services/questionsService";
+import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
+import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+import type { QuestionData } from "@/types";
+import * as schema from "../../src/core/database/schema";
+import { QuestionsService } from "../../src/core/services/questionsService";
 
 const createSampleQuestion = (
 	withExplanation: boolean = true,
@@ -29,22 +20,57 @@ const createSampleQuestion = (
 		})),
 	};
 };
-describe("Testing questions related functions", () => {
-	let sequelize: Sequelize;
 
+describe("QuestionsService", () => {
+	let database: BunSQLiteDatabase<typeof schema>;
+	let db: Database;
+	let questionsService: QuestionsService;
 	beforeEach(async () => {
-		sequelize = new Sequelize({
-			dialect: "sqlite",
-			storage: ":memory:",
-			logging: false,
+		db = new Database(":memory:");
+		database = drizzle(db, { schema: schema });
+		migrate(database, {
+			migrationsFolder: "drizzle",
 		});
-		initQuestionsModel(sequelize);
-		initAnswersModel(sequelize);
+		questionsService = new QuestionsService(database);
+	});
 
-		Question.hasMany(Answer, { foreignKey: "questionId", as: "answers" });
-		Answer.belongsTo(Question, { foreignKey: "questionId", as: "question" });
-
-		await sequelize.sync({ force: true });
+	describe("test constraints", () => {
+		test("pass null question should raise NOT NULL constraint error", async () => {
+			try {
+				await database
+					.insert(schema.questions)
+					//@ts-expect-error
+					.values({ question: null })
+					.returning();
+				throw new Error(
+					"ERROR : NOT NULL constraint on questions.question was violated",
+				);
+			} catch (error) {
+				if ((error as Error).message.startsWith("ERROR :")) throw error;
+				expect(error).toBeInstanceOf(SQLiteError);
+				expect((error as Error).message).toContain(
+					"NOT NULL constraint failed: questions.question",
+				);
+			}
+		});
+		test("pass null text should raise NOT NULL constraint error", async () => {
+			try {
+				await database
+					.insert(schema.answers)
+					//@ts-expect-error
+					.values({ text: null })
+					.returning();
+				throw new Error(
+					"ERROR : NOT NULL constraint on answers.text was violated",
+				);
+			} catch (error) {
+				if ((error as Error).message.startsWith("ERROR :")) throw error;
+				expect(error).toBeInstanceOf(SQLiteError);
+				expect((error as Error).message).toContain(
+					"NOT NULL constraint failed: answers.text",
+				);
+			}
+		});
 	});
 
 	describe("createQuestion", () => {
@@ -71,19 +97,19 @@ describe("Testing questions related functions", () => {
 					},
 				],
 			};
-			const createdQuestion = await createQuestion(question);
-			expect(createdQuestion[0]).toBeInstanceOf(Question);
+			const createdQuestion = await questionsService.createQuestion(question);
+			expect(createdQuestion).toBeObject();
 		});
 		test("create question without explanation", async () => {
 			const question = createSampleQuestion(false);
-			const createdQuestion = await createQuestion(question);
-			expect(createdQuestion[0]).toBeInstanceOf(Question);
+			const createdQuestion = await questionsService.createQuestion(question);
+			expect(createdQuestion).toBeObject();
 		});
 	});
 
 	describe("getQuestionsCount", () => {
 		test("should return 0 when database is empty", async () => {
-			const questionsCount = await getQuestionsCount();
+			const questionsCount = await questionsService.getQuestionsCount();
 			expect(questionsCount).toBeNumber();
 			expect(questionsCount).toBe(0);
 		});
@@ -155,10 +181,10 @@ describe("Testing questions related functions", () => {
 					},
 				],
 			};
-			await createQuestion(question);
-			await createQuestion(question2);
-			await createQuestion(question3);
-			const questionsCount = await getQuestionsCount();
+			await questionsService.createQuestion(question);
+			await questionsService.createQuestion(question2);
+			await questionsService.createQuestion(question3);
+			const questionsCount = await questionsService.getQuestionsCount();
 			expect(questionsCount).toBeNumber();
 			expect(questionsCount).toBe(3);
 		});
@@ -166,15 +192,15 @@ describe("Testing questions related functions", () => {
 
 	describe("getRandomQuestion", () => {
 		test("should returns null if no question found", async () => {
-			expect(await getRandomQuestion()).toBeNull();
+			expect(await questionsService.getRandomQuestion()).toBeNull();
 		});
 		test("should returns random question when questions exist in database", async () => {
-			await createQuestion(createSampleQuestion());
-			expect(await getRandomQuestion()).toBeInstanceOf(Question);
+			await questionsService.createQuestion(createSampleQuestion());
+			expect(await questionsService.getRandomQuestion()).toBeObject();
 		});
 	});
 
 	afterEach(async () => {
-		await sequelize.close();
+		db.close();
 	});
 });

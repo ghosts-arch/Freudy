@@ -1,4 +1,5 @@
 import { Events, type Interaction } from "discord.js";
+import { services } from "@/core/services";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
 import { Context } from "../types/context";
 import type { EventInterface } from "../types/event";
@@ -40,7 +41,7 @@ const InteractionCreate: EventInterface<Events.InteractionCreate> = {
 			);
 		}
 		try {
-			command.execute(context);
+			command.execute(context, services);
 			if (command.hasCooldown) {
 				interaction.client.cooldowns.addUser(interaction.user.id, () => {
 					context.send(

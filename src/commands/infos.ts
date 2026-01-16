@@ -1,6 +1,6 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
+import type { ApplicationServices, Context } from "@/types";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-import { getQuestionsCount } from "../services/questionsService";
 import type { ICommand } from "../types/commandInterface";
 
 const infosCommand: ICommand = {
@@ -10,9 +10,14 @@ const infosCommand: ICommand = {
 		.setDescription("Infos about bot.")
 		.setContexts(InteractionContextType.Guild),
 
-	async execute(context) {
-		const questionsCount = await getQuestionsCount();
-		context.reply(`Nombre de questions : ${questionsCount}.`);
+	async execute(context: Context, services: ApplicationServices) {
+		try {
+			const questionsCount = await services.questions.getQuestionsCount();
+			await context.reply(`Nombre de questions : ${questionsCount}.`);
+		} catch (error) {
+			await context.sendErrorEmbed(`${error}`);
+			console.error(error);
+		}
 	},
 };
 

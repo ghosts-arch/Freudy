@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
+import type { ApplicationServices, Context } from "@/types";
+import { getTitle } from "../core/services/experienceService";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-import { getTitle } from "../services/experienceService";
-import { getUser } from "../services/userService";
 import type { ICommand } from "../types/commandInterface";
 
 const questionCommand: ICommand = {
@@ -9,17 +9,22 @@ const questionCommand: ICommand = {
 	data: new SlashCommandBuilder()
 		.setName("profil")
 		.setDescription("Mon profil"),
-	async execute(context) {
-		const user = await getUser(context.interaction.user.id);
-		if (!user)
-			return context.sendErrorEmbed(
-				"Vous n'avez pas encore commencer à étudier la voie de Freud !",
+	async execute(context: Context, services: ApplicationServices) {
+		try {
+			const user = await services.users.getUser(context.interaction.user.id);
+			if (!user)
+				return await context.sendErrorEmbed(
+					"Vous n'avez pas encore commencer à étudier la voie de Freud !",
+				);
+			await context.reply(
+				`Vos points de connaissance : ${
+					user.experience
+				} 🧠\n\n Votre titre actuel : \`${getTitle(user.level)}\``,
 			);
-		context.reply(
-			`Vos points de connaissance : ${
-				user.experience
-			} 🧠\n\n Votre titre actuel : \`${getTitle(user.level)}\``,
-		);
+		} catch (error) {
+			await context.sendErrorEmbed(`${error}`);
+			console.error(error);
+		}
 	},
 };
 

@@ -1,8 +1,8 @@
-import { GoogleGenAI } from "@google/genai";
 import { EmbedBuilder } from "discord.js";
-import { Sequelize } from "sequelize";
 import type { Freudy } from "../client";
-import { DailyFact } from "../database/database";
+import { db } from "../core/database/database";
+import { FactService } from "../core/services/factService";
+import { GeminiService } from "../core/services/geminiService";
 import { info } from "../utils/logging";
 
 let interval: NodeJS.Timeout | null = null;
@@ -28,38 +28,15 @@ const calculateDelay = () => {
 };
 
 const callback = async (client: Freudy) => {
-	const ai = new GoogleGenAI({
-		apiKey: process.env.GEMINI_KEY,
-	});
-
-	const response = await ai.models.generateContent({
-		model: "gemini-2.5-flash",
-		contents:
-			"Sélectionne un signe du zodiaque aléatoire et génére un conseil très très aléatoire dans le domaine que tu veux (amour, santé, travail...). Génére une réponse au format {emote} {signe} - {sujet} \n {conseil}.",
-		config: {
-			systemInstruction:
-				"Tu es freudy, un bot chargé de l'horoscope quotidien du serveur. Ton but est de donner des conseils très aproximatifs dans le domaine que tu veux (amour, santé, travail...), voir borderline.",
-			thinkingConfig: {
-				thinkingBudget: 0,
-			},
-		},
-	});
-
+	const dailyHoroscope = await new GeminiService().getDailyHoroscope();
+	const dailyFact = await new FactService(db).getRandomFact();
 	const channel = await client.channels.fetch(
 		process.env.DAILY_FACT_CHANNEL_ID,
 	);
-	console.log(DailyFact);
-	const fact = await DailyFact.findOne({
-		order: Sequelize.literal("random()"),
-	});
-	if (!fact) return;
-	if (channel?.isSendable()) {
-		const description = `${fact.fact} \n ${response.text}`;
-		const embed = new EmbedBuilder()
-			.setColor("Blue")
-			.setDescription(description);
-		channel.send({ embeds: [embed] });
-	}
+	if (!channel?.isSendable()) throw new Error();
+	const description = `${dailyFact.fact} \n ${dailyHoroscope}`;
+	const embed = new EmbedBuilder().setColor("Blue").setDescription(description);
+	channel.send({ embeds: [embed] });
 	await info("daily message sended with success !");
 };
 

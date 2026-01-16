@@ -7,19 +7,25 @@
 	"scripts": {
 		"start": "bun run src/index.ts",
 		"lint": "bunx --bun biome check --write",
-		"test": "bun test --coverage"
+		"test": "bun test --coverage",
+		"db:generate": "bunx drizzle-kit generate",
+		"db:migrate": "bunx drizzle-kit migrate"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.5",
-		"@types/bun": "latest"
+		"@types/better-sqlite3": "^7.6.13",
+		"@types/bun": "^1.3.0",
+		"drizzle-kit": "^0.31.5"
 	},
 	"peerDependencies": {
 		"typescript": "^5"
 	},
 	"dependencies": {
 		"@google/genai": "^1.25.0",
+		"better-sqlite3": "^12.4.1",
 		"csv-parser": "^3.2.0",
 		"discord.js": "^14.22.1",
+		"drizzle-orm": "^0.44.6",
 		"sequelize": "^6.37.7",
 		"sqlite3": "^5.1.7"
 	}

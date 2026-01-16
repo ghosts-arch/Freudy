@@ -1,10 +1,5 @@
 import { InteractionContextType, SlashCommandBuilder } from "discord.js";
 import { PERMISSIONS_LEVEL } from "../enums/permissionsLevel";
-import {
-	createUser,
-	getUser,
-	setExperience as setUserExperience,
-} from "../services/userService";
 import type { ICommand } from "../types/commandInterface";
 
 const setExperience: ICommand = {
@@ -25,15 +20,17 @@ const setExperience: ICommand = {
 				.setDescription("new experience of user")
 				.setRequired(true),
 		),
-	async execute(context) {
+	async execute(context, services) {
 		const amount = context.interaction.options.getInteger("amount", true);
 		const targetUser = context.interaction.options.getUser("user", true);
-		let user = await getUser(targetUser.id);
+		let user = await services.users.getUser(targetUser.id);
 		if (!user) {
-			user = await createUser(targetUser.id);
+			user = await services.users.createUser(targetUser.id);
 		}
-		setUserExperience(user, 10);
-		context.reply(`${amount} experience given to ${targetUser.username} ! ✅`);
+		services.users.setExperience(targetUser.id, 10);
+		await context.reply(
+			`${amount} experience given to ${targetUser.username} ! ✅`,
+		);
 	},
 };
 

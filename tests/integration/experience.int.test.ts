@@ -1,47 +1,52 @@
+import { Database } from "bun:sqlite";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
-import { Sequelize } from "sequelize";
-import { initModel } from "../../src/database/models/User";
+import { type BunSQLiteDatabase, drizzle } from "drizzle-orm/bun-sqlite";
+import { migrate } from "drizzle-orm/bun-sqlite/migrator";
+import * as schema from "../../src/core/database/schema";
 import {
 	getTitle,
 	processLevelProgression,
-} from "../../src/services/experienceService";
-import { createUser } from "../../src/services/userService";
+} from "../../src/core/services/experienceService";
+import { UserService } from "../../src/core/services/userService";
 
 describe("experience integration", () => {
-	let sequelize: Sequelize;
-
+	let database: BunSQLiteDatabase<typeof schema>;
+	let db: Database;
 	beforeEach(async () => {
-		sequelize = new Sequelize({
-			dialect: "sqlite",
-			storage: ":memory:",
-			logging: false,
+		db = new Database(":memory:");
+		database = drizzle(db, { schema: schema });
+		migrate(database, {
+			migrationsFolder: "drizzle",
 		});
-		initModel(sequelize);
-		await sequelize.sync({ force: true });
 	});
 
 	test("process level progression", async () => {
 		let hasLevelUp: boolean | undefined;
-		const user = await createUser("467818337599225866");
+		let updatedUser: typeof schema.users.$inferSelect;
+		const userService = new UserService(database);
+		const userId = "467818337599225866";
+		const user = await userService.createUser("467818337599225866");
+		expect(user).not.toBeNull();
+		if (!user) return;
 		expect(user.level).toBe(0);
 		expect(user.experience).toBe(0);
 		expect(getTitle(user.level)).toBe("Apprenti Freudy");
-		hasLevelUp = await processLevelProgression(user);
+		[updatedUser, hasLevelUp] = await processLevelProgression(database, userId);
 		expect(hasLevelUp).toBeFalse();
-		expect(user.level).toBe(0);
-		expect(user.experience).toBe(10);
-		expect(getTitle(user.level)).toBe("Apprenti Freudy");
-		await processLevelProgression(user);
-		await processLevelProgression(user);
-		await processLevelProgression(user);
-		hasLevelUp = await processLevelProgression(user);
+		expect(updatedUser.level).toBe(0);
+		expect(updatedUser.experience).toBe(10);
+		expect(getTitle(updatedUser.level)).toBe("Apprenti Freudy");
+		await processLevelProgression(database, userId);
+		await processLevelProgression(database, userId);
+		await processLevelProgression(database, userId);
+		[updatedUser, hasLevelUp] = await processLevelProgression(database, userId);
 		expect(hasLevelUp).toBeTrue();
-		expect(user.level).toBe(1);
-		expect(user.experience).toBe(50);
-		expect(getTitle(user.level)).toBe("Disciple de Freud");
+		expect(updatedUser.level).toBe(1);
+		expect(updatedUser.experience).toBe(50);
+		expect(getTitle(updatedUser.level)).toBe("Disciple de Freud");
 	});
 
 	afterEach(async () => {
-		await sequelize.close();
+		db.close();
 	});
 });
